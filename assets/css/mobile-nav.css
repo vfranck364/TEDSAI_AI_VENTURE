@@ -1,0 +1,153 @@
+/* ========================================
+   NAVIGATION MOBILE-FIRST
+   Barre de navigation inférieure fixe
+   Optimisée pour zone du pouce
+   ======================================== */
+
+/* Barre de navigation inférieure (Mobile Bottom Nav) */
+.mobile-bottom-nav {
+    display: none; /* Cachée par défaut sur desktop */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 0.5rem 0;
+    border-top: 1px solid #e0e0e0;
+}
+
+.mobile-nav-items {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #666;
+    transition: all 0.3s ease;
+    padding: 0.5rem;
+    min-width: 60px;
+    min-height: 60px; /* Zone du pouce optimisée */
+    border-radius: 8px;
+}
+
+.mobile-nav-item i {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+    transition: transform 0.3s ease;
+}
+
+.mobile-nav-item span {
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.mobile-nav-item:active {
+    background: rgba(90, 169, 230, 0.1);
+    transform: scale(0.95);
+}
+
+.mobile-nav-item.active {
+    color: var(--color-primary);
+}
+
+.mobile-nav-item.active i {
+    color: var(--color-secondary);
+    transform: scale(1.1);
+}
+
+/* Afficher la navigation mobile uniquement sur petits écrans */
+@media (max-width: 768px) {
+    .mobile-bottom-nav {
+        display: block;
+    }
+
+    /* Ajouter du padding au body pour éviter que le contenu soit caché par la nav */
+    body {
+        padding-bottom: 70px;
+    }
+
+    /* Cacher la navigation desktop sur mobile */
+    header .nav-links {
+        display: none;
+    }
+
+    /* Simplifier le header mobile */
+    header .navbar {
+        height: 60px;
+        padding: 0.5rem 1rem;
+    }
+
+    header .logo img {
+        height: 40px;
+    }
+}
+
+/* Support pour prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    .mobile-nav-item,
+    .mobile-nav-item i {
+        transition: none;
+    }
+
+    .mobile-nav-item:active {
+        transform: none;
+    }
+
+    .mobile-nav-item.active i {
+        transform: none;
+    }
+}
+
+/* Zones cliquables optimisées pour le pouce */
+@media (max-width: 768px) {
+    /* Augmenter la taille des boutons et liens sur mobile */
+    .btn {
+        min-height: 48px;
+        padding: 14px 28px;
+        font-size: 1rem;
+    }
+
+    /* Zones cliquables pour les cartes */
+    .pillar-card,
+    .choice-card {
+        min-height: 48px;
+    }
+
+    /* Inputs de formulaire */
+    input,
+    textarea,
+    select,
+    button {
+        min-height: 48px;
+        font-size: 16px; /* Évite le zoom automatique sur iOS */
+    }
+}
+
+/* Menu hamburger simplifié (si nécessaire pour pages secondaires) */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    cursor: pointer;
+    padding: 0.5rem;
+    min-width: 48px;
+    min-height: 48px;
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+    }
+}

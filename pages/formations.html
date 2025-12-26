@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formations - TEDSAI Complex</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/mobile-nav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="../assets/images/logos/Logo TEDSAI.jpeg" alt="TEDSAI Logo" style="height: 50px;">
+            </div>
+            <nav class="nav-links">
+                <a href="../index.html">Accueil</a>
+                <a href="solutions-ia.html">Solutions IA</a>
+                <a href="vitedia.html">viTEDia</a>
+                <a href="garden.html">SelecTED Gardens</a>
+                <a href="observatoire.html">Observatoire</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content container fade-in-up">
+            <h1>Formations TEDSAI</h1>
+            <p>Montée en Compétences • Pratique • Certifiante</p>
+        </div>
+    </section>
+
+    <section class="container" style="padding: 4rem 0;">
+        <h2 style="text-align: center; margin-bottom: 3rem;">Notre Catalogue</h2>
+
+        <div class="prod-grid">
+            <div class="prod-card">
+                <i class="fa-solid fa-brain prod-icon" style="color: var(--color-primary);"></i>
+                <h3>IA pour PME</h3>
+                <p style="color: #666; margin: 1rem 0;">Comprendre et déployer l'IA dans votre entreprise. Cas
+                    pratiques, outils no-code.</p>
+                <div style="margin: 1rem 0; font-size: 0.9rem;">
+                    <div><i class="fa-solid fa-clock"></i> 3 jours (21h)</div>
+                    <div><i class="fa-solid fa-users"></i> Max 12 participants</div>
+                </div>
+                <strong style="color: var(--color-primary); font-size: 1.3rem;">150 000 FCFA</strong>
+                <button class="btn btn-primary" onclick="requestInfo('IA PME')"
+                    style="width: 100%; margin-top: 1rem;">S'inscrire</button>
+            </div>
+
+            <div class="prod-card">
+                <i class="fa-solid fa-chart-line prod-icon" style="color: #16A085;"></i>
+                <h3>Data & Tableaux de Bord</h3>
+                <p style="color: #666; margin: 1rem 0;">Créer des dashboards pour piloter votre activité. Excel avancé,
+                    Power BI.</p>
+                <div style="margin: 1rem 0; font-size: 0.9rem;">
+                    <div><i class="fa-solid fa-clock"></i> 2 jours (14h)</div>
+                    <div><i class="fa-solid fa-users"></i> Max 15 participants</div>
+                </div>
+                <strong style="color: #16A085; font-size: 1.3rem;">100 000 FCFA</strong>
+                <button class="btn btn-primary" onclick="requestInfo('Data')"
+                    style="width: 100%; margin-top: 1rem; background: #16A085;">S'inscrire</button>
+            </div>
+
+            <div class="prod-card">
+                <i class="fa-solid fa-seedling prod-icon" style="color: var(--color-garden-primary);"></i>
+                <h3>Agriculture Urbaine Rentable</h3>
+                <p style="color: #666; margin: 1rem 0;">Techniques, gestion de l'eau, commercialisation. Visite terrain
+                    incluse.</p>
+                <div style="margin: 1rem 0; font-size: 0.9rem;">
+                    <div><i class="fa-solid fa-clock"></i> 3 jours (21h)</div>
+                    <div><i class="fa-solid fa-users"></i> Max 10 participants</div>
+                </div>
+                <strong style="color: var(--color-garden-primary); font-size: 1.3rem;">120 000 FCFA</strong>
+                <button class="btn btn-primary" onclick="requestInfo('Agriculture')"
+                    style="width: 100%; margin-top: 1rem; background: var(--color-garden-primary);">S'inscrire</button>
+            </div>
+
+            <div class="prod-card">
+                <i class="fa-solid fa-drumstick-bite prod-icon" style="color: #8B4513;"></i>
+                <h3>Élevage : Poulet & Poisson</h3>
+                <p style="color: #666; margin: 1rem 0;">Démarrage, alimentation, biosécurité, rentabilité. Pratique sur
+                    site.</p>
+                <div style="margin: 1rem 0; font-size: 0.9rem;">
+                    <div><i class="fa-solid fa-clock"></i> 3 jours (21h)</div>
+                    <div><i class="fa-solid fa-users"></i> Max 10 participants</div>
+                </div>
+                <strong style="color: #8B4513; font-size: 1.3rem;">75 000 FCFA</strong>
+                <button class="btn btn-primary" onclick="requestInfo('Élevage')"
+                    style="width: 100%; margin-top: 1rem; background: #8B4513;">S'inscrire</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" style="background: #f9f9f9; padding: 3rem; border-radius: 12px; margin: 4rem 0;">
+        <h2 style="text-align: center; margin-bottom: 1rem;">Formations Sur-Mesure</h2>
+        <p style="text-align: center; max-width: 700px; margin: 0 auto 2rem;">
+            Besoin d'une formation adaptée à votre équipe ? Nous concevons des programmes personnalisés.
+        </p>
+        <div style="text-align: center;">
+            <a href="contact.html" class="btn btn-primary">Demander un Devis</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-col">
+                <h4>TEDSAI Formations</h4>
+                <p>Expertise • Pratique • Résultats</p>
+            </div>
+        </div>
+        <div class="container"
+            style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 2rem;">
+            <p>&copy; 2025 TEDSAI Complex.</p>
+        </div>
+    </footer>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" aria-label="Navigation mobile principale">
+        <div class="mobile-nav-items">
+            <a href="../index.html" class="mobile-nav-item" aria-label="Accueil">
+                <i class="fa-solid fa-home"></i>
+                <span>Accueil</span>
+            </a>
+            <a href="solutions-ia.html" class="mobile-nav-item" aria-label="Solutions IA">
+                <i class="fa-solid fa-brain"></i>
+                <span>IA</span>
+            </a>
+            <a href="vitedia.html" class="mobile-nav-item" aria-label="Restaurant viTEDia">
+                <i class="fa-solid fa-utensils"></i>
+                <span>viTEDia</span>
+            </a>
+            <a href="garden.html" class="mobile-nav-item" aria-label="SelecTED Gardens">
+                <i class="fa-solid fa-leaf"></i>
+                <span>Jardin</span>
+            </a>
+            <a href="observatoire.html" class="mobile-nav-item" aria-label="Observatoire">
+                <i class="fa-solid fa-satellite-dish"></i>
+                <span>Obs</span>
+            </a>
+        </div>
+    </nav>
+
+    <script>
+        function requestInfo(formation) {
+            const email = prompt(`Inscription "${formation}" - Entrez votre email :`);
+            if (email && email.includes('@')) {
+                const messages = JSON.parse(localStorage.getItem('tedsai_messages') || '[]');
+                messages.unshift({
+                    id: 'formation_' + Date.now(),
+                    name: 'Demande Formation',
+                    email: email,
+                    interest: 'formation',
+                    message: `Inscription : ${formation}`,
+                    date: new Date().toISOString()
+                });
+                localStorage.setItem('tedsai_messages', JSON.stringify(messages));
+
+                alert(`Merci ! Nous vous contactons sous 24h pour finaliser votre inscription à "${formation}".`);
+            } else if (email) {
+                alert("Email invalide.");
+            }
+        }
+    </script>
+    <script src="/Users/dev-ai/Documents/TEDSAI-website/relative/path/fixer.js"></script>
+</body>
+
+</html>

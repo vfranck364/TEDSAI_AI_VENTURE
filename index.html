@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="ted-page-slug" content="index.html"> <!-- CMS Hook -->
+    <title>TEDSAI Complex - De la Data à l'Assiette</title>
+    <meta name="description"
+        content="TEDSAI Complex : Un écosystème intelligent unifiant Intelligence Artificielle, Gastronomie Durable et Agriculture Urbaine.">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/mobile-nav.css">
+    <link rel="stylesheet" href="assets/css/ted-widget.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Carrefour Landing Page Styles */
+        .carrefour-hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #0A2463 0%, #1e3a8a 50%, #0A2463 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carrefour-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('assets/images/hero_bg.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .carrefour-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .carrefour-logo {
+            margin-bottom: 2rem;
+            /* animation: fadeInDown 0.8s ease-out; */
+        }
+
+        .carrefour-logo img {
+            height: 80px;
+            filter: brightness(0) invert(1);
+        }
+
+        .carrefour-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            /* animation: fadeInUp 0.8s ease-out 0.2s both; */
+        }
+
+        .carrefour-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            /* animation: fadeInUp 0.8s ease-out 0.4s both; */
+        }
+
+        .carrefour-tagline {
+            font-size: 1.1rem;
+            margin-bottom: 4rem;
+            opacity: 0.8;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            /* animation: fadeInUp 0.8s ease-out 0.6s both; */
+        }
+
+        .carrefour-choices {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            /* animation: fadeInUp 0.8s ease-out 0.8s both; */
+        }
+
+        .choice-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--color-text-dark);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .choice-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-color-light));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .choice-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .choice-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .choice-card.ia {
+            --accent-color: #5AA9E6;
+            --accent-color-light: #7ec8ff;
+        }
+
+        .choice-card.restaurant {
+            --accent-color: #8B1E3F;
+            --accent-color-light: #b8274f;
+        }
+
+        .choice-card.garden {
+            --accent-color: #2D5A27;
+            --accent-color-light: #4a8f42;
+        }
+
+        .choice-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+
+        .choice-card:hover .choice-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .choice-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+
+        .choice-description {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .choice-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            transition: gap 0.3s ease;
+        }
+
+        .choice-card:hover .choice-cta {
+            gap: 1rem;
+        }
+
+        .ecosystem-link {
+            margin-top: 2rem;
+            /* animation: fadeInUp 0.8s ease-out 1s both; */
+        }
+
+        .ecosystem-link a {
+            color: white;
+            text-decoration: underline;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .ecosystem-link a:hover {
+            opacity: 1;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .carrefour-title {
+                font-size: 2.5rem;
+            }
+
+            .carrefour-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .carrefour-tagline {
+                font-size: 1rem;
+            }
+
+            .carrefour-choices {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .choice-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .choice-icon {
+                font-size: 3rem;
+            }
+
+            .choice-title {
+                font-size: 1.5rem;
+            }
+
+            .carrefour-logo img {
+                height: 60px;
+            }
+        }
+
+        /* Accessibility: Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+
+            .carrefour-hero::before,
+            .carrefour-logo,
+            .carrefour-title,
+            .carrefour-subtitle,
+            .carrefour-tagline,
+            .carrefour-choices,
+            .ecosystem-link {
+                animation: none;
+            }
+
+            .choice-card:hover {
+                transform: none;
+            }
+        }
+
+        /* Language Toggle in Carrefour */
+        .carrefour-lang-toggle {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            .carrefour-lang-toggle {
+                top: 1rem;
+                right: 1rem;
+            }
+        }
+
+        /* Observatory Section Home */
+        .home-obs-section {
+            padding: 5rem 2rem;
+            background: #050b1a;
+            position: relative;
+            z-index: 1;
+            margin-top: 2rem;
+            border-radius: 30px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .home-obs-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(33, 150, 243, 0.1) 0%, transparent 60%);
+            z-index: -1;
+        }
+
+        .home-obs-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .home-obs-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .home-obs-text {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            line-height: 1.7;
+            margin-bottom: 3rem;
+        }
+
+        .btn-obs-pulse {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #2196F3;
+            color: white;
+            padding: 1.25rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.7);
+            animation: pulse-obs 2s infinite;
+        }
+
+        .btn-obs-pulse:hover {
+            transform: scale(1.05);
+            background: #1976D2;
+        }
+
+        @keyframes pulse-obs {
+            0% {
+                box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 20px rgba(33, 150, 243, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(33, 150, 243, 0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Google Translate Widget -->
+
+    <!-- Carrefour Landing Page -->
+    <section class="carrefour-hero">
+
+        <div class="carrefour-content">
+            <!-- Logo -->
+            <div class="carrefour-logo">
+                <img src="assets/images/logos/tedsai_logo.jpg" alt="Logo TEDSAI" loading="lazy">
+            </div>
+        </div>
+        <!-- Main Title -->
+        <h1 class="carrefour-title" data-cms-id="hero_title">TEDSAI Complex</h1>
+        <p class="carrefour-subtitle" data-cms-id="hero_subtitle">De la Data à l'Assiette</p>
+        <p class="carrefour-tagline">
+            Un écosystème intelligent unifiant IA, Agriculture, Élevage, Restauration et Épicerie
+        </p>
+
+        <!-- Three Main Choices -->
+        <div class="carrefour-choices">
+            <!-- Choice 1: IA & Entreprises -->
+            <a href="pages/solutions-ia.html" class="choice-card ia"
+                aria-label="Découvrir nos solutions IA pour entreprises">
+                <div class="choice-icon">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+                <h2 class="choice-title">Entreprises & IA</h2>
+                <p class="choice-description">Solutions d'intelligence
+                    artificielle sur mesure pour automatiser, optimiser et propulser votre entreprise.</p>
+                <span class="choice-cta">
+                    Découvrir <i class="fa-solid fa-arrow-right"></i>
+                </span>
+            </a>
+
+            <!-- Choice 2: Restaurant viTEDia -->
+            <a href="pages/vitedia.html" class="choice-card restaurant" aria-label="Découvrir le restaurant viTEDia">
+                <div class="choice-icon">
+                    <i class="fa-solid fa-utensils"></i>
+                </div>
+                <h2 class="choice-title">Restaurant viTEDia</h2>
+                <p class="choice-description">
+                    Gastronomie traçable où chaque ingrédient raconte son histoire, du jardin à votre assiette
+                </p>
+                <span class="choice-cta">
+                    Réserver <i class="fa-solid fa-arrow-right"></i>
+                </span>
+            </a>
+
+            <!-- Choice 3: Jardins & Épicerie -->
+            <a href="pages/garden.html" class="choice-card garden"
+                aria-label="Découvrir SelecTED Gardens et l'épicerie">
+                <div class="choice-icon">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <h2 class="choice-title">Jardin & Épicerie SelecTED</h2>
+                <p class="choice-description">
+                    Production locale, élevage et épicerie fine avec traçabilité totale de la graine à l'assiette
+                </p>
+                <span class="choice-cta">
+                    Explorer <i class="fa-solid fa-arrow-right"></i>
+                </span>
+            </a>
+        </div>
+
+        <!-- Link to Ecosystem Page -->
+        <div class="ecosystem-link">
+            <a href="pages/ecosystem.html">
+                <i class="fa-solid fa-diagram-project"></i> Comprendre notre écosystème complet
+            </a>
+        </div>
+
+        <!-- New Observatory Section -->
+        <div class="home-obs-section">
+            <div class="home-obs-container">
+                <h2 class="home-obs-title">
+                    <i class="fa-solid fa-satellite-dish" style="color: #2196F3;"></i>
+                    L'Observatoire TEDSAI
+                </h2>
+                <p class="home-obs-text">
+                    Analyses économiques, études de cas et veille technologique. <br>
+                    Participez aux discussions et découvrez les tendances qui façonnent l'Afrique de demain.
+                </p>
+                <a href="pages/observatoire.html" class="btn-obs-pulse">
+                    Explorer les Analyses & Discussions
+                    <i class="fa-solid fa-comments"></i>
+                </a>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-col">
+                <img src="assets/images/logos/Logo TEDSAI.jpeg" alt="Logo" style="height: 40px; margin-bottom: 1rem;">
+                <p>Le système nerveux numérique d'un écosystème intelligent.</p>
+                <div class="socials" style="margin-top: 1rem; display: flex; gap: 1rem; font-size: 1.5rem;">
+                    <a href="https://www.linkedin.com/in/tedsai-complex-a26b95397" target="_blank"
+                        rel="noopener noreferrer" aria-label="LinkedIn" style="color: white; transition: color 0.3s;"><i
+                            class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/tedsai1385/" target="_blank" rel="noopener noreferrer"
+                        aria-label="Instagram" style="color: white; transition: color 0.3s;"><i
+                            class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61584073655708" target="_blank"
+                        rel="noopener noreferrer" aria-label="Facebook" style="color: white; transition: color 0.3s;"><i
+                            class="fa-brands fa-facebook"></i></a>
+                    <a href="https://x.com/Tedsai1385" target="_blank" rel="noopener noreferrer"
+                        aria-label="X (Twitter)"
+                        style="color: white; transition: color 0.3s; font-weight: bold; font-family: Arial, sans-serif;">𝕏</a>
+                    <a href="https://www.youtube.com/@TEDSAIComplex" target="_blank" rel="noopener noreferrer"
+                        aria-label="YouTube" style="color: white; transition: color 0.3s;"><i
+                            class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Liens Rapides</h4>
+                <ul>
+                    <li><a href="pages/solutions-ia.html">Solutions IA</a></li>
+                    <li><a href="pages/vitedia.html">Restaurant viTEDia</a></li>
+                    <li><a href="pages/garden.html">SelecTED Gardens</a></li>
+                    <li><a href="pages/observatoire.html">Observatoire</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="pages/contact.html">Nous Contacter</a></li>
+                    <li><a href="pages/contact.html?reason=hiring">Recrutement</a></li>
+                    <li><a href="pages/contact.html?reason=press">Presse</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container copyright"
+            style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 2rem;">
+            <p>&copy; 2024 TEDSAI Complex. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" aria-label="Navigation mobile principale">
+        <div class="mobile-nav-items">
+            <a href="index.html" class="mobile-nav-item active" aria-label="Accueil">
+                <i class="fa-solid fa-home"></i>
+                <span>Accueil</span>
+            </a>
+            <a href="pages/solutions-ia.html" class="mobile-nav-item" aria-label="Solutions IA">
+                <i class="fa-solid fa-brain"></i>
+                <span>IA</span>
+            </a>
+            <a href="pages/vitedia.html" class="mobile-nav-item" aria-label="Restaurant viTEDia">
+                <i class="fa-solid fa-utensils"></i>
+                <span>viTEDia</span>
+            </a>
+            <a href="pages/garden.html" class="mobile-nav-item" aria-label="SelecTED Gardens">
+                <i class="fa-solid fa-leaf"></i>
+                <span>Jardin</span>
+            </a>
+            <a href="pages/observatoire.html" class="mobile-nav-item" aria-label="Observatoire">
+                <i class="fa-solid fa-satellite-dish"></i>
+                <span>Obs</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="assets/js/core/db.js"></script>
+    <script src="assets/js/core/auth.js"></script>
+
+    <!-- Firebase SDKs (Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="assets/js/core/firebase-config.js"></script>
+
+    <script src="assets/js/core/api.js"></script>
+    <script src="assets/js/data-loader.js"></script>
+    <script src="assets/js/cms-loader.js"></script>
+    <script src="assets/js/lang-toggle.js"></script>
+    <script src="assets/js/backend-mock.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/ted-assistant.js"></script>
+    <script>
+        // Active state pour navigation mobile
+        document.addEventListener('DOMContentLoaded', function () {
+            const currentPage = window.location.pathname;
+            const navItems = document.querySelectorAll('.mobile-nav-item');
+
+            navItems.forEach(item => {
+                const href = item.getAttribute('href');
+                if (currentPage.includes(href) || (currentPage === '/' && href === 'index.html')) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

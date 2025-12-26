@@ -1,0 +1,354 @@
+/* ========================================
+   ASSISTANT TED - Widget Flottant
+   Chatbot guidé avec scénarios B2B/B2C
+   ======================================== */
+
+:root {
+    --ted-primary: #5AA9E6;
+    --ted-secondary: #0A2463;
+    --ted-bg: #FFFFFF;
+    --ted-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Widget TED flottant */
+.ted-widget {
+    position: fixed;
+    bottom: 90px;
+    /* Au-dessus de la navigation mobile */
+    right: 20px;
+    z-index: 999;
+}
+
+@media (max-width: 768px) {
+    .ted-widget {
+        bottom: 80px;
+        /* Ajusté pour mobile */
+    }
+}
+
+/* Bouton TED */
+.ted-button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--ted-primary), var(--ted-secondary));
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--ted-shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+.ted-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(90, 169, 230, 0.4);
+}
+
+.ted-button img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+/* Animation pulse */
+@keyframes pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 4px 20px rgba(90, 169, 230, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 4px 30px rgba(90, 169, 230, 0.6);
+    }
+}
+
+/* Fenêtre de chat */
+.ted-chat-window {
+    position: fixed;
+    bottom: 150px;
+    right: 20px;
+    width: 350px;
+    max-width: calc(100vw - 40px);
+    height: 500px;
+    max-height: calc(100vh - 200px);
+    background: var(--ted-bg);
+    border-radius: 16px;
+    box-shadow: var(--ted-shadow);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 998;
+}
+
+.ted-chat-window.active {
+    display: flex;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Header du chat */
+.ted-chat-header {
+    background: linear-gradient(135deg, var(--ted-primary), var(--ted-secondary));
+    color: white;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ted-chat-header-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.ted-chat-header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+.ted-chat-header h3 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.ted-chat-header p {
+    margin: 0;
+    font-size: 0.75rem;
+    opacity: 0.9;
+}
+
+.ted-close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.3s;
+}
+
+.ted-close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Corps du chat */
+.ted-chat-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    background: #f5f5f7;
+}
+
+/* Messages */
+.ted-message {
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.ted-message.ted {
+    justify-content: flex-start;
+}
+
+.ted-message.user {
+    justify-content: flex-end;
+}
+
+.ted-message-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.ted-message-content {
+    max-width: 70%;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.ted-message.ted .ted-message-content {
+    background: white;
+    color: #333;
+    border-bottom-left-radius: 4px;
+}
+
+.ted-message.user .ted-message-content {
+    background: var(--ted-primary);
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+/* Boutons de scénarios */
+.ted-scenarios {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.ted-scenario-btn {
+    background: white;
+    border: 2px solid var(--ted-primary);
+    color: var(--ted-primary);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.ted-scenario-btn:hover {
+    background: var(--ted-primary);
+    color: white;
+    transform: translateX(5px);
+}
+
+.ted-scenario-btn i {
+    font-size: 1.1rem;
+}
+
+/* Footer du chat */
+.ted-chat-footer {
+    padding: 1rem;
+    background: white;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.ted-input {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.ted-input:focus {
+    border-color: var(--ted-primary);
+}
+
+.ted-send-btn {
+    background: var(--ted-primary);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+.ted-send-btn:hover {
+    background: var(--ted-secondary);
+}
+
+/* Typing indicator */
+.ted-typing {
+    display: flex;
+    gap: 4px;
+    padding: 0.75rem 1rem;
+    background: white;
+    border-radius: 12px;
+    width: fit-content;
+}
+
+.ted-typing span {
+    width: 8px;
+    height: 8px;
+    background: #999;
+    border-radius: 50%;
+    animation: typing 1.4s infinite;
+}
+
+.ted-typing span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.ted-typing span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+
+    0%,
+    60%,
+    100% {
+        transform: translateY(0);
+    }
+
+    30% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .ted-widget {
+        bottom: 90px;
+        right: 15px;
+    }
+
+    .ted-chat-window {
+        bottom: 160px;
+        right: 15px;
+        width: calc(100vw - 30px);
+        height: calc(100vh - 250px);
+    }
+
+    .ted-button {
+        width: 55px;
+        height: 55px;
+    }
+}
+
+/* Support prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    .ted-button {
+        animation: none;
+    }
+
+    .ted-chat-window.active {
+        animation: none;
+    }
+
+    .ted-typing span {
+        animation: none;
+    }
+}

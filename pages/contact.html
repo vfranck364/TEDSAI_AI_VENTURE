@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - TEDSAI Complex</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/mobile-nav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            padding: 4rem 0;
+        }
+
+        .contact-form-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group select,
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        .dynamic-fields {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .dynamic-fields.active {
+            display: block;
+        }
+
+        .info-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--color-bg-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-primary);
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container navbar">
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logos/tedsai_logo.jpg" alt="TEDSAI Logo">
+            </a>
+            <nav class="nav-links">
+                <a href="../index.html"><i class="fa-solid fa-home"></i> <span>Accueil</span></a>
+                <a href="solutions-ia.html">Solutions IA</a>
+                <a href="vitedia.html">viTEDia</a>
+                <a href="garden.html">SelecTED Gardens</a>
+                <a href="observatoire.html">Observatoire</a>
+                <a href="contact.html" style="color: var(--color-primary);">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" style="background: var(--color-text-dark); height: 40vh; min-height: 300px;">
+        <div class="hero-content container fade-in-up">
+            <h1>Contactez-nous</h1>
+            <p>Nous sommes là pour vous aider</p>
+        </div>
+    </section>
+
+    <section class="container contact-grid">
+        <div class="contact-form-container">
+            <h3>Envoyez-nous un message</h3>
+            <form id="smart-form">
+                <div class="form-group">
+                    <label>Je suis intéressé par :</label>
+                    <select id="interest-select" onchange="updateForm()" name="interest">
+                        <option value="">-- Select --</option>
+                        <option value="ia">Solution IA pour mon entreprise</option>
+                        <option value="resto">Réservation viTEDia</option>
+                        <option value="garden">Partenariat SelecTED Gardens</option>
+                        <option value="hiring">Recrutement / Jobs</option>
+                        <option value="press">Presse / Média</option>
+                        <option value="other">Autre demande</option>
+                    </select>
+                </div>
+
+                <!-- IA Fields -->
+                <div id="ia-fields" class="dynamic-fields">
+                    <div class="form-group">
+                        <label>Nom de l'entreprise</label>
+                        <input type="text" name="company">
+                    </div>
+                    <div class="form-group">
+                        <label>Problématique Principale</label>
+                        <select name="problem">
+                            <option>Automatisation Facturation</option>
+                            <option>Gestion Stocks</option>
+                            <option>Service Client</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Resto Fields -->
+                <div id="resto-fields" class="dynamic-fields">
+                    <div class="form-group">
+                        <p>Pour réserver, vous pouvez utiliser notre <a href="vitedia.html"
+                                style="color: var(--color-vitedia-primary); font-weight: bold;">module de
+                                réservation</a> ou demander à TED.</p>
+                        <p>To make a reservation, you can use our <a href="vitedia.html"
+                                style="color: var(--color-vitedia-primary); font-weight: bold;">reservation module</a>
+                            or ask TED.</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Nom</label>
+                    <input type="text" name="name" placeholder="Votre nom" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" placeholder="votre@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea name="message" rows="5" placeholder="Votre message..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Envoyer le Message</button>
+            </form>
+        </div>
+
+        <div class="contact-info">
+            <h3>Nos Coordonnées</h3>
+            <div class="info-card">
+                <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <div>
+                    <h4>ADRESSE</h4>
+                    <p>TEDSAI Complex, quartier X, Yaoundé</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+                <div>
+                    <h4>EMAIL</h4>
+                    <p>contact@tedsai.cm</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+                <div>
+                    <h4>TÉLÉPHONE</h4>
+                    <p>+237 000 000 000</p>
+                </div>
+            </div>
+
+            <div
+                style="background: #eee; height: 300px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                <p style="color: #666;"><i class="fa-solid fa-map"></i> Google Maps Embed Placeholder</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container" style="text-align: center; padding: 2rem;">
+            <div class="socials"
+                style="margin-top: 1rem; display: flex; gap: 1rem; font-size: 1.5rem; justify-content: center; margin-bottom: 1rem;">
+                <a href="https://www.linkedin.com/in/tedsai-complex-a26b95397" target="_blank" rel="noopener noreferrer"
+                    aria-label="LinkedIn" style="color: var(--color-text-dark); transition: color 0.3s;"><i
+                        class="fa-brands fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/tedsai1385/" target="_blank" rel="noopener noreferrer"
+                    aria-label="Instagram" style="color: var(--color-text-dark); transition: color 0.3s;"><i
+                        class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=61584073655708" target="_blank"
+                    rel="noopener noreferrer" aria-label="Facebook"
+                    style="color: var(--color-text-dark); transition: color 0.3s;"><i
+                        class="fa-brands fa-facebook"></i></a>
+                <a href="https://x.com/Tedsai1385" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"
+                    style="color: var(--color-text-dark); transition: color 0.3s; font-weight: bold; font-family: Arial, sans-serif;">𝕏</a>
+                <a href="https://www.youtube.com/@TEDSAIComplex" target="_blank" rel="noopener noreferrer"
+                    aria-label="YouTube" style="color: var(--color-text-dark); transition: color 0.3s;"><i
+                        class="fa-brands fa-youtube"></i></a>
+            </div>
+            <p>&copy; 2024 TEDSAI Complex</p>
+        </div>
+    </footer>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" aria-label="Navigation mobile principale">
+        <div class="mobile-nav-items">
+            <a href="../index.html" class="mobile-nav-item" aria-label="Accueil">
+                <i class="fa-solid fa-home"></i>
+                <span>Accueil</span>
+            </a>
+            <a href="solutions-ia.html" class="mobile-nav-item" aria-label="Solutions IA">
+                <i class="fa-solid fa-brain"></i>
+                <span>IA</span>
+            </a>
+            <a href="vitedia.html" class="mobile-nav-item" aria-label="Restaurant viTEDia">
+                <i class="fa-solid fa-utensils"></i>
+                <span>viTEDia</span>
+            </a>
+            <a href="garden.html" class="mobile-nav-item" aria-label="SelecTED Gardens">
+                <i class="fa-solid fa-leaf"></i>
+                <span>Jardin</span>
+            </a>
+            <a href="observatoire.html" class="mobile-nav-item" aria-label="Observatoire">
+                <i class="fa-solid fa-satellite-dish"></i>
+                <span>Obs</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Scripts -->
+    <!-- Firebase SDKs (Compat for file:// support) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+
+    <!-- Firebase Config -->
+    <script src="../assets/js/core/firebase-config.js"></script>
+
+    <script src="../assets/js/core/db.js"></script>
+    <script src="../assets/js/core/auth.js"></script>
+    <script src="../assets/js/core/api.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/cms-loader.js"></script>
+    <script src="../assets/js/ted-assistant.js"></script>
+    <script>
+        function updateForm() {
+            const select = document.getElementById('interest-select');
+            const val = select.value;
+
+            // Hide all first
+            document.querySelectorAll('.dynamic-fields').forEach(el => el.classList.remove('active'));
+
+            if (val === 'ia') document.getElementById('ia-fields').classList.add('active');
+            if (val === 'resto') document.getElementById('resto-fields').classList.add('active');
+        }
+
+        // Handle Smart Submission
+        document.getElementById('smart-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Collect Data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            data.id = 'msg_' + Date.now();
+            data.date = new Date().toISOString();
+
+            // TODO: Remplacer cette URL par l'URL de votre déploiement Google Apps Script
+            const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyYmsZSmbj6qVx6WBOSSR7eYrS8eoae_XO0_1WWnKn5_A0WJmQy7ridb7bdxXYvp79Jvg/exec';
+
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            submitButton.disabled = true;
+            submitButton.textContent = 'Envoi en cours...';
+
+            // Envoyer vers Google Sheets
+            fetch(GOOGLE_APPS_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors', // Important pour Google Apps Script
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+                .then(() => {
+                    // Avec mode no-cors, on ne peut pas lire la réponse
+                    // On suppose que ça a fonctionné
+                    alert('✅ Message envoyé avec succès ! Nous vous contacterons bientôt.');
+                    this.reset();
+
+                    // Aussi sauvegarder localement pour le dashboard admin
+                    if (typeof TedAPI !== 'undefined') {
+                        const messages = JSON.parse(localStorage.getItem('tedsai_messages') || '[]');
+                        messages.unshift(data);
+                        TedAPI.saveData('messages', messages);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Erreur:', error);
+                    alert('❌ Erreur lors de l\'envoi. Veuillez réessayer ou nous contacter directement.');
+                })
+                .finally(() => {
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalText;
+                });
+        });
+    </script>
+</body>
+
+</html>

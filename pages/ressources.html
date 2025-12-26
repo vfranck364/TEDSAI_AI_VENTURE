@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ressources - TEDSAI Complex</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/mobile-nav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="../assets/images/logos/Logo TEDSAI.jpeg" alt="TEDSAI Logo" style="height: 50px;">
+            </div>
+            <nav class="nav-links">
+                <a href="../index.html">Accueil</a>
+                <a href="solutions-ia.html">Solutions IA</a>
+                <a href="vitedia.html">viTEDia</a>
+                <a href="garden.html">SelecTED Gardens</a>
+                <a href="observatoire.html">Observatoire</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content container fade-in-up">
+            <h1>Ressources Gratuites</h1>
+            <p>Guides • Checklists • Modèles • Baromètres</p>
+        </div>
+    </section>
+
+    <section class="container" style="padding: 4rem 0; text-align: center;">
+        <h2 style="margin-bottom: 1rem;">Outils Pratiques pour Réussir</h2>
+        <p style="max-width: 700px; margin: 0 auto; color: #666;">
+            Téléchargez nos ressources gratuites : guides complets, checklists, modèles Excel.
+            Conçus par nos experts pour vous faire gagner du temps.
+        </p>
+    </section>
+
+    <section class="container">
+        <div class="prod-grid" id="resources-container">
+            <p style="text-align: center;"><i class="fa-solid fa-spinner fa-spin"></i> Chargement...</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-col">
+                <h4>TEDSAI Complex</h4>
+                <p>Expertise partagée, succès multiplié.</p>
+            </div>
+        </div>
+        <div class="container"
+            style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 2rem;">
+            <p>&copy; 2025 TEDSAI Complex.</p>
+        </div>
+    </footer>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" aria-label="Navigation mobile principale">
+        <div class="mobile-nav-items">
+            <a href="../index.html" class="mobile-nav-item" aria-label="Accueil">
+                <i class="fa-solid fa-home"></i>
+                <span>Accueil</span>
+            </a>
+            <a href="solutions-ia.html" class="mobile-nav-item" aria-label="Solutions IA">
+                <i class="fa-solid fa-brain"></i>
+                <span>IA</span>
+            </a>
+            <a href="vitedia.html" class="mobile-nav-item" aria-label="Restaurant viTEDia">
+                <i class="fa-solid fa-utensils"></i>
+                <span>viTEDia</span>
+            </a>
+            <a href="garden.html" class="mobile-nav-item" aria-label="SelecTED Gardens">
+                <i class="fa-solid fa-leaf"></i>
+                <span>Jardin</span>
+            </a>
+            <a href="observatoire.html" class="mobile-nav-item" aria-label="Observatoire">
+                <i class="fa-solid fa-satellite-dish"></i>
+                <span>Obs</span>
+            </a>
+        </div>
+    </nav>
+
+    <script src="../assets/js/data-loader.js"></script>
+    <script>
+        async function loadResources() {
+            const data = await tedApi.fetchData('resources');
+            if (!data) return;
+
+            const container = document.getElementById('resources-container');
+            let html = '';
+
+            data.resources.forEach(resource => {
+                html += `
+                    <div class="prod-card">
+                        <i class="fa-solid ${resource.icon} prod-icon" style="color: ${resource.color}; font-size: 3rem;"></i>
+                        <h3>${resource.title}</h3>
+                        <p style="color: #666; font-size: 0.9rem; margin: 1rem 0;">${resource.description}</p>
+                        <div style="display: flex; gap: 10px; justify-content: center; font-size: 0.85rem; color: #888; margin-bottom: 1rem;">
+                            <span><i class="fa-solid fa-file"></i> ${resource.type}</span>
+                            ${resource.pages ? `<span><i class="fa-solid fa-book-open"></i> ${resource.pages} pages</span>` : ''}
+                        </div>
+                        <button class="btn btn-primary" onclick="downloadResource('${resource.id}', '${resource.title}')" style="width: 100%;">
+                            <i class="fa-solid fa-download"></i> Télécharger
+                        </button>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function downloadResource(id, title) {
+            const email = prompt("Entrez votre email pour recevoir le document :");
+            if (email && email.includes('@')) {
+                // Save lead
+                const messages = JSON.parse(localStorage.getItem('tedsai_messages') || '[]');
+                messages.unshift({
+                    id: 'resource_' + Date.now(),
+                    name: 'Téléchargement Ressource',
+                    email: email,
+                    interest: 'ressources',
+                    message: `Téléchargement : ${title}`,
+                    date: new Date().toISOString()
+                });
+                localStorage.setItem('tedsai_messages', JSON.stringify(messages));
+
+                alert(`Merci ! Le lien de téléchargement a été envoyé à ${email}.`);
+            } else if (email) {
+                alert("Email invalide.");
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadResources);
+    </script>
+    <script src="/Users/dev-ai/Documents/TEDSAI-website/relative/path/fixer.js"></script>
+</body>
+
+</html>

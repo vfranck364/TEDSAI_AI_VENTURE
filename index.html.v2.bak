@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEDSAI Complex - De la Data à l'Assiette</title>
+    <meta name="description"
+        content="TEDSAI Complex : Un écosystème intelligent unifiant Intelligence Artificielle, Gastronomie Durable et Agriculture Urbaine.">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logos/Logo TEDSAI.jpeg" alt="TEDSAI Logo">
+            </a>
+            <nav class="nav-links">
+                <a href="pages/solutions-ia.html" data-i18n="nav.solutions">Solutions IA</a>
+                <a href="pages/vitedia.html" data-i18n="nav.vitedia">Restaurant viTEDia</a>
+                <a href="pages/garden.html" data-i18n="nav.garden">SelecTED Gardens</a>
+                <a href="pages/observatoire.html" data-i18n="nav.observatory">Observatoire</a>
+                <a href="pages/contact.html" data-i18n="nav.contact">Contact</a>
+                <button id="lang-toggle-btn" onclick="toggleLanguage()"
+                    style="background-color: #2196F3 !important; color: white !important; border: 2px solid #1976D2; padding: 8px 16px; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-language"></i> EN
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content container fade-in-up">
+            <h1>TEDSAI Complex</h1>
+            <p style="font-size: 1.8rem; font-weight: bold; margin-bottom: 0.5rem;" data-i18n="hero.title">From Data to
+                Plate</p>
+            <p data-i18n="hero.subtitle">An intelligent ecosystem unifying Artificial Intelligence, Sustainable
+                Gastronomy and Urban Agriculture</p>
+            <div class="hero-buttons">
+                <a href="pages/solutions-ia.html" class="btn btn-primary" data-i18n="hero.discover_cta">Discover</a>
+                <a href="pages/vitedia.html" class="btn btn-secondary" data-i18n="hero.vitedia_cta">viTEDia</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- The 3 Pillars -->
+    <section class="pillars container">
+        <div class="pillar-card card-ia">
+            <div class="icon-wrapper">
+                <i class="fa-solid fa-brain"></i>
+            </div>
+            <h3 data-i18n="pillars.ia.title">Solutions IA Sur Mesure</h3>
+            <p data-i18n="pillars.ia.desc">Automatisez vos processus, optimisez vos stocks, propulsez votre service
+                client
+                avec l'intelligence
+                artificielle pragmatique.</p>
+            <div class="stats" data-i18n="pillars.ia.stats">250+ heures économisées/mois</div>
+            <a href="pages/solutions-ia.html" class="btn-text"><span data-i18n="pillars.ia.cta">Explorer</span> <i
+                    class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="pillar-card card-rest">
+            <div class="icon-wrapper">
+                <i class="fa-solid fa-utensils"></i>
+            </div>
+            <h3 data-i18n="pillars.gastronomy.title">Gastronomie Traçable</h3>
+            <p data-i18n="pillars.gastronomy.desc">Une cuisine raffinée où chaque ingrédient raconte son histoire, de
+                notre jardin à votre assiette.</p>
+            <div class="stats" data-i18n="pillars.gastronomy.stats">95% des produits du jardin</div>
+            <a href="pages/vitedia.html" class="btn-text"><span data-i18n="pillars.gastronomy.cta">Voir le menu</span>
+                <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="pillar-card card-garden">
+            <div class="icon-wrapper">
+                <i class="fa-solid fa-leaf"></i>
+            </div>
+            <h3 data-i18n="pillars.agriculture.title">Agriculture Urbaine</h3>
+            <p data-i18n="pillars.agriculture.desc">Un jardin productif au cœur de la ville, utilisant l'IoT et l'IA
+                pour
+                une traçabilité totale.</p>
+            <div class="stats" data-i18n="pillars.agriculture.stats">Zéro pesticide, 100% traçable</div>
+            <a href="pages/garden.html" class="btn-text"><span data-i18n="pillars.agriculture.cta">Découvrir le
+                    jardin</span> <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- Detailed Ecosystem & Vision -->
+    <section class="ecosystem-preview">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="ecosystem.title">Une Vision Unifiée</h2>
+                <p data-i18n="ecosystem.subtitle">L'IA ne dort jamais. Elle pilote, optimise et relie chaque
+                    compartiment.</p>
+            </div>
+            <div class="ecosystem-diagram" style="position: relative; max-width: 800px; margin: 2rem auto;">
+                <!-- Interactive SVGs/CSS Nodes -->
+                <div class="node node-ia fade-in-up" style="animation-delay: 0.2s;"
+                    onclick="location.href='pages/solutions-ia.html'">
+                    <i class="fa-solid fa-brain fa-2x"></i>
+                    <span data-i18n="ecosystem.nodes.ia">IA & Data</span>
+                    <div class="tooltip" data-i18n="ecosystem.nodes.ia_tooltip">Analyse & Optimisation</div>
+                </div>
+
+                <div class="flow-arrow arrow-1"
+                    style="position: absolute; top: 30%; left: 35%; animation: flowPulse 2s infinite;">
+                    <i class="fa-solid fa-chevron-right"></i> <span data-i18n="ecosystem.flow.data">Données</span>
+                </div>
+
+                <div class="node node-garden fade-in-up" style="animation-delay: 0.4s;"
+                    onclick="location.href='pages/garden.html'">
+                    <i class="fa-solid fa-leaf fa-2x"></i>
+                    <span data-i18n="ecosystem.nodes.garden">Jardin Urbain</span>
+                    <div class="tooltip" data-i18n="ecosystem.nodes.garden_tooltip">Production Traçable</div>
+                </div>
+
+                <div class="flow-arrow arrow-2"
+                    style="position: absolute; top: 60%; left: 50%; transform: translateX(-50%) rotate(90deg); animation: flowPulse 2s infinite 0.5s;">
+                    <i class="fa-solid fa-chevron-right"></i> <span data-i18n="ecosystem.flow.products">Produits
+                        Frais</span>
+                </div>
+
+                <div class="node node-rest fade-in-up" style="animation-delay: 0.6s;"
+                    onclick="location.href='pages/vitedia.html'">
+                    <i class="fa-solid fa-utensils fa-2x"></i>
+                    <span data-i18n="ecosystem.nodes.rest">Restaurant</span>
+                    <div class="tooltip" data-i18n="ecosystem.nodes.rest_tooltip">Expérience Gastronomique</div>
+                </div>
+
+                <div class="flow-arrow arrow-3"
+                    style="position: absolute; top: 45%; right: 25%; transform: rotate(-135deg); animation: flowPulse 2s infinite 1s;">
+                    <span data-i18n="ecosystem.flow.compost">Compost</span> <i class="fa-solid fa-chevron-right"></i>
+                </div>
+
+                <!-- New Spice Teaser Node -->
+                <div class="node node-spice fade-in-up"
+                    style="animation-delay: 0.8s; opacity: 0.7; border-bottom: 4px solid var(--color-spice-primary); color: var(--color-spice-primary);">
+                    <i class="fa-solid fa-pepper-hot fa-2x"></i>
+                    <span data-i18n="ecosystem.nodes.spice">Épices</span>
+                    <span
+                        style="font-size: 0.6rem; text-transform: uppercase; background: var(--color-spice-primary); color: white; padding: 2px 6px; border-radius: 4px; margin-top: 5px;"
+                        data-i18n="ecosystem.nodes.soon">Bientôt</span>
+                </div>
+            </div>
+
+
+            <style>
+                .node {
+                    cursor: pointer;
+                    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                    position: relative;
+                    display: inline-flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 10px;
+                    padding: 20px;
+                    background: white;
+                    border-radius: 12px;
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                    min-width: 150px;
+                    margin: 20px;
+                }
+
+                .node:hover {
+                    transform: scale(1.1);
+                    z-index: 10;
+                }
+
+                .node i {
+                    margin-bottom: 5px;
+                }
+
+                .node-ia {
+                    border-bottom: 4px solid var(--color-secondary);
+                    color: var(--color-primary);
+                }
+
+                .node-garden {
+                    border-bottom: 4px solid var(--color-garden-primary);
+                    color: var(--color-garden-primary);
+                }
+
+                .node-rest {
+                    border-bottom: 4px solid var(--color-vitedia-primary);
+                    color: var(--color-vitedia-primary);
+                }
+
+                .node-spice {
+                    border-style: dashed !important;
+                }
+
+                .tooltip {
+                    position: absolute;
+                    bottom: -30px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: #333;
+                    color: white;
+                    padding: 5px 10px;
+                    border-radius: 4px;
+                    font-size: 0.8rem;
+                    opacity: 0;
+                    transition: opacity 0.3s;
+                    pointer-events: none;
+                    white-space: nowrap;
+                }
+
+                .node:hover .tooltip {
+                    opacity: 1;
+                }
+
+                @keyframes flowPulse {
+                    0% {
+                        opacity: 0.4;
+                        transform: scale(0.9);
+                    }
+
+                    50% {
+                        opacity: 1;
+                        transform: scale(1.1);
+                    }
+
+                    100% {
+                        opacity: 0.4;
+                        transform: scale(0.9);
+                    }
+                }
+            </style>
+            <div class="center-text">
+                <a href="pages/ecosystem.html" class="btn btn-secondary" data-i18n="ecosystem.cta">Comprendre notre
+                    vision</a>
+            </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-col">
+                <img src="assets/images/logos/Logo TEDSAI.jpeg" alt="Logo" style="height: 40px; margin-bottom: 1rem;">
+                <p data-i18n="footer.tagline">Le système nerveux numérique d'un écosystème intelligent.</p>
+                <div class="socials">
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <ul>
+                    <li><a href="pages/contact.html" data-i18n="footer.links.contact">Nous Contacter</a></li>
+                    <li><a href="#" data-i18n="footer.links.recruitment">Recrutement</a></li>
+                    <li><a href="#" data-i18n="footer.links.press">Presse</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container copyright"
+            style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 2rem;">
+            <p data-i18n="footer.copyright">&copy; 2024 TEDSAI Complex. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- TED Assistant Widget (Placeholder for now) -->
+    <script src="assets/js/data-loader.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/lang-toggle.js"></script>
+</body>
+
+</html>

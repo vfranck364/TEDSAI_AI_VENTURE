@@ -1,0 +1,83 @@
+{
+    "epices": [
+        {
+            "id": "piment-rouge",
+            "name": "Piment Rouge Moulu",
+            "category": "epice",
+            "origin": "Ouest Cameroun",
+            "price": 1500,
+            "unit": "250g",
+            "description": "Piment rouge traditionnel, séché et moulu. Idéal pour les sauces et grillades.",
+            "available": true,
+            "traceable": true
+        },
+        {
+            "id": "gingembre-frais",
+            "name": "Gingembre Frais",
+            "category": "epice",
+            "origin": "Foumbot",
+            "price": 800,
+            "unit": "500g",
+            "description": "Gingembre frais de qualité supérieure. Parfait pour infusions et cuisine.",
+            "available": true,
+            "traceable": true
+        },
+        {
+            "id": "poivre-noir",
+            "name": "Poivre Noir en Grains",
+            "category": "epice",
+            "origin": "Sud-Ouest",
+            "price": 2000,
+            "unit": "200g",
+            "description": "Poivre noir de Penja, AOC. Arôme puissant et fruité.",
+            "available": true,
+            "traceable": true
+        },
+        {
+            "id": "ail-sec",
+            "name": "Ail Séché",
+            "category": "epice",
+            "origin": "Nord Cameroun",
+            "price": 1200,
+            "unit": "300g",
+            "description": "Ail séché et émincé. Base essentielle de la cuisine camerounaise.",
+            "available": true,
+            "traceable": true
+        }
+    ],
+    "produits_frais": [
+        {
+            "id": "poulet-entier",
+            "name": "Poulet Fermier Entier",
+            "category": "volaille",
+            "origin": "TEDSAI Élevage",
+            "price": 3500,
+            "unit": "kg",
+            "description": "Poulet élevé en plein air, alimentation locale. Prêt à cuisiner.",
+            "available": true,
+            "traceable": true
+        },
+        {
+            "id": "filet-tilapia",
+            "name": "Filets de Tilapia",
+            "category": "poisson",
+            "origin": "TEDSAI Élevage",
+            "price": 2800,
+            "unit": "kg",
+            "description": "Tilapia frais, élevé en bassins contrôlés. Sans antibiotiques.",
+            "available": true,
+            "traceable": true
+        },
+        {
+            "id": "oeufs-frais",
+            "name": "Œufs Frais",
+            "category": "volaille",
+            "origin": "TEDSAI Élevage",
+            "price": 150,
+            "unit": "pièce",
+            "description": "Œufs de poules élevées en plein air. Jaune orangé.",
+            "available": true,
+            "traceable": true
+        }
+    ]
+}

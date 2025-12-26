@@ -1,0 +1,231 @@
+{
+    "articles": [
+        {
+            "id": "ia-pme-cameroun-2025",
+            "title": "IA Générative pour PME Camerounaises : ROI Réel en 2025",
+            "category": "ia",
+            "author": "Équipe TEDSAI",
+            "date": "2025-01-10",
+            "readTime": "8 min",
+            "summary": "Analyse chiffrée du retour sur investissement de l'IA générative pour 30 PME camerounaises. Résultats : +35% productivité, -20% coûts opérationnels.",
+            "image": "",
+            "tags": [
+                "IA",
+                "PME",
+                "ROI",
+                "Cameroun"
+            ],
+            "content": "Analyse complète basée sur 30 cas réels..."
+        },
+        {
+            "id": "rendement-maraichage-urbain",
+            "title": "Rendement Maraîchage Urbain : Yaoundé vs Douala (Données 2024)",
+            "category": "agriculture",
+            "author": "Équipe SelecTED Gardens",
+            "date": "2025-01-08",
+            "readTime": "6 min",
+            "summary": "Comparaison des rendements en agriculture urbaine entre Yaoundé et Douala. Tomates : 45kg/m² à Yaoundé vs 38kg/m² à Douala. Analyse des facteurs clés.",
+            "image": "",
+            "tags": [
+                "Agriculture",
+                "Maraîchage",
+                "Yaoundé",
+                "Douala"
+            ],
+            "content": "Étude sur 24 parcelles urbaines..."
+        },
+        {
+            "id": "poulet-chair-analyse-couts",
+            "title": "Poulet de Chair : Analyse Coûts/Bénéfices (Rations Locales vs Importées)",
+            "category": "elevage",
+            "author": "TEDSAI Élevage",
+            "date": "2025-01-05",
+            "readTime": "10 min",
+            "summary": "Étude comparative sur 500 poulets : rations locales = -15% coût, même croissance. Rentabilité : 28% avec local vs 22% avec importé.",
+            "image": "",
+            "tags": [
+                "Élevage",
+                "Poulet",
+                "Rentabilité",
+                "Rations"
+            ],
+            "content": "Protocole expérimental rigoureux..."
+        },
+        {
+            "id": "prix-epices-yaounde-2024",
+            "title": "Prix des Épices à Yaoundé : Tendances Saisonnières 2024",
+            "category": "epicerie",
+            "author": "TEDSAI Épicerie",
+            "date": "2025-01-03",
+            "readTime": "5 min",
+            "summary": "Baromètre annuel des prix : Piment +12%, Gingembre stable, Poivre -8%. Meilleurs mois d'achat identifiés pour chaque épice.",
+            "image": "",
+            "tags": [
+                "Épices",
+                "Prix",
+                "Yaoundé",
+                "Tendances"
+            ],
+            "content": "Données collectées sur 12 marchés..."
+        },
+        {
+            "id": "marges-restauration-etude",
+            "title": "Marges Restauration : Étude de 50 Établissements Yaoundé",
+            "category": "restauration",
+            "author": "viTEDia Insights",
+            "date": "2024-12-28",
+            "readTime": "7 min",
+            "summary": "Marge moyenne : 32%. Top performers : 45%+ grâce à l'approvisionnement local et à la réduction du gaspillage. Méthodologie détaillée.",
+            "image": "",
+            "tags": [
+                "Restauration",
+                "Marges",
+                "Gestion",
+                "Yaoundé"
+            ],
+            "content": "Enquête anonymisée auprès de 50 restaurants..."
+        },
+        {
+            "id": "inflation-secteur-alimentaire",
+            "title": "Inflation & Pouvoir d'Achat : Impact sur le Secteur Alimentaire",
+            "category": "economie",
+            "author": "Observatoire TEDSAI",
+            "date": "2024-12-20",
+            "readTime": "9 min",
+            "summary": "Inflation alimentaire 2024 : +8,5%. Analyse des stratégies d'adaptation des ménages et opportunités pour les producteurs locaux.",
+            "image": "",
+            "tags": [
+                "Économie",
+                "Inflation",
+                "Alimentation",
+                "Cameroun"
+            ],
+            "content": "Analyse macro-économique basée sur données ECAM..."
+        },
+        {
+            "id": "vitedia-reduction-gaspillage",
+            "title": "Cas viTEDia : Réduction du Gaspillage de 40% avec l'IA",
+            "category": "cas-tedsai",
+            "author": "TEDSAI IA",
+            "date": "2024-12-15",
+            "readTime": "6 min",
+            "summary": "Étude de cas : système de prévision de demande par IA. Résultats : -40% gaspillage, +18% marge nette, ROI en 4 mois.",
+            "image": "",
+            "tags": [
+                "Cas Client",
+                "IA",
+                "Restauration",
+                "ROI"
+            ],
+            "content": "Avant : 25% de perte quotidienne. Après : 15%..."
+        },
+        {
+            "id": "checklist-elevage-poisson",
+            "title": "Checklist : Lancer un Élevage de Poisson Rentable",
+            "category": "pratique",
+            "author": "TEDSAI Élevage",
+            "date": "2024-12-10",
+            "readTime": "12 min",
+            "summary": "Guide complet : choix du site, construction des bassins, gestion de l'eau, alimentation, biosécurité. Budget type : 2M FCFA pour démarrer.",
+            "image": "",
+            "tags": [
+                "Guide",
+                "Élevage",
+                "Poisson",
+                "Pratique"
+            ],
+            "content": "Étape 1 : Analyse du terrain..."
+        },
+        {
+            "id": "barometre-prix-hebdo",
+            "title": "Baromètre Prix Hebdo : Poulet, Poisson, Tomates (Semaine 2)",
+            "category": "barometre",
+            "author": "Observatoire TEDSAI",
+            "date": "2025-01-12",
+            "readTime": "3 min",
+            "summary": "Mise à jour hebdomadaire : Poulet vif 2200 FCFA/kg (-50 FCFA), Tilapia 1800 FCFA/kg (stable), Tomates 800 FCFA/kg (+100 FCFA).",
+            "image": "",
+            "tags": [
+                "Baromètre",
+                "Prix",
+                "Marché",
+                "Hebdo"
+            ],
+            "content": "Données collectées dans 8 marchés de Yaoundé..."
+        },
+        {
+            "id": "portrait-producteur-epices",
+            "title": "Portrait : Un Producteur d'Épices de l'Ouest Cameroun",
+            "category": "interview",
+            "author": "Observatoire TEDSAI",
+            "date": "2024-12-05",
+            "readTime": "8 min",
+            "summary": "Rencontre avec Jean K., producteur de gingembre à Foumbot. De 0,5 ha à 3 ha en 5 ans. Secrets de réussite et défis du marché.",
+            "image": "",
+            "tags": [
+                "Interview",
+                "Épices",
+                "Portrait",
+                "Agriculture"
+            ],
+            "content": "Jean K. a démarré en 2019 avec 0,5 hectare..."
+        }
+    ],
+    "categories": [
+        {
+            "id": "ia",
+            "name": "Intelligence Artificielle",
+            "color": "#0A2463"
+        },
+        {
+            "id": "agriculture",
+            "name": "Agriculture",
+            "color": "#2D5A27"
+        },
+        {
+            "id": "elevage",
+            "name": "Élevage",
+            "color": "#8B4513"
+        },
+        {
+            "id": "restauration",
+            "name": "Restauration",
+            "color": "#8B1538"
+        },
+        {
+            "id": "epicerie",
+            "name": "Épicerie & Produits",
+            "color": "#D35400"
+        },
+        {
+            "id": "commerce",
+            "name": "Commerce & PME",
+            "color": "#34495E"
+        },
+        {
+            "id": "economie",
+            "name": "Économie",
+            "color": "#16A085"
+        },
+        {
+            "id": "cas-tedsai",
+            "name": "Cas TEDSAI",
+            "color": "#E67E22"
+        },
+        {
+            "id": "pratique",
+            "name": "Guides Pratiques",
+            "color": "#27AE60"
+        },
+        {
+            "id": "barometre",
+            "name": "Baromètres",
+            "color": "#C0392B"
+        },
+        {
+            "id": "interview",
+            "name": "Interviews",
+            "color": "#9B59B6"
+        }
+    ]
+}

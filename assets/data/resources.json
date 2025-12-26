@@ -1,0 +1,54 @@
+{
+    "resources": [
+        {
+            "id": "guide-ia-pme",
+            "title": "Guide Complet : IA pour PME Camerounaises",
+            "category": "ia",
+            "type": "PDF",
+            "pages": 24,
+            "description": "De l'audit initial au déploiement : méthodologie complète, cas d'usage, budget type.",
+            "icon": "fa-file-pdf",
+            "color": "#e74c3c"
+        },
+        {
+            "id": "checklist-elevage-poulet",
+            "title": "Checklist : Démarrer un Élevage de Poulet",
+            "category": "elevage",
+            "type": "PDF",
+            "pages": 8,
+            "description": "Liste complète des étapes, équipements, budget, calendrier de vaccination.",
+            "icon": "fa-list-check",
+            "color": "#8B4513"
+        },
+        {
+            "id": "modele-business-plan-agro",
+            "title": "Modèle Business Plan Agriculture Urbaine",
+            "category": "agriculture",
+            "type": "Excel",
+            "pages": null,
+            "description": "Fichier Excel pré-rempli : projections financières, calcul de rentabilité.",
+            "icon": "fa-file-excel",
+            "color": "#27ae60"
+        },
+        {
+            "id": "barometre-prix-2024",
+            "title": "Baromètre Annuel des Prix 2024",
+            "category": "economie",
+            "type": "PDF",
+            "pages": 16,
+            "description": "Évolution des prix : poulet, poisson, légumes, épices. Tendances et prévisions.",
+            "icon": "fa-chart-line",
+            "color": "#16A085"
+        },
+        {
+            "id": "guide-traceabilite",
+            "title": "Guide : Mettre en Place la Traçabilité",
+            "category": "agriculture",
+            "type": "PDF",
+            "pages": 12,
+            "description": "Système de traçabilité pour producteurs : outils, méthodes, bénéfices.",
+            "icon": "fa-qrcode",
+            "color": "#2D5A27"
+        }
+    ]
+}

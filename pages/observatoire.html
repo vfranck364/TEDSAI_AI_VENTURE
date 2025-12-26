@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Observatoire TEDSAI - Analyses & Tendances Social</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/mobile-nav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --obs-primary: #0A2463;
+            --obs-secondary: #5AA9E6;
+            --obs-bg: #f8fafc;
+        }
+
+        body {
+            background-color: var(--obs-bg);
+        }
+
+        /* Hero Style Frontline */
+        .obs-hero-v2 {
+            background: white;
+            padding: 5rem 0 3rem;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .hero-text {
+            flex: 1;
+            text-align: left;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            color: var(--obs-primary);
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            color: #64748b;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: right;
+            display: none;
+        }
+
+        @media (min-width: 992px) {
+            .hero-image {
+                display: block;
+            }
+        }
+
+        /* Pills Navigation */
+        .category-nav {
+            padding: 2rem 0;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .pills-container {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .pill {
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid #e2e8f0;
+            background: white;
+            color: #64748b;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .pill:hover,
+        .pill.active {
+            background: var(--obs-primary);
+            color: white;
+            border-color: var(--obs-primary);
+        }
+
+        /* Social Article Cards */
+        .obs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+            padding: 4rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .obs-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .obs-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .card-img {
+            height: 220px;
+            position: relative;
+            background: #cbd5e1;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .category-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--obs-primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .card-meta {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            color: var(--obs-primary);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+            font-weight: 700;
+        }
+
+        .card-excerpt {
+            color: #475569;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Social Actions */
+        .card-social {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #f1f5f9;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .social-btn {
+            background: none;
+            border: none;
+            color: #64748b;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .social-btn:hover {
+            color: var(--obs-primary);
+        }
+
+        .social-btn.liked {
+            color: #ef4444;
+        }
+
+        .social-btn.liked i {
+            animation: heartBeat 0.3s ease-in-out;
+        }
+
+        @keyframes heartBeat {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.3);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Floating Action Button */
+        .fab-submit {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--obs-primary);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(10, 36, 99, 0.4);
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .fab-submit:hover {
+            transform: scale(1.1) rotate(90deg);
+        }
+
+        /* Modal Simple */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            overflow-y: auto;
+            /* Permet le défilement de la modal entière */
+            padding: 2rem 0;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 900px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            margin: auto;
+            position: relative;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+        }
+
+        .btn-submit {
+            background: var(--obs-primary);
+            color: white;
+            border: none;
+            padding: 1rem;
+            width: 100%;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: #081d4a;
+        }
+
+        .editor-area.columns-2 {
+            column-count: 2;
+            column-gap: 2rem;
+            column-rule: 1px solid #e2e8f0;
+        }
+
+        .tool-btn input[type="color"] {
+            border: none;
+            width: 20px;
+            height: 20px;
+            padding: 0;
+            cursor: pointer;
+            background: none;
+        }
+
+        /* Rich Editor Styles */
+        .editor-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding: 0.8rem;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-bottom: none;
+            border-radius: 10px 10px 0 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .tool-btn {
+            padding: 0.5rem;
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            cursor: pointer;
+            color: #475569;
+            min-width: 35px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tool-btn:hover {
+            background: #e2e8f0;
+            color: var(--obs-primary);
+        }
+
+        .tool-btn.active {
+            background: var(--obs-primary);
+            color: white;
+        }
+
+        .editor-area {
+            min-height: 400px;
+            max-height: 60vh;
+            overflow-y: auto;
+            border: 1px solid #e2e8f0;
+            padding: 2rem;
+            background: white;
+            outline: none;
+            border-radius: 0 0 10px 10px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        .editor-area h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--obs-primary);
+        }
+
+        .editor-area h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--obs-primary);
+        }
+
+        .editor-area p {
+            margin-bottom: 1rem;
+        }
+
+        .editor-area img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 1rem 0;
+            display: block;
+        }
+
+        /* Shapes & Special Elements */
+        .editor-callout {
+            background: #f1f5f9;
+            border-left: 5px solid var(--obs-primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 10px 10px 0;
+            position: relative;
+        }
+
+        .editor-text-box {
+            display: block;
+            border: 2px solid #cbd5e1;
+            padding: 1rem;
+            background: white;
+            min-height: 50px;
+            margin: 1rem 0;
+            border-radius: 8px;
+            position: relative;
+            resize: both;
+            /* Permet le redimensionnement */
+            overflow: auto;
+            z-index: 1;
+            /* Base z-index */
+            transition: outline 0.2s, box-shadow 0.2s;
+        }
+
+        .editor-text-box.scrollable {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .editor-text-box.transparent-bg {
+            background-color: transparent !important;
+        }
+
+        .editor-text-box.transparent-border {
+            border-color: transparent !important;
+        }
+
+        .editor-area img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 1rem 0;
+            display: block;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        /* Pour redimensionner les images, on les rend changeables via drag sur le coin dans certains environnements, 
+           sinon on peut utiliser width/height inline. On ajoute une classe si selectionné. */
+        .editor-area img.selected-block {
+            resize: both;
+            overflow: hidden;
+            border: 3px solid var(--obs-secondary);
+        }
+
+        .editor-callout {
+            border-left: 5px solid var(--obs-primary);
+            background: #f1f5f9;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            border-radius: 0 10px 10px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .editor-callout.transparent-bg {
+            background-color: transparent !important;
+        }
+
+        .editor-callout.transparent-border {
+            border-left-color: transparent !important;
+        }
+
+        .selected-block {
+            outline: 2px dashed var(--obs-secondary) !important;
+            outline-offset: 4px;
+            z-index: 10;
+            /* Bring forward visually in editor */
+        }
+
+        /* Smart Button Style */
+        .editor-button {
+            display: inline-block;
+            background: var(--obs-primary);
+            color: white !important;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            margin: 1rem 0;
+            cursor: pointer;
+        }
+
+        .editor-area blockquote {
+            border-left: 4px solid var(--obs-primary);
+            padding-left: 1rem;
+            font-style: italic;
+            color: #64748b;
+            margin: 1rem 0;
+        }
+
+        .modal-footer {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #475569;
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .step-indicator {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        .step-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #e2e8f0;
+        }
+
+        .step-dot.active {
+            background: var(--obs-primary);
+            transform: scale(1.3);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container navbar">
+            <div class="logo">
+                <a href="../index.html"><img src="../assets/images/logos/tedsai_logo.jpg" alt="TEDSAI Logo"
+                        style="height: 50px;"></a>
+            </div>
+            <nav class="nav-links">
+                <a href="../index.html">Accueil</a>
+                <a href="solutions-ia.html">IA Solutions</a>
+                <a href="vitedia.html">viTEDia</a>
+                <a href="garden.html">SelecTED Garden</a>
+                <a href="observatoire.html" style="font-weight: bold; color: var(--obs-primary);">Observatoire</a>
+                <a href="contact.html" class="btn-cta">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="obs-hero-v2">
+        <div class="hero-container">
+            <div class="hero-text">
+                <h1>Nos Analyses & Insights</h1>
+                <p>Découvrez les tendances deep-tech, agro-pastorales et économiques qui façonnent l'Afrique de demain.
+                    Données réelles, impact concret.</p>
+            </div>
+            <div class="hero-image">
+                <img src="https://img.freepik.com/free-vector/blogging-concept-illustration_114360-1038.jpg?w=800"
+                    alt="Analyses" style="max-width: 400px; border-radius: 20px;">
+            </div>
+        </div>
+    </section>
+
+    <div class="category-nav">
+        <div class="pills-container" id="category-pills">
+            <button class="pill active" onclick="Observatory.filter('all', this)">Tous</button>
+            <!-- Dynamically loaded -->
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="obs-grid" id="posts-grid">
+            <!-- Dynamically loaded social cards -->
+        </div>
+    </div>
+
+    <button class="fab-submit" onclick="Observatory.openSubmitModal()" title="Proposer un article">
+        <i class="fa-solid fa-plus fa-xl"></i>
+    </button>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" aria-label="Navigation mobile principale">
+        <div class="mobile-nav-items">
+            <a href="../index.html" class="mobile-nav-item" aria-label="Accueil">
+                <i class="fa-solid fa-home"></i>
+                <span>Accueil</span>
+            </a>
+            <a href="solutions-ia.html" class="mobile-nav-item" aria-label="Solutions IA">
+                <i class="fa-solid fa-brain"></i>
+                <span>IA</span>
+            </a>
+            <a href="vitedia.html" class="mobile-nav-item" aria-label="Restaurant viTEDia">
+                <i class="fa-solid fa-utensils"></i>
+                <span>viTEDia</span>
+            </a>
+            <a href="garden.html" class="mobile-nav-item" aria-label="SelecTED Gardens">
+                <i class="fa-solid fa-leaf"></i>
+                <span>Jardin</span>
+            </a>
+            <a href="observatoire.html" class="mobile-nav-item active" aria-label="Observatoire">
+                <i class="fa-solid fa-satellite-dish"></i>
+                <span>Obs</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Modal Submission -->
+    <div id="submit-modal" class="modal">
+        <div class="modal-content" style="max-width: 900px; padding: 2.5rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+                <h2 style="color:var(--obs-primary);" id="modal-title">Proposer une Analyse</h2>
+                <button onclick="Observatory.closeSubmitModal()"
+                    style="border:none; background:none; font-size:1.5rem; cursor:pointer;">&times;</button>
+            </div>
+
+            <div class="step-indicator">
+                <div class="step-dot active" id="dot-1"></div>
+                <div class="step-dot" id="dot-2"></div>
+            </div>
+
+            <!-- STEP 1: METADATA -->
+            <div id="step-1">
+                <p style="color:#64748b; margin-bottom:1.5rem; font-size:0.9rem;">Commencez par les informations de base
+                    de votre article.</p>
+                <form id="submit-form-step1">
+                    <div class="form-group">
+                        <label>Votre Nom / Organisation</label>
+                        <input type="text" id="post-author" required placeholder="Ex: Jean Dupont">
+                    </div>
+                    <div class="form-group">
+                        <label>Titre de l'Analyse</label>
+                        <input type="text" id="post-title" required placeholder="Un titre percutant...">
+                    </div>
+                    <div class="form-group">
+                        <label>Catégorie</label>
+                        <select id="modal-cat-select" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Résumé court (s'affiche sur la grille)</label>
+                        <textarea id="post-summary" rows="3" required
+                            placeholder="De quoi parle votre article ?"></textarea>
+                    </div>
+                    <button type="button" class="btn-submit" onclick="Observatory.goToStep(2)">Suivant : Rédiger le
+                        contenu</button>
+                </form>
+            </div>
+
+            <!-- STEP 2: RICH EDITOR -->
+            <div id="step-2" style="display: none;">
+                <p style="color:#64748b; margin-bottom:1.5rem; font-size:0.9rem;">Rédigez maintenant votre article
+                    complet. Utilisez la barre d'outils pour la mise en forme.</p>
+
+                <div class="editor-container">
+                    <div class="editor-toolbar">
+                        <button class="tool-btn" onclick="Observatory.exec('undo')" title="Annuler"><i
+                                class="fa-solid fa-undo"></i></button>
+                        <button class="tool-btn" onclick="Observatory.exec('redo')" title="Retablir"><i
+                                class="fa-solid fa-redo"></i></button>
+                        <div style="width:1px; background:#cbd5e1; margin:0 5px;"></div>
+                        <button class="tool-btn" onclick="Observatory.exec('bold')" title="Gras"><i
+                                class="fa-solid fa-bold"></i></button>
+                        <button class="tool-btn" onclick="Observatory.exec('italic')" title="Italique"><i
+                                class="fa-solid fa-italic"></i></button>
+                        <button class="tool-btn" onclick="Observatory.exec('underline')" title="Souligné"><i
+                                class="fa-solid fa-underline"></i></button>
+                        <button class="tool-btn" onclick="Observatory.exec('strikeThrough')" title="Barré"><i
+                                class="fa-solid fa-strikethrough"></i></button>
+                        <div style="width:1px; background:#cbd5e1; margin:0 5px;"></div>
+                        <div class="tool-btn" title="Couleur Texte">
+                            <i class="fa-solid fa-font" style="margin-right:5px;"></i>
+                            <input type="color" onchange="Observatory.exec('foreColor', this.value)" value="#0A2463">
+                        </div>
+                        <div class="tool-btn" title="Surlignage">
+                            <i class="fa-solid fa-highlighter" style="margin-right:5px;"></i>
+                            <input type="color" onchange="Observatory.exec('hiliteColor', this.value)" value="#ffffff">
+                        </div>
+                        <div class="tool-btn" title="Couleur Page">
+                            <i class="fa-solid fa-fill-drip" style="margin-right:5px;"></i>
+                            <input type="color" onchange="Observatory.changePageColor(this.value)" value="#ffffff">
+                        </div>
+                        <div style="width:1px; background:#cbd5e1; margin:0 5px;"></div>
+
+                        <div style="width:1px; background:#cbd5e1; margin:0 5px;"></div>
+                        <button class="tool-btn" onclick="Observatory.exec('formatBlock', 'H1')" title="Titre 1"><i
+                                class="fa-solid fa-h1"></i></button>
+                        <button class="tool-btn" onclick="Observatory.exec('formatBlock', 'H2')" title="Titre 2"><i
+                                class="fa-solid fa-h2"></i></button>
+                        <button class="tool-btn" onclick="Observatory.exec('formatBlock', 'P')" title="Texte normal"><i
+                                class="fa-solid fa-paragraph"></i></button>
+                        <div style="width:1px; background:#cbd5e1; margin:0 5px;"></div>
+                        <button class="tool-btn" onclick="Observatory.exec('insertUnorderedList')"
+                            title="Liste à puces"><i class="fa-solid fa-list-ul"></i></button>
+                        <button class="tool-btn" onclick="Observatory.exec('insertOrderedList')"
+                            title="Liste numérotée"><i class="fa-solid fa-list-ol"></i></button>
+                        <div style="width:1px; background:#cbd5e1; margin:0 5px;"></div>
+                        <button class="tool-btn" onclick="Observatory.exec('justifyLeft')" title="Gauche"><i
+                                class="fa-solid fa-align-left"></i></button>
+                        <button class="tool-btn" onclick="Observatory.exec('justifyCenter')" title="Centrer"><i
+                                class="fa-solid fa-align-center"></i></button>
+                        <button class="tool-btn" onclick="Observatory.exec('justifyRight')" title="Droite"><i
+                                class="fa-solid fa-align-right"></i></button>
+                        <button class="tool-btn" onclick="Observatory.exec('justifyFull')" title="Justifier"><i
+                                class="fa-solid fa-align-justify"></i></button>
+                        <button class="tool-btn" onclick="Observatory.exec('insertHorizontalRule')"
+                            title="Ligne Horizontale"><i class="fa-solid fa-minus"></i></button>
+                        <button class="tool-btn" onclick="Observatory.toggleColumns()" title="Basculez 1/2 Colonnes"><i
+                                class="fa-solid fa-columns"></i></button>
+                        <div style="width:1px; background:#cbd5e1; margin:0 5px;"></div>
+
+                        <button class="tool-btn" onclick="document.getElementById('editor-image-input').click()"
+                            title="Insérer Image (Upload)"><i class="fa-solid fa-image"></i></button>
+                        <input type="file" id="editor-image-input" style="display:none" accept="image/*"
+                            onchange="Observatory.handleImageUpload(this)">
+                        <button class="tool-btn" onclick="Observatory.insertCallout()" title="Insérer Encadré"><i
+                                class="fa-solid fa-square-poll-horizontal"></i></button>
+                        <button class="tool-btn" onclick="Observatory.insertTextBox()" title="Zone de Texte"><i
+                                class="fa-solid fa-vector-square"></i></button>
+                        <button class="tool-btn" onclick="Observatory.insertSmartButton()" title="Bouton d'Action"><i
+                                class="fa-solid fa-rectangle-ad"></i></button>
+
+                        <div style="width:1px; background:#cbd5e1; margin:0 5px;"></div>
+                        <button class="tool-btn" onclick="Observatory.toggleTransparency('bg')"
+                            title="Fond Transparent"><i class="fa-solid fa-droplet-slash"></i></button>
+                        <button class="tool-btn" onclick="Observatory.toggleTransparency('border')"
+                            title="Bordure Transparente"><i class="fa-solid fa-border-none"></i></button>
+                        <button class="tool-btn" onclick="Observatory.bringToFront()" title="Premier Plan"><i
+                                class="fa-solid fa-layer-group"></i></button>
+                        <button class="tool-btn" onclick="Observatory.toggleScroll()" title="Mode Déroulable"><i
+                                class="fa-solid fa-arrows-up-down"></i></button>
+
+                        <div style="width:1px; background:#cbd5e1; margin:0 5px;"></div>
+                        <button class="tool-btn" onclick="Observatory.exec('createLink')" title="Lien"><i
+                                class="fa-solid fa-link"></i></button>
+                        <button class="tool-btn" onclick="Observatory.exec('removeFormat')"
+                            title="Effacer mise en forme"><i class="fa-solid fa-eraser"></i></button>
+                    </div>
+                    <div id="editor-content" class="editor-area" contenteditable="true">
+                        <h1>Titre de votre article...</h1>
+                        <p>Commencez à rédiger ici. Vous pouvez utiliser <strong>le gras</strong>, <em>l'italique</em>,
+                            et insérer des listes ou des images pour rendre votre analyse percutante.</p>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn-secondary" onclick="Observatory.goToStep(1)">Précédent</button>
+                    <button class="btn-submit" style="flex:2;" onclick="Observatory.finalSubmit()">Envoyer pour
+                        modération</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="background: var(--color-primary); padding: 4rem 0; color: white; margin-top: 4rem;">
+        <div class="container footer-content"
+            style="display: flex; justify-content: space-between; flex-wrap: wrap; text-align: left; gap: 3rem;">
+            <div class="footer-col" style="flex: 2; min-width: 300px;">
+                <h3 style="color: white; margin-bottom: 1.5rem; font-family: var(--font-accent);">L'Observatoire TEDSAI
+                </h3>
+                <p style="opacity: 0.8; line-height: 1.6;">Le pôle d'intelligence économique et technologique du
+                    Complexe TEDSAI. Nous analysons les données pour éclairer vos décisions en Afrique.</p>
+            </div>
+            <div class="container footer-content">
+                <div class="footer-col">
+                    <p>Le système nerveux numérique d'un écosystème intelligent.</p>
+                    <div class="socials" style="margin-top: 1rem; display: flex; gap: 1rem; font-size: 1.5rem;">
+                        <a href="https://www.linkedin.com/in/tedsai-complex-a26b95397" target="_blank"
+                            rel="noopener noreferrer" aria-label="LinkedIn"
+                            style="color: white; transition: color 0.3s;"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://www.instagram.com/tedsai1385/" target="_blank" rel="noopener noreferrer"
+                            aria-label="Instagram" style="color: white; transition: color 0.3s;"><i
+                                class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/profile.php?id=61584073655708" target="_blank"
+                            rel="noopener noreferrer" aria-label="Facebook"
+                            style="color: white; transition: color 0.3s;"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://x.com/Tedsai1385" target="_blank" rel="noopener noreferrer"
+                            aria-label="X (Twitter)"
+                            style="color: white; transition: color 0.3s; font-weight: bold; font-family: Arial, sans-serif;">𝕏</a>
+                        <a href="https://www.youtube.com/@TEDSAIComplex" target="_blank" rel="noopener noreferrer"
+                            aria-label="YouTube" style="color: white; transition: color 0.3s;"><i
+                                class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Liens Rapides</h4>
+                    <ul>
+                        <li><a href="pages/solutions-ia.html">Solutions IA</a></li>
+                        <li><a href="pages/vitedia.html">Restaurant viTEDia</a></li>
+                        <li><a href="pages/garden.html">SelecTED Gardens</a></li>
+                        <li><a href="pages/observatoire.html">Observatoire</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="pages/contact.html">Nous Contacter</a></li>
+                        <li><a href="pages/contact.html?reason=hiring">Recrutement</a></li>
+                        <li><a href="pages/contact.html?reason=press">Presse</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-col" style="flex: 1; min-width: 200px;">
+                <h4
+                    style="color: var(--color-secondary); margin-bottom: 1.2rem; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;">
+                    Ressources</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.8rem;"><a href="contact.html?reason=hiring"
+                            style="color: white; text-decoration: none; opacity: 0.7; transition: 0.3s;">Recrutement /
+                            Jobs</a></li>
+                    <li style="margin-bottom: 0.8rem;"><a href="contact.html?reason=press"
+                            style="color: white; text-decoration: none; opacity: 0.7; transition: 0.3s;">Presse /
+                            Média</a></li>
+                    <li style="margin-bottom: 0.8rem;"><a href="contact.html"
+                            style="color: white; text-decoration: none; opacity: 0.7; transition: 0.3s;">Contact
+                            Direct</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container"
+            style="text-align:center; margin-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; opacity: 0.6; font-size: 0.9rem;">
+            <p>&copy; 2024 TEDSAI Complex - Pôle Observatoire. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../assets/js/core/db.js"></script>
+    <script src="../assets/js/core/api.js"></script>
+    <script>
+        const Observatory = {
+            init() {
+                this.loadCategories();
+                this.loadPosts();
+            },
+
+            loadCategories() {
+                const cats = TedAPI.Blog.getCategories();
+                const container = document.getElementById('category-pills');
+                const select = document.getElementById('modal-cat-select');
+
+                if (!container || !select) return;
+
+                // Clear existing (except "All" pill)
+                while (container.children.length > 1) container.removeChild(container.lastChild);
+                select.innerHTML = '<option value="" disabled selected>Choisir une catégorie...</option>';
+
+                cats.forEach(cat => {
+                    const btn = document.createElement('button');
+                    btn.className = 'pill';
+                    btn.textContent = cat.name;
+                    btn.onclick = (e) => this.filter(cat.id, e.target);
+                    container.appendChild(btn);
+
+                    const opt = document.createElement('option');
+                    opt.value = cat.id;
+                    opt.textContent = cat.name;
+                    select.appendChild(opt);
+                });
+            },
+
+            loadPosts(filter = 'all') {
+                const grid = document.getElementById('posts-grid');
+                const categories = TedAPI.Blog.getCategories();
+                let posts = TedAPI.Blog.getPosts();
+
+                if (filter !== 'all') {
+                    posts = posts.filter(p => p.category === filter);
+                }
+
+                if (posts.length === 0) {
+                    grid.innerHTML = `
+                        <div style="grid-column: 1/-1; text-align: center; padding: 5rem 0; color: #94a3b8;">
+                            <i class="fa-solid fa-newspaper fa-4x" style="margin-bottom: 1.5rem; opacity: 0.2;"></i>
+                            <h3>Aucune analyse disponible</h3>
+                            <p>Nous n'avons pas encore d'articles dans cette catégorie. Revenez bientôt !</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                grid.innerHTML = posts.map(post => {
+                    const catObj = categories.find(c => c.id === post.category);
+                    const catName = catObj ? catObj.name : post.category;
+
+                    return `
+                    <article class="obs-card">
+                        <div class="card-img" onclick="window.location.href='article.html?id=${post.id}'" style="cursor:pointer;">
+                            <img src="${post.image || 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=800'}" alt="${post.title}">
+                            <span class="category-badge">${catName}</span>
+                        </div>
+                        <div class="card-body" onclick="window.location.href='article.html?id=${post.id}'" style="cursor:pointer;">
+                            <div class="card-meta">
+                                <span><i class="fa-solid fa-user"></i> ${post.author}</span> • 
+                                <span><i class="fa-solid fa-calendar"></i> ${new Date(post.date).toLocaleDateString('fr-FR')}</span>
+                            </div>
+                            <h3 class="card-title">${post.title}</h3>
+                            <p class="card-excerpt">${post.summary}</p>
+                        </div>
+                        <div class="card-social">
+                            <button class="social-btn" onclick="Observatory.like('${post.id}', this)">
+                                <i class="fa-solid fa-heart"></i> <span class="count">${post.likes || 0}</span>
+                            </button>
+                            <button class="social-btn" onclick="window.location.href='article.html?id=${post.id}#comments'">
+                                <i class="fa-solid fa-comment"></i> Commenter
+                            </button>
+                        </div>
+                    </article>
+                `;
+                }).join('');
+            },
+
+            filter(catId, btn) {
+                document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+                btn.classList.add('active');
+                this.loadPosts(catId);
+            },
+
+            like(id, btn) {
+                if (btn.classList.contains('liked')) return;
+                if (TedAPI.Blog.likePost(id)) {
+                    btn.classList.add('liked');
+                    const countSpan = btn.querySelector('.count');
+                    countSpan.textContent = parseInt(countSpan.textContent) + 1;
+                }
+            },
+
+            openSubmitModal() {
+                this.goToStep(1);
+                document.getElementById('submit-modal').style.display = 'flex';
+            },
+
+            closeSubmitModal() { document.getElementById('submit-modal').style.display = 'none'; },
+
+            goToStep(step) {
+                if (step === 2) {
+                    // Validation simple étape 1
+                    if (!document.getElementById('post-author').value || !document.getElementById('post-title').value) {
+                        alert("Veuillez remplir les informations de base.");
+                        return;
+                    }
+                    document.getElementById('step-1').style.display = 'none';
+                    document.getElementById('step-2').style.display = 'block';
+                    document.getElementById('dot-1').classList.remove('active');
+                    document.getElementById('dot-2').classList.add('active');
+                    document.getElementById('modal-title').textContent = "Rédaction de l'Analyse";
+                } else {
+                    document.getElementById('step-1').style.display = 'block';
+                    document.getElementById('step-2').style.display = 'none';
+                    document.getElementById('dot-1').classList.add('active');
+                    document.getElementById('dot-2').classList.remove('active');
+                    document.getElementById('modal-title').textContent = "Proposer une Analyse";
+                }
+            },
+
+            exec(command, value = null) {
+                if (command === 'createLink') {
+                    const selection = window.getSelection();
+                    if (selection.toString().length === 0) {
+                        const text = prompt("Texte du lien :");
+                        if (!text) return;
+                        const url = prompt("URL du lien :");
+                        if (!url) return;
+                        const link = `<a href="${url}" target="_blank" style="color:var(--obs-secondary); text-decoration:underline;">${text}</a>`;
+                        document.execCommand('insertHTML', false, link);
+                        return;
+                    } else {
+                        const url = prompt("URL du lien :");
+                        if (!url) return;
+                        document.execCommand('createLink', false, url);
+                        return;
+                    }
+                }
+                document.execCommand(command, false, value);
+                document.getElementById('editor-content').focus();
+            },
+
+            handleImageUpload(input) {
+                const file = input.files[0];
+                if (!file) return;
+
+                // Check size (Base64 is ~33% larger than binary, limit to 800KB roughly 1.1MB base64)
+                if (file.size > 800000) {
+                    alert("⚠️ Image trop lourde (Max 800 Ko recommandés). \n\nL'utilisation d'images trop lourdes ralentit le site et sature la mémoire du navigateur. Veuillez compresser votre image.");
+                    input.value = '';
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const base64 = e.target.result;
+                    const img = `<img src="${base64}" style="max-width:100%; border-radius:10px; margin: 1rem 0;" onclick="Observatory.selectBlock(this)">`;
+                    document.execCommand('insertHTML', false, img);
+                };
+                reader.readAsDataURL(file);
+                input.value = '';
+            },
+
+            insertCallout() {
+                const html = `<div class="editor-callout" onclick="Observatory.selectBlock(this)"><strong>💡 Note :</strong><br>Saisissez votre texte ici...</div><p><br></p>`;
+                document.execCommand('insertHTML', false, html);
+            },
+
+            insertTextBox() {
+                const html = `<div class="editor-text-box" onclick="Observatory.selectBlock(this)">Zone de texte personnalisable...</div><p><br></p>`;
+                document.execCommand('insertHTML', false, html);
+            },
+
+            selectBlock(el) {
+                document.querySelectorAll('.selected-block').forEach(b => b.classList.remove('selected-block'));
+                el.classList.add('selected-block');
+                // Prevent bubbling to editor focus if needed
+                event.stopPropagation();
+            },
+
+            toggleTransparency(type) {
+                const selected = document.querySelector('.selected-block');
+                if (!selected) {
+                    alert("Veuillez d'abord cliquer sur une zone de texte ou un encadré pour le sélectionner.");
+                    return;
+                }
+                if (type === 'bg') selected.classList.toggle('transparent-bg');
+                if (type === 'border') selected.classList.toggle('transparent-border');
+            },
+
+            bringToFront() {
+                const selected = document.querySelector('.selected-block');
+                if (selected) {
+                    selected.style.zIndex = "100";
+                    selected.style.position = "relative";
+                }
+            },
+
+            toggleScroll() {
+                const selected = document.querySelector('.selected-block');
+                if (selected) {
+                    selected.classList.toggle('scrollable');
+                }
+            },
+
+            insertSmartButton() {
+                const text = prompt("Texte du bouton :", "En savoir plus");
+                const url = prompt("URL du bouton :", "https://");
+                if (text && url) {
+                    const html = `<a href="${url}" target="_blank" class="editor-button" style="display:inline-block; background:var(--obs-primary); color:white; padding:0.8rem 1.5rem; border-radius:50px; text-decoration:none;">${text}</a><span>&nbsp;</span>`;
+                    document.execCommand('insertHTML', false, html);
+                }
+            },
+
+            toggleColumns() {
+                const editor = document.getElementById('editor-content');
+                editor.classList.toggle('columns-2');
+            },
+
+            changePageColor(color) {
+                document.getElementById('editor-content').style.backgroundColor = color;
+            },
+
+            finalSubmit() {
+                const editor = document.getElementById('editor-content');
+                const content = editor.innerHTML;
+                const isTwoColumns = editor.classList.contains('columns-2');
+                const bgColor = editor.style.backgroundColor;
+
+                if (content.length < 50) {
+                    alert("Votre article semble trop court. Veuillez développer votre analyse.");
+                    return;
+                }
+
+                // Try to find the first image for the thumbnail
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = content;
+                const firstImg = tempDiv.querySelector('img');
+                const thumbnail = firstImg ? firstImg.src : '';
+
+                const data = {
+                    author: document.getElementById('post-author').value,
+                    title: document.getElementById('post-title').value,
+                    category: document.getElementById('modal-cat-select').value,
+                    summary: document.getElementById('post-summary').value,
+                    content: content,
+                    layout: isTwoColumns ? 'columns-2' : 'columns-1',
+                    bgColor: bgColor || '#ffffff',
+                    image: thumbnail, // Capture first image as thumbnail
+                    date: new Date().toISOString(),
+                    likes: 0
+                };
+
+                TedAPI.Blog.submitGuestPost(data);
+
+                alert("Merci ! Votre analyse complète a été envoyée pour modération.");
+                this.closeSubmitModal();
+                // Reset fields
+                document.getElementById('post-author').value = '';
+                document.getElementById('post-title').value = '';
+                document.getElementById('post-summary').value = '';
+                document.getElementById('editor-content').innerHTML = '<h1>Titre...</h1><p>Rédaction...</p>';
+                document.getElementById('editor-content').style.backgroundColor = '#ffffff';
+                document.getElementById('editor-content').classList.remove('columns-2');
+            },
+
+            updateToolbar() {
+                const commands = ['bold', 'italic', 'underline', 'strikeThrough', 'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'];
+                commands.forEach(cmd => {
+                    const btn = document.querySelector(`[onclick*="'${cmd}'"]`);
+                    if (btn) {
+                        if (document.queryCommandState(cmd)) btn.classList.add('active');
+                        else btn.classList.remove('active');
+                    }
+                });
+            }
+        };
+
+        // Listeners for toolbar feedback
+        document.getElementById('editor-content').addEventListener('keyup', () => Observatory.updateToolbar());
+        document.getElementById('editor-content').addEventListener('mouseup', () => Observatory.updateToolbar());
+        document.querySelector('.editor-toolbar').addEventListener('click', () => setTimeout(() => Observatory.updateToolbar(), 50));
+
+        // Initialization synced with Database
+        if (window.TedDB && window.TedDB.collections.blog_categories.length > 0) {
+            Observatory.init();
+        } else {
+            window.addEventListener('ted-db-ready', () => Observatory.init());
+        }
+    </script>
+</body>
+
+</html>

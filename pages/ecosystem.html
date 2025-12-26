@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Écosystème TEDSAI - Vision & Impact</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/mobile-nav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 2rem 0;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--color-secondary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: white;
+            border: 4px solid var(--color-primary);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            right: 30px;
+            border: medium solid white;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent white;
+        }
+
+        .right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            left: 30px;
+            border: medium solid white;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent white transparent transparent;
+        }
+
+        .right::after {
+            left: -10px;
+        }
+
+        .content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .value-card {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            color: var(--color-secondary);
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <div class="container navbar">
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logos/Logo TEDSAI.jpeg" alt="TEDSAI Logo">
+            </a>
+            <nav class="nav-links">
+                <a href="solutions-ia.html">Solutions IA</a>
+                <a href="vitedia.html">Restaurant</a>
+                <a href="garden.html">Garden</a>
+                <a href="ecosystem.html" style="color: var(--color-primary);">Ecosystem</a>
+                <a href="contact.html" class="btn btn-primary">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero"
+        style="background-image: linear-gradient(rgba(10,36,99,0.8), rgba(10,36,99,0.5)), url('https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); height: 50vh;">
+        <div class="hero-content container fade-in-up">
+            <h1>Notre Vision</h1>
+            <p>Où l'Intelligence Artificielle Rencontre la Nature et la Gastronomie.</p>
+        </div>
+    </section>
+
+    <!-- Narrative -->
+    <section class="container" style="padding: 4rem 0; text-align: center; max-width: 800px;">
+        <h2>Une Boucle Vertueuse</h2>
+        <p style="text-align: left; margin-top: 2rem; font-size: 1.1rem;">
+            TEDSAI Complex n'est pas une simple entreprise, c'est un laboratoire vivant où cinq mondes fusionnent.
+            L'Intelligence Artificielle optimise la production de notre Jardin Urbain et de notre Élevage. Le Jardin et
+            l'Élevage nourrissent notre Restaurant viTEDia et notre Épicerie. Le Restaurant génère des données et des
+            déchets organiques qui retournent alimenter l'IA, le Jardin et l'Élevage. C'est l'économie circulaire à
+            l'ère du numérique.
+        </p>
+    </section>
+
+    <!-- Les 5 Pôles de l'Écosystème -->
+    <section style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); padding: 4rem 0;">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem; color: var(--color-primary);">L'Écosystème TEDSAI : 5
+                Pôles Interconnectés</h2>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                <!-- Pôle 1: IA -->
+                <div class="value-card" style="border-top: 4px solid var(--color-secondary);">
+                    <i class="fa-solid fa-brain value-icon" style="color: var(--color-secondary);"></i>
+                    <h3 style="color: var(--color-primary);">Intelligence Artificielle</h3>
+                    <p style="text-align: left; margin-top: 1rem;">
+                        Le cerveau du complexe. L'IA pilote l'ensemble de l'écosystème : optimisation des stocks,
+                        prédiction des récoltes, régulation de l'irrigation, analyse des flux clients, et solutions sur
+                        mesure pour PME.
+                    </p>
+                    <a href="solutions-ia.html" class="btn-text" style="margin-top: 1rem; display: inline-flex;">
+                        En savoir plus <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Pôle 2: Agriculture -->
+                <div class="value-card" style="border-top: 4px solid var(--color-garden-primary);">
+                    <i class="fa-solid fa-leaf value-icon" style="color: var(--color-garden-primary);"></i>
+                    <h3 style="color: var(--color-primary);">Agriculture Urbaine</h3>
+                    <p style="text-align: left; margin-top: 1rem;">
+                        2 hectares de production maraîchère au cœur de Yaoundé. Tomates, laitues, potimarrons, herbes
+                        aromatiques... 100% traçable grâce à l'IoT et l'IA. Zéro pesticide, circuit ultra-court.
+                    </p>
+                    <a href="garden.html" class="btn-text" style="margin-top: 1rem; display: inline-flex;">
+                        Visiter le jardin <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Pôle 3: Élevage -->
+                <div class="value-card" style="border-top: 4px solid #D35400;">
+                    <i class="fa-solid fa-drumstick-bite value-icon" style="color: #D35400;"></i>
+                    <h3 style="color: var(--color-primary);">Élevage Traçable</h3>
+                    <p style="text-align: left; margin-top: 1rem;">
+                        Poulet, poisson et autres protéines élevés dans des conditions optimales. Alimentation
+                        contrôlée, traçabilité complète de la naissance à l'assiette. Qualité premium pour viTEDia et
+                        l'épicerie.
+                    </p>
+                    <a href="elevage.html" class="btn-text" style="margin-top: 1rem; display: inline-flex;">
+                        Découvrir l'élevage <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Pôle 4: Restauration -->
+                <div class="value-card" style="border-top: 4px solid var(--color-vitedia-primary);">
+                    <i class="fa-solid fa-utensils value-icon" style="color: var(--color-vitedia-primary);"></i>
+                    <h3 style="color: var(--color-primary);">Restaurant viTEDia</h3>
+                    <p style="text-align: left; margin-top: 1rem;">
+                        Gastronomie camerounaise revisitée. Chaque plat raconte l'histoire de ses ingrédients : du
+                        jardin à l'assiette en quelques mètres. Expérience culinaire unique et 100% traçable.
+                    </p>
+                    <a href="vitedia.html" class="btn-text" style="margin-top: 1rem; display: inline-flex;">
+                        Voir le menu <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Pôle 5: Épicerie -->
+                <div class="value-card" style="border-top: 4px solid var(--color-spice-primary);">
+                    <i class="fa-solid fa-pepper-hot value-icon" style="color: var(--color-spice-primary);"></i>
+                    <h3 style="color: var(--color-primary);">Épicerie SelecTED</h3>
+                    <p style="text-align: left; margin-top: 1rem;">
+                        Épices des principaux mets locaux (piment, gingembre, ail, oignon pays...) et produits frais
+                        non cuits issus de notre élevage. Circuit court, fraîcheur garantie, prix justes.
+                    </p>
+                    <a href="epicerie.html" class="btn-text" style="margin-top: 1rem; display: inline-flex;">
+                        Explorer l'épicerie <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Timeline -->
+    <section style="background: #f9f9f9; padding: 4rem 0;">
+        <div class="container">
+            <h2 style="text-align: center;">Notre Histoire</h2>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="content">
+                        <h3>2021</h3>
+                        <p>L'idée naît : et si l'IA pouvait servir le concret ? Lancement de la R&D.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="content">
+                        <h3>2022</h3>
+                        <p>TEDSAI IA signe ses premiers clients PME pour l'automatisation.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="content">
+                        <h3>2023</h3>
+                        <p>Création de SelecTED Gardens : 2 hectares défrichés en ville.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="content">
+                        <h3>2024</h3>
+                        <p>Ouverture de viTEDia et lancement de l'écosystème complet.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values -->
+    <section class="container">
+        <h2 style="text-align: center; margin-top: 4rem;">Nos Valeurs</h2>
+        <div class="values-grid">
+            <div class="value-card">
+                <i class="fa-solid fa-lightbulb value-icon"></i>
+                <h3>Innovation Pragmatique</h3>
+                <p>L'IA doit résoudre de vrais problèmes.</p>
+            </div>
+            <div class="value-card">
+                <i class="fa-solid fa-recycle value-icon"></i>
+                <h3>Durabilité</h3>
+                <p>Zéro déchet, zéro pesticide.</p>
+            </div>
+            <div class="value-card">
+                <i class="fa-solid fa-hand-holding-heart value-icon"></i>
+                <h3>Humain d'Abord</h3>
+                <p>La technologie au service de l'homme.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-col">
+                <h4>TEDSAI Complex</h4>
+                <p>Créons le futur ensemble.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" aria-label="Navigation mobile principale">
+        <div class="mobile-nav-items">
+            <a href="../index.html" class="mobile-nav-item" aria-label="Accueil">
+                <i class="fa-solid fa-home"></i>
+                <span>Accueil</span>
+            </a>
+            <a href="solutions-ia.html" class="mobile-nav-item" aria-label="Solutions IA">
+                <i class="fa-solid fa-brain"></i>
+                <span>IA</span>
+            </a>
+            <a href="vitedia.html" class="mobile-nav-item" aria-label="Restaurant viTEDia">
+                <i class="fa-solid fa-utensils"></i>
+                <span>viTEDia</span>
+            </a>
+            <a href="garden.html" class="mobile-nav-item" aria-label="SelecTED Gardens">
+                <i class="fa-solid fa-leaf"></i>
+                <span>Jardin</span>
+            </a>
+            <a href="observatoire.html" class="mobile-nav-item" aria-label="Observatoire">
+                <i class="fa-solid fa-satellite-dish"></i>
+                <span>Obs</span>
+            </a>
+        </div>
+    </nav>
+
+    <script src="/Users/dev-ai/Documents/TEDSAI-website/relative/path/fixer.js"></script>
+</body>
+
+</html>

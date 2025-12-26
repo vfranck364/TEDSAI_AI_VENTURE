@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEDSAI Élevage - Volaille & Aquaculture</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/mobile-nav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="../assets/images/logos/Logo TEDSAI.jpeg" alt="TEDSAI Logo" style="height: 50px;">
+            </div>
+            <nav class="nav-links">
+                <a href="../index.html">Accueil</a>
+                <a href="solutions-ia.html">Solutions IA</a>
+                <a href="vitedia.html">viTEDia</a>
+                <a href="garden.html">SelecTED Gardens</a>
+                <a href="observatoire.html">Observatoire</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" style="background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);">
+        <div class="hero-content container fade-in-up">
+            <h1>TEDSAI Élevage</h1>
+            <p>Volaille & Aquaculture Durable</p>
+            <p style="font-size: 1.1rem; margin-top: 1rem;">Production locale • Biosécurité • Rentabilité</p>
+        </div>
+    </section>
+
+    <section class="container" style="padding: 4rem 0;">
+        <h2 style="text-align: center; color: #8B4513; margin-bottom: 3rem;">Notre Production</h2>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem;">
+            <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                <div style="text-align: center; margin-bottom: 1.5rem;">
+                    <i class="fa-solid fa-drumstick-bite" style="font-size: 3rem; color: #8B4513;"></i>
+                    <h3 style="color: #8B4513; margin-top: 1rem;">Volaille (Poulet de Chair)</h3>
+                </div>
+                <div id="volaille-stats"></div>
+            </div>
+
+            <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                <div style="text-align: center; margin-bottom: 1.5rem;">
+                    <i class="fa-solid fa-fish" style="font-size: 3rem; color: #16A085;"></i>
+                    <h3 style="color: #16A085; margin-top: 1rem;">Aquaculture</h3>
+                </div>
+                <div id="aqua-stats"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" style="margin-bottom: 4rem;">
+        <h2 style="text-align: center; margin-bottom: 2rem;">Nos Services</h2>
+        <div class="prod-grid" id="services-container">
+            <p style="text-align: center;"><i class="fa-solid fa-spinner fa-spin"></i> Chargement...</p>
+        </div>
+    </section>
+
+    <section class="container" style="background: #f9f9f9; padding: 3rem; border-radius: 12px; text-align: center;">
+        <h2 style="color: #8B4513;">Démarrer Votre Élevage</h2>
+        <p style="margin: 1rem 0;">Conseil, formation, vente d'intrants. Nous vous accompagnons de A à Z.</p>
+        <a href="contact.html" class="btn btn-primary" style="background: #8B4513;">Demander un Devis</a>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-col">
+                <h4>TEDSAI Élevage</h4>
+                <p>Expertise • Formation • Qualité</p>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <p>Tél: +237 XXX XXX XXX</p>
+                <p>Email: elevage@tedsai.cm</p>
+            </div>
+        </div>
+        <div class="container"
+            style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 2rem;">
+            <p>&copy; 2025 TEDSAI Complex.</p>
+        </div>
+    </footer>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" aria-label="Navigation mobile principale">
+        <div class="mobile-nav-items">
+            <a href="../index.html" class="mobile-nav-item" aria-label="Accueil">
+                <i class="fa-solid fa-home"></i>
+                <span>Accueil</span>
+            </a>
+            <a href="solutions-ia.html" class="mobile-nav-item" aria-label="Solutions IA">
+                <i class="fa-solid fa-brain"></i>
+                <span>IA</span>
+            </a>
+            <a href="vitedia.html" class="mobile-nav-item" aria-label="Restaurant viTEDia">
+                <i class="fa-solid fa-utensils"></i>
+                <span>viTEDia</span>
+            </a>
+            <a href="garden.html" class="mobile-nav-item" aria-label="SelecTED Gardens">
+                <i class="fa-solid fa-leaf"></i>
+                <span>Jardin</span>
+            </a>
+            <a href="observatoire.html" class="mobile-nav-item" aria-label="Observatoire">
+                <i class="fa-solid fa-satellite-dish"></i>
+                <span>Obs</span>
+            </a>
+        </div>
+    </nav>
+
+    <script src="../assets/js/data-loader.js"></script>
+    <script>
+        async function loadElevage() {
+            const data = await tedApi.fetchData('elevage');
+            if (!data) return;
+
+            // Render Volaille Stats
+            const volailleContainer = document.getElementById('volaille-stats');
+            const vol = data.volaille;
+            volailleContainer.innerHTML = `
+                <table style="width: 100%; font-size: 0.95rem;">
+                    <tr><td style="padding: 8px 0; color: #666;">Capacité</td><td style="font-weight: bold;">${vol.capacity}</td></tr>
+                    <tr><td style="padding: 8px 0; color: #666;">Durée cycle</td><td style="font-weight: bold;">${vol.cycle_duration}</td></tr>
+                    <tr><td style="padding: 8px 0; color: #666;">Production/an</td><td style="font-weight: bold;">${vol.production_annuelle}</td></tr>
+                    <tr><td style="padding: 8px 0; color: #666;">Taux survie</td><td style="font-weight: bold; color: #27ae60;">${vol.stats.taux_survie}</td></tr>
+                    <tr><td style="padding: 8px 0; color: #666;">Poids moyen</td><td style="font-weight: bold;">${vol.stats.poids_moyen}</td></tr>
+                    <tr><td style="padding: 8px 0; color: #666;">Rentabilité</td><td style="font-weight: bold; color: #27ae60;">${vol.stats.rentabilite}</td></tr>
+                </table>
+            `;
+
+            // Render Aquaculture Stats
+            const aquaContainer = document.getElementById('aqua-stats');
+            const aqua = data.aquaculture;
+            aquaContainer.innerHTML = `
+                <table style="width: 100%; font-size: 0.95rem;">
+                    <tr><td style="padding: 8px 0; color: #666;">Espèces</td><td style="font-weight: bold;">${aqua.especes.join(', ')}</td></tr>
+                    <tr><td style="padding: 8px 0; color: #666;">Bassins</td><td style="font-weight: bold;">${aqua.bassins}</td></tr>
+                    <tr><td style="padding: 8px 0; color: #666;">Production/an</td><td style="font-weight: bold;">${aqua.production_annuelle}</td></tr>
+                    <tr><td style="padding: 8px 0; color: #666;">Taux survie</td><td style="font-weight: bold; color: #27ae60;">${aqua.stats.taux_survie}</td></tr>
+                    <tr><td style="padding: 8px 0; color: #666;">Poids Tilapia</td><td style="font-weight: bold;">${aqua.stats.poids_moyen_tilapia}</td></tr>
+                    <tr><td style="padding: 8px 0; color: #666;">Rentabilité</td><td style="font-weight: bold; color: #27ae60;">${aqua.stats.rentabilite}</td></tr>
+                </table>
+            `;
+
+            // Render Services
+            const servicesContainer = document.getElementById('services-container');
+            let html = '';
+            data.services.forEach(service => {
+                html += `
+                    <div class="prod-card">
+                        <i class="fa-solid fa-handshake prod-icon" style="color: #8B4513;"></i>
+                        <h3>${service.name}</h3>
+                        <p style="color: #666; font-size: 0.9rem;">${service.description}</p>
+                        <div style="margin-top: 1rem;">
+                            <strong style="color: #8B4513;">${service.price}</strong>
+                        </div>
+                    </div>
+                `;
+            });
+            servicesContainer.innerHTML = html;
+        }
+
+        document.addEventListener('DOMContentLoaded', loadElevage);
+    </script>
+    <script src="/Users/dev-ai/Documents/TEDSAI-website/relative/path/fixer.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+{
+    "case_studies": [
+        {
+            "id": "vitedia-ia-gaspillage",
+            "client": "viTEDia Restaurant",
+            "sector": "Restauration",
+            "challenge": "Gaspillage alimentaire élevé (25% des achats)",
+            "solution": "Système de prévision de demande par IA + optimisation des commandes",
+            "results": {
+                "gaspillage": "-40%",
+                "marge_nette": "+18%",
+                "roi": "4 mois"
+            },
+            "testimonial": "L'IA nous a permis de réduire drastiquement nos pertes tout en améliorant la fraîcheur des produits servis.",
+            "date": "2024-12"
+        },
+        {
+            "id": "pme-automatisation",
+            "client": "PME Commerce (Anonyme)",
+            "sector": "Commerce",
+            "challenge": "Gestion manuelle des factures et stocks",
+            "solution": "Automatisation complète : facturation, inventaire, relances clients",
+            "results": {
+                "temps_admin": "-60%",
+                "erreurs": "-85%",
+                "roi": "6 mois"
+            },
+            "testimonial": "Nous avons récupéré 20h/semaine que nous consacrons maintenant au développement commercial.",
+            "date": "2024-11"
+        },
+        {
+            "id": "eleveur-rations-locales",
+            "client": "Éleveur Poulet (Ouest)",
+            "sector": "Élevage",
+            "challenge": "Coût élevé des aliments importés",
+            "solution": "Formulation de rations locales (maïs, soja, tourteau)",
+            "results": {
+                "cout_aliment": "-15%",
+                "croissance": "Identique",
+                "rentabilite": "+6 points"
+            },
+            "testimonial": "Même performance avec des intrants 100% locaux. C'est une révolution pour notre rentabilité.",
+            "date": "2024-10"
+        }
+    ]
+}

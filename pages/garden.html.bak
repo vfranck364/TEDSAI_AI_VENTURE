@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SelecTED Gardens - Agriculture Urbaine</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .language-switcher {
+            position: relative;
+            display: inline-block;
+            margin-left: 15px
+        }
+
+        .lang-current {
+            background: var(--color-secondary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: .95rem;
+            transition: all .3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .lang-current:hover {
+            background: var(--color-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, .2)
+        }
+
+        .lang-current i {
+            font-size: 1.1rem
+        }
+
+        .lang-dropdown {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: white;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .2);
+            border-radius: 12px;
+            margin-top: 8px;
+            min-width: 220px;
+            z-index: 1000;
+            overflow: hidden;
+            animation: slideDown .3s ease
+        }
+
+        .lang-dropdown.active {
+            display: block
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .lang-dropdown a {
+            display: block;
+            padding: 14px 18px;
+            color: #333;
+            text-decoration: none;
+            transition: background .2s;
+            cursor: pointer;
+            font-size: .95rem;
+            border-bottom: 1px solid #f0f0f0
+        }
+
+        .lang-dropdown a:last-child {
+            border-bottom: none
+        }
+
+        .lang-dropdown a:hover {
+            background: #f8f9fa;
+            color: var(--color-primary)
+        }
+
+        .lang-dropdown a.active-lang {
+            background: #e8f4f8;
+            color: var(--color-primary);
+            font-weight: 600
+        }
+    </style>
+    <style>
+        :root {
+            --color-garden-primary: #2D5A27;
+            --color-garden-accent: #B68D40;
+        }
+
+        .hero-garden {
+            background-color: var(--color-garden-primary);
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-garden::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            opacity: 0.4;
+        }
+
+        .hero-content {
+            z-index: 2;
+            position: relative;
+        }
+
+        .prod-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+
+        .prod-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .prod-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .prod-icon {
+            font-size: 3rem;
+            color: var(--color-garden-primary);
+            margin-bottom: 1rem;
+        }
+
+        .traceability-section {
+            background: #E8F5E9;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .trace-input {
+            padding: 15px;
+            width: 300px;
+            border: 2px solid var(--color-garden-primary);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .btn-garden {
+            background-color: var(--color-garden-primary);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <div class="container navbar">
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logos/Logo SelecTED Gardens.jpeg" alt="Garden Logo" style="height: 60px;">
+            </a>
+            <nav class="nav-links">
+                <a href="../index.html"><i class="fa-solid fa-home"></i> <span data-i18n="nav.home">Home</span></a>
+                <a href="solutions-ia.html" data-i18n="nav.solutions">AI Solutions</a>
+                <a href="vitedia.html" data-i18n="nav.vitedia">viTEDia</a>
+                <a href="garden.html" style="color: var(--color-garden-primary);" data-i18n="nav.garden">SelecTED
+                    Gardens</a>
+                <a href="observatoire.html" data-i18n="nav.observatory">Observatory</a>
+                <a href="contact.html" data-i18n="nav.contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero-garden">
+        <div class="container hero-content fade-in-up">
+            <h1>La Base Agricole du Complexe</h1>
+            <p style="font-size: 1.2rem;">Production Locale • Élevage • Traçabilité Totale</p>
+        </div>
+    </section>
+
+    <!-- Production -->
+    <section class="container">
+        <h2 style="text-align: center; margin-top: 4rem; color: var(--color-garden-primary);">Notre Production</h2>
+        <!-- Dynamic Content -->
+        <div id="dynamic-garden-container">
+            <p style="text-align: center; color: #777;">Chargement de la production... <i
+                    class="fa-solid fa-spinner fa-spin"></i></p>
+        </div>
+    </section>
+
+    <!-- Traceability -->
+    <section class="traceability-section">
+        <div class="container">
+            <h2>Suivez le Parcours de Votre Ingrédient</h2>
+            <p style="margin-bottom: 2rem;">Entrez le code produit présent sur votre ticket ou étiquette.</p>
+
+            <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                <input type="text" class="trace-input" placeholder="Ex: TOM-131224-B3">
+                <button class="btn-garden"
+                    onclick="alert('Traçabilité simulée : Tomate Cœur de Bœuf, Serre 2, Récoltée ce matin !')">Tracer</button>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <a href="#" style="color: var(--color-garden-primary); text-decoration: underline;"><i
+                        class="fa-solid fa-qrcode"></i> Ou scannez un QR Code</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hidden Result View for Traceability -->
+    <div id="trace-result-view"
+        style="display: none; background: #f9f9f9; padding: 2rem; margin-top: 2rem; border-radius: 8px; animation: fadeInUp 0.5s ease;">
+        <h3 style="color: var(--color-garden-primary); text-align: center; margin-bottom: 2rem;">Résultat de la
+            Traçabilité</h3>
+        <!-- Mimicking Spec Table Layout -->
+        <div
+            style="max-width: 600px; margin: 0 auto; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+            <div
+                style="display: flex; justify-content: space-between; border-bottom: 2px solid #eee; padding-bottom: 1rem; margin-bottom: 1rem;">
+                <span style="font-weight: bold; font-size: 1.2rem;">🍅 Tomate Cœur de Bœuf Bio</span>
+                <span style="color: #666;">Code: TOM-131224-B3</span>
+            </div>
+
+            <div style="display: grid; gap: 1rem;">
+                <div style="display: grid; grid-template-columns: 100px 1fr;">
+                    <span style="color: #888;">ORIGINE</span>
+                    <span><strong>Serre #2, Parcelle B3</strong></span>
+                </div>
+                <div style="display: grid; grid-template-columns: 100px 1fr;">
+                    <span style="color: #888;">PLANTATION</span>
+                    <span>15 Septembre 2024 (Semences BioDom)</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 100px 1fr;">
+                    <span style="color: #888;">RÉCOLTE</span>
+                    <span>13 Décembre 2024 (Jean K.)</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 100px 1fr;">
+                    <span style="color: #888;">LIVRAISON</span>
+                    <span style="color: green; font-weight: bold;">50 mètres vers viTEDia</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; text-align: center;">
+                <button class="btn btn-secondary">Télécharger Certificat</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: var(--color-garden-primary);">
+        <div class="container footer-content">
+            <div class="footer-col">
+                <h4>SelecTED Gardens</h4>
+                <p>Cultiver mieux pour manger mieux.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="#">partenariat@garden.cm</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../assets/js/data-loader.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/ted-assistant.js"></script>
+    <script>
+        // Specific override for Garden page specific "Tracer" button in section
+        const gardenBtn = document.querySelector('.btn-garden[onclick]');
+        if (gardenBtn) {
+            gardenBtn.removeAttribute('onclick');
+            gardenBtn.addEventListener('click', () => {
+                document.getElementById('trace-result-view').style.display = 'block';
+                window.scrollTo({
+                    top: document.getElementById('trace-result-view').offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>

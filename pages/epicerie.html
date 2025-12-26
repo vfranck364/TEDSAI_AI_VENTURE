@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEDSAI Épicerie - Épices & Produits Frais</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/mobile-nav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="../assets/images/logos/Logo TEDSAI.jpeg" alt="TEDSAI Logo" style="height: 50px;">
+            </div>
+            <nav class="nav-links">
+                <a href="../index.html">Accueil</a>
+                <a href="solutions-ia.html">Solutions IA</a>
+                <a href="vitedia.html">viTEDia</a>
+                <a href="garden.html">SelecTED Gardens</a>
+                <a href="observatoire.html">Observatoire</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" style="background: linear-gradient(135deg, #D35400 0%, #E67E22 100%);">
+        <div class="hero-content container fade-in-up">
+            <h1>TEDSAI Épicerie</h1>
+            <p>Épices Authentiques & Produits Frais</p>
+            <p style="font-size: 1.1rem; margin-top: 1rem;">Du producteur à votre cuisine. 100% Traçable.</p>
+        </div>
+    </section>
+
+    <section class="container" style="padding: 4rem 0; text-align: center;">
+        <h2 style="color: #D35400; margin-bottom: 1rem;">Notre Promesse</h2>
+        <p style="max-width: 800px; margin: 0 auto; font-size: 1.1rem; color: #555;">
+            Nous sélectionnons les meilleures <strong>épices camerounaises</strong> directement auprès des producteurs.
+            Nos <strong>produits frais</strong> (poulet, poisson, œufs) proviennent de notre propre élevage TEDSAI,
+            garantissant qualité et traçabilité totale.
+        </p>
+    </section>
+
+    <section class="container" style="margin-bottom: 4rem;">
+        <h2 style="text-align: center; margin-bottom: 2rem;">Nos Épices</h2>
+        <div class="prod-grid" id="epices-container">
+            <p style="text-align: center;"><i class="fa-solid fa-spinner fa-spin"></i> Chargement...</p>
+        </div>
+    </section>
+
+    <section class="container" style="margin-bottom: 4rem;">
+        <h2 style="text-align: center; margin-bottom: 2rem;">Produits Frais</h2>
+        <div class="prod-grid" id="frais-container">
+            <p style="text-align: center;"><i class="fa-solid fa-spinner fa-spin"></i> Chargement...</p>
+        </div>
+    </section>
+
+    <section class="container" style="background: #f9f9f9; padding: 3rem; border-radius: 12px; text-align: center;">
+        <h2 style="color: #D35400;">Commander</h2>
+        <p style="margin: 1rem 0;">Passez commande par téléphone ou WhatsApp. Livraison à Yaoundé sous 24h.</p>
+        <a href="contact.html" class="btn btn-primary" style="background: #D35400;">Nous Contacter</a>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-col">
+                <h4>TEDSAI Épicerie</h4>
+                <p>Qualité • Traçabilité • Fraîcheur</p>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <p>Tél: +237 XXX XXX XXX</p>
+                <p>Email: epicerie@tedsai.cm</p>
+            </div>
+        </div>
+        <div class="container"
+            style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 2rem;">
+            <p>&copy; 2025 TEDSAI Complex.</p>
+        </div>
+    </footer>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" aria-label="Navigation mobile principale">
+        <div class="mobile-nav-items">
+            <a href="../index.html" class="mobile-nav-item" aria-label="Accueil">
+                <i class="fa-solid fa-home"></i>
+                <span>Accueil</span>
+            </a>
+            <a href="solutions-ia.html" class="mobile-nav-item" aria-label="Solutions IA">
+                <i class="fa-solid fa-brain"></i>
+                <span>IA</span>
+            </a>
+            <a href="vitedia.html" class="mobile-nav-item" aria-label="Restaurant viTEDia">
+                <i class="fa-solid fa-utensils"></i>
+                <span>viTEDia</span>
+            </a>
+            <a href="garden.html" class="mobile-nav-item" aria-label="SelecTED Gardens">
+                <i class="fa-solid fa-leaf"></i>
+                <span>Jardin</span>
+            </a>
+            <a href="observatoire.html" class="mobile-nav-item" aria-label="Observatoire">
+                <i class="fa-solid fa-satellite-dish"></i>
+                <span>Obs</span>
+            </a>
+        </div>
+    </nav>
+
+    <script src="../assets/js/data-loader.js"></script>
+    <script>
+        async function loadEpicerie() {
+            const data = await tedApi.fetchData('epicerie');
+            if (!data) return;
+
+            // Render Épices
+            const epicesContainer = document.getElementById('epices-container');
+            let htmlEpices = '';
+            data.epices.forEach(item => {
+                htmlEpices += `
+                    <div class="prod-card">
+                        <i class="fa-solid fa-pepper-hot prod-icon" style="color: #D35400;"></i>
+                        <h3>${item.name}</h3>
+                        <p style="color: #666; font-size: 0.9rem;">${item.description}</p>
+                        <div style="margin-top: 1rem;">
+                            <strong style="color: #D35400; font-size: 1.2rem;">${item.price} FCFA</strong>
+                            <span style="color: #888;"> / ${item.unit}</span>
+                        </div>
+                        <div style="margin-top: 0.5rem; font-size: 0.85rem; color: #27ae60;">
+                            <i class="fa-solid fa-map-marker-alt"></i> ${item.origin}
+                        </div>
+                    </div>
+                `;
+            });
+            epicesContainer.innerHTML = htmlEpices;
+
+            // Render Produits Frais
+            const fraisContainer = document.getElementById('frais-container');
+            let htmlFrais = '';
+            data.produits_frais.forEach(item => {
+                const icon = item.category === 'volaille' ? 'fa-drumstick-bite' : 'fa-fish';
+                htmlFrais += `
+                    <div class="prod-card">
+                        <i class="fa-solid ${icon} prod-icon" style="color: #8B4513;"></i>
+                        <h3>${item.name}</h3>
+                        <p style="color: #666; font-size: 0.9rem;">${item.description}</p>
+                        <div style="margin-top: 1rem;">
+                            <strong style="color: #8B4513; font-size: 1.2rem;">${item.price} FCFA</strong>
+                            <span style="color: #888;"> / ${item.unit}</span>
+                        </div>
+                        <div style="margin-top: 0.5rem; font-size: 0.85rem; color: #27ae60;">
+                            <i class="fa-solid fa-check-circle"></i> ${item.origin}
+                        </div>
+                    </div>
+                `;
+            });
+            fraisContainer.innerHTML = htmlFrais;
+        }
+
+        document.addEventListener('DOMContentLoaded', loadEpicerie);
+    </script>
+    <script src="/Users/dev-ai/Documents/TEDSAI-website/relative/path/fixer.js"></script>
+</body>
+
+</html>

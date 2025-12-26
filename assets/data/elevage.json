@@ -1,0 +1,51 @@
+{
+    "volaille": {
+        "type": "Poulet de Chair",
+        "capacity": "2000 têtes/cycle",
+        "cycle_duration": "45 jours",
+        "production_annuelle": "16000 poulets",
+        "alimentation": "Rations locales (maïs, soja, tourteau)",
+        "biosecurite": "Protocole strict : vaccination, désinfection, quarantaine",
+        "stats": {
+            "taux_survie": "95%",
+            "poids_moyen": "2.2 kg",
+            "fcr": "1.8",
+            "rentabilite": "28%"
+        }
+    },
+    "aquaculture": {
+        "especes": [
+            "Tilapia",
+            "Clarias (Poisson-chat)"
+        ],
+        "bassins": 8,
+        "capacity": "5000 poissons",
+        "cycle_duration": "6 mois",
+        "production_annuelle": "10 tonnes",
+        "alimentation": "Granulés locaux + compléments naturels",
+        "qualite_eau": "Contrôle quotidien : pH, oxygène, température",
+        "stats": {
+            "taux_survie": "92%",
+            "poids_moyen_tilapia": "400g",
+            "poids_moyen_clarias": "800g",
+            "rentabilite": "35%"
+        }
+    },
+    "services": [
+        {
+            "name": "Conseil Élevage",
+            "description": "Accompagnement technique pour démarrer ou optimiser votre élevage.",
+            "price": "Sur devis"
+        },
+        {
+            "name": "Formation Pratique",
+            "description": "Ateliers de 3 jours : gestion, alimentation, biosécurité.",
+            "price": "75 000 FCFA/personne"
+        },
+        {
+            "name": "Vente d'Intrants",
+            "description": "Poussins, alevins, aliments, équipements.",
+            "price": "Catalogue disponible"
+        }
+    ]
+}

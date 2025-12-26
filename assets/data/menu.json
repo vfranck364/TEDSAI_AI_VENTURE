@@ -1,0 +1,64 @@
+{
+    "starters": [
+        {
+            "id": "s1",
+            "name": "Velouté de Potimarron du Jardin",
+            "description": "Crème de coco, graines torréfiées",
+            "price": 12,
+            "traceable": true,
+            "available": true
+        },
+        {
+            "id": "s2",
+            "name": "Tartare de Tomates Anciennes",
+            "description": "Basilic, huile d'olive, pain maison",
+            "price": 14,
+            "traceable": true,
+            "available": true
+        }
+    ],
+    "mains": [
+        {
+            "id": "m1",
+            "name": "Risotto aux Cèpes",
+            "description": "Parmesan affiné, herbes fraîches",
+            "price": 24,
+            "traceable": true,
+            "available": true
+        },
+        {
+            "id": "m2",
+            "name": "Filet de Tilapia Rôti",
+            "description": "Légumes de saison rôtis",
+            "price": 28,
+            "traceable": true,
+            "available": true
+        },
+        {
+            "id": "m3",
+            "name": "Poulet DG Revisité",
+            "description": "Plantains frits, légumes croquants, sauce secrète",
+            "price": 26,
+            "traceable": true,
+            "available": true
+        }
+    ],
+    "desserts": [
+        {
+            "id": "d1",
+            "name": "Tarte Tatin aux Pommes",
+            "description": "Glace vanille artisanale",
+            "price": 9,
+            "traceable": true,
+            "available": true
+        },
+        {
+            "id": "d2",
+            "name": "Mousse Chocolat & Piment",
+            "description": "Cacao local, pointe de piment",
+            "price": 10,
+            "traceable": false,
+            "available": true
+        }
+    ]
+}

@@ -1,0 +1,67 @@
+{
+    "questions": [
+        {
+            "id": 1,
+            "text": "Quelle est la taille de votre entreprise ?",
+            "options": [
+                {
+                    "label": "1-10 personnes",
+                    "value": "small",
+                    "price_mod": 100
+                },
+                {
+                    "label": "11-50 personnes",
+                    "value": "medium",
+                    "price_mod": 300
+                },
+                {
+                    "label": "+50 personnes",
+                    "value": "large",
+                    "price_mod": 1000
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "text": "Quel est votre principal besoin ?",
+            "options": [
+                {
+                    "label": "Automatisation (Facturation/Admin)",
+                    "value": "auto",
+                    "price_mod": 500
+                },
+                {
+                    "label": "Chatbot Service Client",
+                    "value": "bot",
+                    "price_mod": 300
+                },
+                {
+                    "label": "Analyse de Données",
+                    "value": "data",
+                    "price_mod": 800
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "text": "Avez-vous déjà des données numériques ?",
+            "options": [
+                {
+                    "label": "Oui, tout est digitalisé",
+                    "value": "clean",
+                    "price_mod": 0
+                },
+                {
+                    "label": "Partiellement (Excel/Papier)",
+                    "value": "messy",
+                    "price_mod": 200
+                },
+                {
+                    "label": "Non, tout est papier",
+                    "value": "none",
+                    "price_mod": 500
+                }
+            ]
+        }
+    ]
+}

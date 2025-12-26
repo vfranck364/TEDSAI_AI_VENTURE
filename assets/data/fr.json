@@ -1,0 +1,26 @@
+{
+    "nav": {
+        "home": "Accueil",
+        "ia": "Solutions IA",
+        "resto": "viTEDia",
+        "garden": "SelecTED Gardens",
+        "obs": "Observatoire",
+        "contact": "Contact"
+    },
+    "hero": {
+        "title": "Innover. Cultiver. Savourer.",
+        "subtitle": "Le premier complexe écosystémique intégrant IA, Agriculture Durable et Gastronomie.",
+        "cta": "Découvrir l'Écosystème"
+    },
+    "modules": {
+        "ia_title": "TEDSAI IA",
+        "ia_desc": "Solutions d'intelligence artificielle pour optimiser vos processus d'affaires.",
+        "resto_title": "viTEDia Restaurant",
+        "resto_desc": "La gastronomie rencontre la technologie. Du jardin à l'assiette.",
+        "garden_title": "SelecTED Gardens",
+        "garden_desc": "Agriculture urbaine durable et traçabilité alimentaire."
+    },
+    "footer": {
+        "rights": "Tous droits réservés."
+    }
+}

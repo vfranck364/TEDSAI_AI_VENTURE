@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - TEDSAI Complex</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .language-switcher {
+            position: relative;
+            display: inline-block;
+            margin-left: 15px
+        }
+
+        .lang-current {
+            background: var(--color-secondary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: .95rem;
+            transition: all .3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .lang-current:hover {
+            background: var(--color-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, .2)
+        }
+
+        .lang-current i {
+            font-size: 1.1rem
+        }
+
+        .lang-dropdown {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: white;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .2);
+            border-radius: 12px;
+            margin-top: 8px;
+            min-width: 220px;
+            z-index: 1000;
+            overflow: hidden;
+            animation: slideDown .3s ease
+        }
+
+        .lang-dropdown.active {
+            display: block
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .lang-dropdown a {
+            display: block;
+            padding: 14px 18px;
+            color: #333;
+            text-decoration: none;
+            transition: background .2s;
+            cursor: pointer;
+            font-size: .95rem;
+            border-bottom: 1px solid #f0f0f0
+        }
+
+        .lang-dropdown a:last-child {
+            border-bottom: none
+        }
+
+        .lang-dropdown a:hover {
+            background: #f8f9fa;
+            color: var(--color-primary)
+        }
+
+        .lang-dropdown a.active-lang {
+            background: #e8f4f8;
+            color: var(--color-primary);
+            font-weight: 600
+        }
+    </style>
+    <style>
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            padding: 4rem 0;
+        }
+
+        .contact-form-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group select,
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        .dynamic-fields {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .dynamic-fields.active {
+            display: block;
+        }
+
+        .info-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--color-bg-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-primary);
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container navbar">
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logos/Logo TEDSAI.jpeg" alt="TEDSAI Logo">
+            </a>
+            <nav class="nav-links">
+                <a href="../index.html"><i class="fa-solid fa-home"></i> <span data-i18n="nav.home">Home</span></a>
+                <a href="solutions-ia.html" data-i18n="nav.solutions">AI Solutions</a>
+                <a href="vitedia.html" data-i18n="nav.vitedia">viTEDia</a>
+                <a href="garden.html" data-i18n="nav.garden">SelecTED Gardens</a>
+                <a href="observatoire.html" data-i18n="nav.observatory">Observatory</a>
+                <a href="contact.html" style="color: var(--color-secondary);" data-i18n="nav.contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" style="background: var(--color-text-dark); height: 40vh; min-height: 300px;">
+        <div class="hero-content container fade-in-up">
+            <h1>Parlons de Votre Projet</h1>
+            <p>IA, Réservation, Partenariat : Nous sommes à votre écoute.</p>
+        </div>
+    </section>
+
+    <section class="container contact-grid">
+        <div class="contact-form-container">
+            <h3>Envoyez-nous un message</h3>
+            <form id="smart-form">
+                <div class="form-group">
+                    <label>Je suis intéressé par :</label>
+                    <select id="interest-select" onchange="updateForm()" name="interest">
+                        <option value="">-- Sélectionnez --</option>
+                        <option value="ia">Solution IA pour mon entreprise</option>
+                        <option value="resto">Réservation viTEDia</option>
+                        <option value="garden">Partenariat SelecTED Gardens</option>
+                        <option value="other">Autre demande</option>
+                    </select>
+                </div>
+
+                <!-- IA Fields -->
+                <div id="ia-fields" class="dynamic-fields">
+                    <div class="form-group">
+                        <label>Nom de l'entreprise</label>
+                        <input type="text" name="company">
+                    </div>
+                    <div class="form-group">
+                        <label>Problématique Principale</label>
+                        <select name="problem">
+                            <option>Automatisation Facturation</option>
+                            <option>Gestion Stocks</option>
+                            <option>Service Client</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Resto Fields -->
+                <div id="resto-fields" class="dynamic-fields">
+                    <div class="form-group">
+                        <p>Pour réserver, vous pouvez utiliser notre <a href="vitedia.html"
+                                style="color: var(--color-vitedia-primary); font-weight: bold;">module de
+                                réservation</a> ou demander à TED.</p>
+                    </div>
+                </div>
+
+                <!-- Common Fields -->
+                <div class="form-group">
+                    <label>Nom Complet</label>
+                    <input type="text" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea name="message" rows="4"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Envoyer</button>
+            </form>
+        </div>
+
+        <div class="contact-info">
+            <h3>Nos Coordonnées</h3>
+            <div class="info-card">
+                <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <div>
+                    <h4>ADRESSE</h4>
+                    <p>TEDSAI Complex, quartier X, Yaoundé</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+                <div>
+                    <h4>EMAIL</h4>
+                    <p>contact@tedsai.cm</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+                <div>
+                    <h4>TÉLÉPHONE</h4>
+                    <p>+237 000 000 000</p>
+                </div>
+            </div>
+
+            <div
+                style="background: #eee; height: 300px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                <p style="color: #666;"><i class="fa-solid fa-map"></i> Google Maps Embed Placeholder</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container" style="text-align: center; padding: 2rem;">
+            <p>&copy; 2024 TEDSAI Complex</p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/data-loader.js"></script>
+    <script>
+        function updateForm() {
+            const select = document.getElementById('interest-select');
+            const val = select.value;
+
+            // Hide all first
+            document.querySelectorAll('.dynamic-fields').forEach(el => el.classList.remove('active'));
+
+            if (val === 'ia') document.getElementById('ia-fields').classList.add('active');
+            if (val === 'resto') document.getElementById('resto-fields').classList.add('active');
+        }
+
+        // Handle Smart Submission
+        document.getElementById('smart-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Collect Data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            data.id = 'msg_' + Date.now();
+            data.date = new Date().toISOString();
+
+            // Save to "Mock Backend" via tedApi
+            if (typeof tedApi !== 'undefined') {
+                // Fetch existing messages first mock
+                const messages = JSON.parse(localStorage.getItem('tedsai_messages') || '[]');
+                messages.unshift(data); // Add new to top
+                tedApi.saveData('messages', messages);
+
+                alert('Message envoyé avec succès ! Il est visible dans le Dashboard Admin.');
+                this.reset();
+            }
+        });
+    </script>
+</body>
+
+</html>

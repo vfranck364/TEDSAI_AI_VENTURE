@@ -1,0 +1,48 @@
+{
+    "categories": [
+        {
+            "id": "c1",
+            "name": "Maraîchage",
+            "icon": "fa-carrot",
+            "description": "Légumes de saison, herbes aromatiques et tubercules.",
+            "items": [
+                "Tomates",
+                "Laitues",
+                "Carottes",
+                "Poireaux"
+            ]
+        },
+        {
+            "id": "c2",
+            "name": "Élevage",
+            "icon": "fa-drumstick-bite",
+            "description": "Volailles, Poulets de chair et Escargots.",
+            "items": [
+                "Poulets",
+                "Escargots",
+                "Œufs"
+            ]
+        },
+        {
+            "id": "c3",
+            "name": "Aquaponie",
+            "icon": "fa-fish",
+            "description": "Élevage de Tilapias en circuit fermé.",
+            "items": [
+                "Tilapias",
+                "Légumes Hydroponiques"
+            ]
+        },
+        {
+            "id": "c4",
+            "name": "Épices (Bientôt)",
+            "icon": "fa-pepper-hot",
+            "description": "Curcuma, Gingembre, Piment. Pour le futur compartiment épices.",
+            "items": [],
+            "style": {
+                "border": "2px dashed var(--color-spice-primary)",
+                "color": "var(--color-spice-primary)"
+            }
+        }
+    ]
+}

@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEDSAI Admin - Super Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <style>
+        :root {
+            --sidebar-width: 280px;
+            --header-height: 70px;
+            --bg-body: #f3f4f6;
+            --color-sidebar: #1e293b;
+            --color-sidebar-hover: #334155;
+            --color-primary-admin: #3b82f6;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            background: var(--bg-body);
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--color-sidebar);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            overflow-y: auto;
+        }
+
+        .sidebar-brand {
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            padding: 0 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-brand span {
+            color: var(--color-primary-admin);
+            margin-left: 8px;
+        }
+
+        .menu-category {
+            padding: 1.5rem 1.5rem 0.5rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: var(--color-sidebar-hover);
+            color: white;
+        }
+
+        .nav-item.active {
+            border-left-color: var(--color-primary-admin);
+        }
+
+        .nav-item i {
+            width: 24px;
+            margin-right: 12px;
+            text-align: center;
+        }
+
+        /* MAIN CONTENT */
+        .wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* HEADER */
+        .top-header {
+            height: var(--header-height);
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+        }
+
+        .header-left h2 {
+            font-size: 1.25rem;
+            color: #1e293b;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: #64748b;
+            background: #f1f5f9;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-left: 20px;
+            border-left: 1px solid #e2e8f0;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: #bfdbfe;
+            color: #1e40af;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .user-info div {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #0f172a;
+        }
+
+        .user-info span {
+            font-size: 0.75rem;
+            color: #64748b;
+            display: block;
+        }
+
+        /* VIEW AREA */
+        .content-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* DASHBOARD WIDGETS */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #64748b;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        /* TABLES */
+        .card-table {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 1.25rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-header h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 1rem 1.25rem;
+            background: #f8fafc;
+            color: #475569;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+            font-size: 0.9rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* VIEWS */
+        .dashboard-view {
+            display: none;
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        .dashboard-view.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* MODAL (Reused) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-card {
+            background: white;
+            width: 500px;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-action {
+            padding: 6px 12px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-right: 5px;
+        }
+
+        .btn-edit {
+            background: #e2e6ea;
+            color: #495057;
+        }
+
+        .btn-delete {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .badge {
+            padding: 4px 8px;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-warning {
+            background: #fef9c3;
+            color: #854d0e;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 2️⃣ BARRE LATÉRALE GAUCHE -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <i class="fa-solid fa-cube"></i> <span>TED ADMIN</span>
+        </div>
+
+        <div id="sidebar-content">
+            <!-- Populated by JS -->
+        </div>
+    </aside>
+
+    <!-- MAIN WRAPPER -->
+    <div class="wrapper">
+        <!-- 1️⃣ EN-TÊTE -->
+        <header class="top-header">
+            <div class="header-left">
+                <h2 id="page-title">Tableau de bord</h2>
+            </div>
+            <div class="header-right">
+                <div class="status-indicator">
+                    <span class="dot"></span> En ligne
+                </div>
+                <!-- Notifications Bell can go here -->
+
+                <div class="user-profile">
+                    <div class="user-info">
+                        <div id="user-name">Chargement...</div>
+                        <span id="user-role">...</span>
+                    </div>
+                    <div class="user-avatar" id="user-avatar-initials">U</div>
+                    <button onclick="TedAuth.logout()" title="Déconnexion"
+                        style="background:none; border:none; color:#ef4444; cursor:pointer; margin-left:10px;">
+                        <i class="fa-solid fa-power-off fa-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- CONTENT AREA -->
+        <main class="content-area">
+
+            <!-- 3️⃣ PAGE DASHBOARD (ACCUEIL) -->
+            <div id="view-dashboard" class="dashboard-view active">
+
+                <!-- KPIs -->
+                <div class="stats-grid">
+                    <div class="stat-card" id="kpi-users">
+                        <div class="stat-label">Utilisateurs Total</div>
+                        <div class="stat-value">...</div>
+                        <div class="stat-sub" style="font-size:0.75rem; color:#64748b; margin-top:5px;">Chargement...
+                        </div>
+                    </div>
+                    <div class="stat-card" id="kpi-admins">
+                        <div class="stat-label">Admins Actifs</div>
+                        <div class="stat-value">...</div>
+                        <div class="stat-sub" style="font-size:0.75rem; color:#64748b;">Chargement...</div>
+                    </div>
+                    <div class="stat-card" id="kpi-content">
+                        <div class="stat-label">Contenus Publiés</div>
+                        <div class="stat-value">...</div>
+                        <div class="stat-sub" style="font-size:0.75rem; color:#f59e0b;">Chargement...</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">État Système</div>
+                        <div class="stat-value" style="color:#22c55e; font-size:1.5rem;">Opérationnel</div>
+                        <div style="font-size:0.75rem; color:#64748b;">Tout fonctionne</div>
+                    </div>
+                </div>
+
+                <!-- RECENT ACTIVITY & ALERTS -->
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem;">
+
+                    <!-- Activity Log -->
+                    <div class="card-table">
+                        <div class="card-header">
+                            <h3>Activité Récente</h3>
+                            <button
+                                style="border:none; background:none; color:#3b82f6; cursor:pointer; font-size:0.9rem;">Tout
+                                voir</button>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Utilisateur</th>
+                                    <th>Action</th>
+                                    <th>Module</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="activity-log-body">
+                                <!-- Filled by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Smart Alerts -->
+                    <div class="card-table">
+                        <div class="card-header">
+                            <h3>⚠️ Alertes Système</h3>
+                        </div>
+                        <div id="system-alerts-body" style="padding: 1.25rem;">
+                            <!-- Filled by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9️⃣ MODULE RESTAURANT -->
+            <div id="view-restaurant" class="dashboard-view">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 2rem;">
+                    <h3>Gestion Menu & Carte</h3>
+                    <button class="btn-action" style="background:#3b82f6; color:white; padding: 10px 20px;"
+                        onclick="RestaurantAdmin.openModal()">+ Nouveau Plat</button>
+                </div>
+                <div id="restaurant-content"></div>
+            </div>
+
+            <!-- 4️⃣ MODULE UTILISATEURS -->
+            <div id="view-users" class="dashboard-view">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 2rem;">
+                    <h3>Gestion Utilisateurs & Rôles</h3>
+                    <button class="btn-action" style="background:#3b82f6; color:white; padding: 10px 20px;"
+                        onclick="UsersAdmin.openModal()">+ Créer Utilisateur</button>
+                </div>
+                <div class="card-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Utilisateur</th>
+                                <th>Rôle</th>
+                                <th>Dernière Connexion</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table-body">
+                            <!-- Filled by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 5️⃣ MODULE JARDIN -->
+            <div id="view-garden" class="dashboard-view">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 2rem;">
+                    <h3>Jardin & Récoltes</h3>
+                    <button class="btn-action" style="background:#22c55e; color:white; padding: 10px 20px;"
+                        onclick="GardenAdmin.openModal()">+ Nouvelle Récolte</button>
+                </div>
+                <div id="garden-content"></div>
+            </div>
+
+            <!-- 6️⃣ MODULE IA -->
+            <div id="view-ia" class="dashboard-view">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 2rem;">
+                    <div>
+                        <h3>Services IA & APIs</h3>
+                        <p style="color: #64748b; font-size: 0.9rem;">Gérez vos offres B2B et tarifs.</p>
+                    </div>
+                    <button class="btn-action" style="background:#8b5cf6; color:white; padding: 10px 20px;"
+                        onclick="IAAdmin.openModal()">+ Nouveau Service</button>
+                </div>
+                <div id="ia-content">
+                    <!-- Dynamic Content -->
+                </div>
+            </div>
+
+            <!-- 7️⃣ MODULE PAGES -->
+            <div id="view-pages" class="dashboard-view">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 2rem;">
+                    <h3>Pages du Site</h3>
+                    <!-- <button class="btn-action" style="background:#3b82f6; color:white; padding: 10px 20px;">+ Nouvelle Page</button> -->
+                </div>
+                <div id="pages-content">
+                    <!-- Dynamic List -->
+                </div>
+            </div>
+
+            <!-- 8️⃣ MODULE CONTENU -->
+            <div id="view-content" class="dashboard-view">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 2rem;">
+                    <h3>Textes & Traductions</h3>
+                    <button class="btn-action" style="background:#3b82f6; color:white; padding: 10px 20px;">Gérer
+                        Langues</button>
+                </div>
+                <div style="text-align:center; padding: 4rem; background:white; border-radius:12px;">
+                    <i class="fa-solid fa-pen-to-square" style="font-size:3rem; color:#cbd5e0; margin-bottom:1rem;"></i>
+                    <p style="color:#64748b;">Gestionnaire de contenu centralisé à venir.</p>
+                </div>
+            </div>
+
+            <!-- 9️⃣ MODULE MEDIA -->
+            <div id="view-media" class="dashboard-view">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 2rem;">
+                    <h3>Médiathèque Globale</h3>
+                    <button class="btn-action" style="background:#3b82f6; color:white; padding: 10px 20px;"
+                        onclick="MediaAdmin.openUploadModal()">+ Ajouter Média</button>
+                </div>
+                <div id="media-content">
+                    <!-- Dynamic Gallery -->
+                </div>
+            </div>
+
+            <!-- 🔟 MODULE BLOG -->
+            <div id="view-blog" class="dashboard-view">
+                <div id="blog-content">
+                    <!-- Dynamic Management Content -->
+                </div>
+            </div>
+
+            <!-- 1️⃣1️⃣ MODULE SETTINGS -->
+            <div id="view-settings" class="dashboard-view">
+                <h3>Paramètres Globaux</h3>
+                <div style="text-align:center; padding: 4rem; background:white; border-radius:12px;">
+                    <i class="fa-solid fa-sliders" style="font-size:3rem; color:#cbd5e0; margin-bottom:1rem;"></i>
+                    <p style="color:#64748b;">Configuration système à venir.</p>
+                </div>
+            </div>
+
+            <!-- 1️⃣2️⃣ MODULE LOGS -->
+            <div id="view-logs" class="dashboard-view">
+                <h3>Journal d'Activité</h3>
+                <div style="text-align:center; padding: 4rem; background:white; border-radius:12px;">
+                    <i class="fa-solid fa-list-ul" style="font-size:3rem; color:#cbd5e0; margin-bottom:1rem;"></i>
+                    <p style="color:#64748b;">Logs complets à venir.</p>
+                </div>
+            </div>
+
+            <!-- 1️⃣3️⃣ MODULE SECURITY -->
+            <div id="view-security" class="dashboard-view">
+                <h3>Sécurité</h3>
+                <div style="text-align:center; padding: 4rem; background:white; border-radius:12px;">
+                    <i class="fa-solid fa-shield-halved" style="font-size:3rem; color:#cbd5e0; margin-bottom:1rem;"></i>
+                    <p style="color:#64748b;">Paramètres de sécurité à venir.</p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- CORE JS -->
+    <!-- Firebase SDKs (Compat for file:// support) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+
+    <!-- Firebase Config -->
+    <script src="../assets/js/core/firebase-config.js"></script>
+
+    <script src="../assets/js/core/db.js" defer></script>
+    <script src="../assets/js/core/auth.js" defer></script>
+    <script src="../assets/js/core/api.js"></script>
+    <script src="../assets/js/modules/dashboard-home.js"></script>
+    <script src="../assets/js/modules/restaurant.js"></script>
+    <script src="../assets/js/modules/users.js"></script>
+    <script src="../assets/js/modules/garden.js"></script>
+    <script src="../assets/js/modules/ia.js"></script>
+    <script src="../assets/js/modules/media.js"></script>
+    <script src="../assets/js/modules/pages.js"></script>
+    <script src="../assets/js/modules/blog.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // AUTH CHECK
+            const session = TedAuth.requireAuth();
+            if (!session) return;
+
+            // 1. UPDATE HEADER
+            const user = session;
+            document.getElementById('user-name').innerText = user.name;
+            document.getElementById('user-role').innerText = formatRole(user.role);
+            document.getElementById('user-avatar-initials').innerText = user.name.charAt(0);
+
+            // 2. BUILD SIDEBAR (DYNAMIC)
+            renderSidebar(user.role);
+
+            // 3. LISTENERS
+            window.navigateTo = function (viewId, el) {
+                // UI Updates
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                if (el) el.classList.add('active');
+
+                document.querySelectorAll('.dashboard-view').forEach(v => v.classList.remove('active'));
+                const target = document.getElementById('view-' + viewId);
+
+                if (target) {
+                    target.classList.add('active');
+                    document.getElementById('page-title').innerText = el ? el.innerText.trim() : 'Dashboard';
+
+                    // Lazy Load Controllers
+                    if (viewId === 'dashboard') DashboardHome.init();
+                    if (viewId === 'restaurant') RestaurantAdmin.init();
+                    if (viewId === 'users') UsersAdmin.init();
+                    if (viewId === 'garden') GardenAdmin.init();
+                    if (viewId === 'ia') IAAdmin.init();
+                    if (viewId === 'media') MediaAdmin.init();
+                    if (viewId === 'pages') PagesAdmin.init();
+                    if (viewId === 'blog') BlogAdmin.init();
+                }
+            };
+
+            // Init Default View
+            DashboardHome.init();
+        });
+
+        function formatRole(role) {
+            const map = {
+                'super_admin': 'Super Administrateur',
+                'admin_resto': 'Admin Restaurant',
+                'admin_garden': 'Admin Jardin',
+                'admin_ia': 'Admin IA'
+            };
+            return map[role] || role;
+        }
+
+        function renderSidebar(role) {
+            const container = document.getElementById('sidebar-content');
+            let html = '';
+
+            // DEFINITION DES MENUS SELON SPECS
+            const menuStructure = [
+                {
+                    header: "Principal",
+                    items: [
+                        { id: 'dashboard', icon: 'fa-chart-pie', label: 'Tableau de bord', roles: ['*'] }
+                    ]
+                },
+                {
+                    header: "Gestion Modules",
+                    items: [
+                        { id: 'users', icon: 'fa-users-gear', label: 'Utilisateurs & Rôles', roles: ['super_admin'] },
+                        { id: 'restaurant', icon: 'fa-utensils', label: 'Restaurant', roles: ['super_admin', 'admin_resto'] },
+                        { id: 'garden', icon: 'fa-leaf', label: 'SelecTED Gardens', roles: ['super_admin', 'admin_garden'] },
+                        { id: 'ia', icon: 'fa-brain', label: 'IA / Services', roles: ['super_admin', 'admin_ia'] }
+                    ]
+                },
+                {
+                    header: "Contenu Site",
+                    items: [
+                        { id: 'pages', icon: 'fa-file-lines', label: 'Pages du site', roles: ['super_admin'] },
+                        { id: 'content', icon: 'fa-pen-to-square', label: 'Textes & Traductions', roles: ['super_admin'] },
+                        { id: 'media', icon: 'fa-images', label: 'Médiathèque', roles: ['super_admin', 'admin_resto', 'admin_garden'] },
+                        { id: 'blog', icon: 'fa-newspaper', label: 'Blog / Actualités', roles: ['super_admin'] }
+                    ]
+                },
+                {
+                    header: "Système",
+                    items: [
+                        { id: 'settings', icon: 'fa-sliders', label: 'Paramètres Globaux', roles: ['super_admin'] },
+                        { id: 'logs', icon: 'fa-list-ul', label: 'Journal & Activité', roles: ['super_admin'] },
+                        { id: 'security', icon: 'fa-shield-halved', label: 'Sécurité', roles: ['super_admin'] }
+                    ]
+                }
+            ];
+
+            menuStructure.forEach(group => {
+                // Filter items by role
+                const validItems = group.items.filter(item =>
+                    item.roles.includes('*') || item.roles.includes(role)
+                );
+
+                if (validItems.length > 0) {
+                    html += `<div class="menu-category">${group.header}</div>`;
+                    validItems.forEach(item => {
+                        html += `
+                        <div class="nav-item ${item.id === 'dashboard' ? 'active' : ''}" onclick="navigateTo('${item.id}', this)">
+                            <i class="fa-solid ${item.icon}"></i> ${item.label}
+                        </div>`;
+                    });
+                }
+            });
+
+            container.innerHTML = html;
+        }
+    </script>
+</body>
+
+</html>

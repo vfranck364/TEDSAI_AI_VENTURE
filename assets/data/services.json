@@ -1,0 +1,30 @@
+{
+    "internal": {
+        "title": "Optimisation Interne",
+        "description": "TEDSAI IA pilote l'ensemble du complexe. Gestion des stocks du restaurant, régulation de l'irrigation du jardin, et analyse des flux en temps réel."
+    },
+    "external": {
+        "title": "Services B2B",
+        "description": "Nous mettons cette même puissance technologique au service des PME locales.",
+        "services": [
+            {
+                "id": "s1",
+                "name": "Automatisation & RPA",
+                "icon": "fa-robot",
+                "summary": "Automatisez vos tâches répétitives (factures, saisie)."
+            },
+            {
+                "id": "s2",
+                "name": "Gestion Intelligente de Stocks",
+                "icon": "fa-boxes-stacked",
+                "summary": "Prédisez vos besoins et réduisez le gaspillage."
+            },
+            {
+                "id": "s3",
+                "name": "Chatbots & Service Client",
+                "icon": "fa-comments",
+                "summary": "Assistance 24/7 pour vos clients."
+            }
+        ]
+    }
+}

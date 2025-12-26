@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="ted-page-slug" content="pages/garden.html">
+    <title>SelecTED Gardens - Agriculture Urbaine</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/mobile-nav.css">
+
+    <style>
+        :root {
+            --color-garden-primary: #2D5A27;
+            --color-garden-accent: #B68D40;
+        }
+
+        .hero-garden {
+            background-color: var(--color-garden-primary);
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-garden::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            opacity: 0.4;
+        }
+
+        .hero-content {
+            z-index: 2;
+            position: relative;
+        }
+
+        .prod-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+
+        .prod-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .prod-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .prod-icon {
+            font-size: 3rem;
+            color: var(--color-garden-primary);
+            margin-bottom: 1rem;
+        }
+
+        .traceability-section {
+            background: #E8F5E9;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .trace-input {
+            padding: 15px;
+            width: 300px;
+            border: 2px solid var(--color-garden-primary);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .btn-garden {
+            background-color: var(--color-garden-primary);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <div class="container navbar">
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logos/garden_logo.jpg" alt="Garden Logo" style="height: 60px;">
+            </a>
+            <nav class="nav-links">
+                <a href="../index.html"><i class="fa-solid fa-home"></i> <span>Accueil</span></a>
+                <a href="solutions-ia.html">Solutions IA</a>
+                <a href="vitedia.html">viTEDia</a>
+                <a href="garden.html" style="color: var(--color-garden-primary);">SelecTED
+                    Gardens</a>
+                <a href="observatoire.html">Observatoire</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero-garden">
+        <div class="container hero-content fade-in-up">
+            <h1 data-cms-id="hero_title">La Base Agricole du Complexe</h1>
+            <p style="font-size: 1.2rem;" data-cms-id="hero_subtitle">Production Locale • Élevage • Traçabilité
+                Totale</p>
+        </div>
+    </section>
+
+    <!-- Production -->
+    <section class="container">
+        <h2 style="text-align: center; margin-top: 4rem; color: var(--color-garden-primary);">Notre Production</h2>
+        <!-- Dynamic Content -->
+        <div id="dynamic-garden-container">
+            <p style="text-align: center; color: #777;">Chargement de la production... <i
+                    class="fa-solid fa-spinner fa-spin"></i></p>
+        </div>
+    </section>
+
+    <!-- Traceability -->
+    <section class="traceability-section">
+        <div class="container">
+            <h2 data-cms-id="trace_title">Suivez le Parcours de Votre Ingrédient</h2>
+            <p style="margin-bottom: 2rem;">Entrez le code produit présent sur votre ticket ou étiquette.</p>
+
+            <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                <input type="text" id="trace-input-code" class="trace-input" placeholder="Ex: TOM-131224-B3">
+                <button id="btn-trace-submit" class="btn-garden">Tracer</button>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <a href="javascript:alert('Ouverture de la caméra... (Simulation)')"
+                    style="color: var(--color-garden-primary); text-decoration: underline;"><i
+                        class="fa-solid fa-qrcode"></i> Ou scannez un QR Code</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hidden Result View for Traceability -->
+    <div id="trace-result-view"
+        style="display: none; background: #f9f9f9; padding: 2rem; margin-top: 2rem; border-radius: 8px; animation: fadeInUp 0.5s ease;">
+        <h3 style="color: var(--color-garden-primary); text-align: center; margin-bottom: 2rem;">Résultat de la
+            Traçabilité</h3>
+        <!-- Mimicking Spec Table Layout -->
+        <div
+            style="max-width: 600px; margin: 0 auto; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+            <div
+                style="display: flex; justify-content: space-between; border-bottom: 2px solid #eee; padding-bottom: 1rem; margin-bottom: 1rem;">
+                <span style="font-weight: bold; font-size: 1.2rem;">🍅 Tomate Cœur de Bœuf Bio</span>
+                <span style="color: #666;">Code: TOM-131224-B3</span>
+            </div>
+
+            <div style="display: grid; gap: 1rem;">
+                <div style="display: grid; grid-template-columns: 100px 1fr;">
+                    <span style="color: #888;">ORIGINE</span>
+                    <span><strong>Serre #2, Parcelle B3</strong></span>
+                </div>
+                <div style="display: grid; grid-template-columns: 100px 1fr;">
+                    <span style="color: #888;">PLANTATION</span>
+                    <span>15 Septembre 2024 (Semences BioDom)</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 100px 1fr;">
+                    <span style="color: #888;">RÉCOLTE</span>
+                    <span>13 Décembre 2024 (Jean K.)</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 100px 1fr;">
+                    <span style="color: #888;">LIVRAISON</span>
+                    <span style="color: green; font-weight: bold;">50 mètres vers viTEDia</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; text-align: center;">
+                <button class="btn btn-secondary" onclick="alert('Génération du PDF... (Simulation)')">Télécharger
+                    Certificat</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: var(--color-garden-primary);">
+        <div class="container footer-content">
+            <div class="footer-col">
+                <h4>SelecTED Gardens</h4>
+                <p>Cultiver mieux pour manger mieux.</p>
+                <div class="socials" style="margin-top: 1rem; display: flex; gap: 1rem; font-size: 1.5rem;">
+                    <a href="https://www.linkedin.com/in/tedsai-complex-a26b95397" target="_blank"
+                        rel="noopener noreferrer" aria-label="LinkedIn" style="color: white; transition: color 0.3s;"><i
+                            class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/tedsai1385/" target="_blank" rel="noopener noreferrer"
+                        aria-label="Instagram" style="color: white; transition: color 0.3s;"><i
+                            class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61584073655708" target="_blank"
+                        rel="noopener noreferrer" aria-label="Facebook" style="color: white; transition: color 0.3s;"><i
+                            class="fa-brands fa-facebook"></i></a>
+                    <a href="https://x.com/Tedsai1385" target="_blank" rel="noopener noreferrer"
+                        aria-label="X (Twitter)"
+                        style="color: white; transition: color 0.3s; font-weight: bold; font-family: Arial, sans-serif;">𝕏</a>
+                    <a href="https://www.youtube.com/@TEDSAIComplex" target="_blank" rel="noopener noreferrer"
+                        aria-label="YouTube" style="color: white; transition: color 0.3s;"><i
+                            class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Liens</h4>
+                <ul>
+                    <li><a href="contact.html?reason=hiring">Recrutement</a></li>
+                    <li><a href="contact.html?reason=press">Presse</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:partenariat@garden.cm">partenariat@garden.cm</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <!-- Firebase SDKs (Compat for file:// support) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+
+    <!-- Firebase Config -->
+    <script src="../assets/js/core/firebase-config.js"></script>
+
+    <script src="../assets/js/core/db.js"></script>
+    <script src="../assets/js/core/auth.js"></script>
+    <script src="../assets/js/core/api.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/cms-loader.js"></script>
+    <script src="../assets/js/ted-assistant.js"></script>
+    <script>
+        // Specific override for Garden page specific "Tracer" button in section
+        const gardenBtn = document.querySelector('#btn-trace-submit'); // corrected selector
+        if (gardenBtn) {
+            gardenBtn.addEventListener('click', () => {
+                document.getElementById('trace-result-view').style.display = 'block';
+                window.scrollTo({
+                    top: document.getElementById('trace-result-view').offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            });
+        }
+    </script>
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" aria-label="Navigation mobile principale">
+        <div class="mobile-nav-items">
+            <a href="../index.html" class="mobile-nav-item" aria-label="Accueil">
+                <i class="fa-solid fa-home"></i>
+                <span>Accueil</span>
+            </a>
+            <a href="solutions-ia.html" class="mobile-nav-item" aria-label="Solutions IA">
+                <i class="fa-solid fa-brain"></i>
+                <span>IA</span>
+            </a>
+            <a href="vitedia.html" class="mobile-nav-item" aria-label="Restaurant viTEDia">
+                <i class="fa-solid fa-utensils"></i>
+                <span>viTEDia</span>
+            </a>
+            <a href="garden.html" class="mobile-nav-item active" aria-label="SelecTED Gardens">
+                <i class="fa-solid fa-leaf"></i>
+                <span>Jardin</span>
+            </a>
+            <a href="observatoire.html" class="mobile-nav-item" aria-label="Observatoire">
+                <i class="fa-solid fa-satellite-dish"></i>
+                <span>Obs</span>
+            </a>
+        </div>
+    </nav>
+</body>
+
+</html>
