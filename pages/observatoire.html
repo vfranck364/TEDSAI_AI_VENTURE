@@ -545,6 +545,24 @@
             background: var(--obs-primary);
             transform: scale(1.3);
         }
+
+        @media (max-width: 768px) {
+            .obs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            /* ADJUST FAB POSITION FOR MOBILE NAV */
+            .fab-submit {
+                bottom: 85px;
+                right: 1.5rem;
+                width: 50px;
+                height: 50px;
+            }
+        }
     </style>
 </head>
 
@@ -773,6 +791,7 @@
         </div>
     </div>
 
+    <!-- Correct Footer Structure -->
     <footer style="background: var(--color-primary); padding: 4rem 0; color: white; margin-top: 4rem;">
         <div class="container footer-content"
             style="display: flex; justify-content: space-between; flex-wrap: wrap; text-align: left; gap: 3rem;">
@@ -782,65 +801,39 @@
                 <p style="opacity: 0.8; line-height: 1.6;">Le pôle d'intelligence économique et technologique du
                     Complexe TEDSAI. Nous analysons les données pour éclairer vos décisions en Afrique.</p>
             </div>
-            <div class="container footer-content">
-                <div class="footer-col">
-                    <p>Le système nerveux numérique d'un écosystème intelligent.</p>
-                    <div class="socials" style="margin-top: 1rem; display: flex; gap: 1rem; font-size: 1.5rem;">
-                        <a href="https://www.linkedin.com/in/tedsai-complex-a26b95397" target="_blank"
-                            rel="noopener noreferrer" aria-label="LinkedIn"
-                            style="color: white; transition: color 0.3s;"><i class="fa-brands fa-linkedin"></i></a>
-                        <a href="https://www.instagram.com/tedsai1385/" target="_blank" rel="noopener noreferrer"
-                            aria-label="Instagram" style="color: white; transition: color 0.3s;"><i
-                                class="fa-brands fa-instagram"></i></a>
-                        <a href="https://www.facebook.com/profile.php?id=61584073655708" target="_blank"
-                            rel="noopener noreferrer" aria-label="Facebook"
-                            style="color: white; transition: color 0.3s;"><i class="fa-brands fa-facebook"></i></a>
-                        <a href="https://x.com/Tedsai1385" target="_blank" rel="noopener noreferrer"
-                            aria-label="X (Twitter)"
-                            style="color: white; transition: color 0.3s; font-weight: bold; font-family: Arial, sans-serif;">𝕏</a>
-                        <a href="https://www.youtube.com/@TEDSAIComplex" target="_blank" rel="noopener noreferrer"
-                            aria-label="YouTube" style="color: white; transition: color 0.3s;"><i
-                                class="fa-brands fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="footer-col">
-                    <h4>Liens Rapides</h4>
-                    <ul>
-                        <li><a href="pages/solutions-ia.html">Solutions IA</a></li>
-                        <li><a href="pages/vitedia.html">Restaurant viTEDia</a></li>
-                        <li><a href="pages/garden.html">SelecTED Gardens</a></li>
-                        <li><a href="pages/observatoire.html">Observatoire</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Contact</h4>
-                    <ul>
-                        <li><a href="pages/contact.html">Nous Contacter</a></li>
-                        <li><a href="pages/contact.html?reason=hiring">Recrutement</a></li>
-                        <li><a href="pages/contact.html?reason=press">Presse</a></li>
-                    </ul>
+
+            <div class="footer-col" style="flex: 1; min-width: 200px;">
+                <h4 style="color:white; margin-bottom:1rem;">Suivez-nous</h4>
+                <div class="socials" style="display: flex; gap: 1rem; font-size: 1.5rem;">
+                    <a href="https://www.linkedin.com/in/tedsai-complex-a26b95397" target="_blank"
+                        rel="noopener noreferrer" aria-label="LinkedIn" style="color: white; transition: color 0.3s;"><i
+                            class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/tedsai1385/" target="_blank" rel="noopener noreferrer"
+                        aria-label="Instagram" style="color: white; transition: color 0.3s;"><i
+                            class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61584073655708" target="_blank"
+                        rel="noopener noreferrer" aria-label="Facebook" style="color: white; transition: color 0.3s;"><i
+                            class="fa-brands fa-facebook"></i></a>
+                    <a href="https://x.com/Tedsai1385" target="_blank" rel="noopener noreferrer"
+                        aria-label="X (Twitter)"
+                        style="color: white; transition: color 0.3s; font-weight: bold; font-family: Arial, sans-serif;">𝕏</a>
                 </div>
             </div>
+
             <div class="footer-col" style="flex: 1; min-width: 200px;">
-                <h4
-                    style="color: var(--color-secondary); margin-bottom: 1.2rem; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;">
-                    Ressources</h4>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="margin-bottom: 0.8rem;"><a href="contact.html?reason=hiring"
-                            style="color: white; text-decoration: none; opacity: 0.7; transition: 0.3s;">Recrutement /
-                            Jobs</a></li>
-                    <li style="margin-bottom: 0.8rem;"><a href="contact.html?reason=press"
-                            style="color: white; text-decoration: none; opacity: 0.7; transition: 0.3s;">Presse /
-                            Média</a></li>
-                    <li style="margin-bottom: 0.8rem;"><a href="contact.html"
-                            style="color: white; text-decoration: none; opacity: 0.7; transition: 0.3s;">Contact
-                            Direct</a></li>
+                <h4 style="color:white; margin-bottom:1rem;">Contact</h4>
+                <ul>
+                    <li><a href="mailto:observatoire@tedsai.cm"
+                            style="color:white; opacity:0.8;">observatoire@tedsai.cm</a></li>
+                    <li><a href="https://maps.app.goo.gl/PAqnePyormGahFcW9" target="_blank"
+                            style="color:white; opacity:0.8;"><i class="fa-solid fa-location-dot"></i> Localiser sur
+                            Maps</a></li>
                 </ul>
             </div>
         </div>
-        <div class="container"
-            style="text-align:center; margin-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; opacity: 0.6; font-size: 0.9rem;">
-            <p>&copy; 2024 TEDSAI Complex - Pôle Observatoire. Tous droits réservés.</p>
+        <div class="container copyright"
+            style="text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; margin-top: 2rem;">
+            <p style="opacity: 0.6;">&copy; 2024 TEDSAI Complex. Tous droits réservés.</p>
         </div>
     </footer>
 

@@ -195,12 +195,19 @@
     </div>
 
     <!-- Footer -->
-    <footer style="background: var(--color-garden-primary);">
-        <div class="container footer-content">
-            <div class="footer-col">
-                <h4>SelecTED Gardens</h4>
-                <p>Cultiver mieux pour manger mieux.</p>
-                <div class="socials" style="margin-top: 1rem; display: flex; gap: 1rem; font-size: 1.5rem;">
+    <footer style="background: var(--color-garden-primary); padding: 4rem 0; color: white;">
+        <div class="container footer-content"
+            style="display: flex; justify-content: space-between; flex-wrap: wrap; text-align: left; gap: 3rem;">
+            <div class="footer-col" style="flex: 2; min-width: 300px;">
+                <h3 style="color: white; margin-bottom: 1.5rem; font-family: var(--font-accent);">SelecTED Gardens
+                </h3>
+                <p style="opacity: 0.8; line-height: 1.6;">Agriculture Urbaine & Production Locale. Des produits
+                    frais, directement de nos jardins à votre assiette.</p>
+            </div>
+
+            <div class="footer-col" style="flex: 1; min-width: 200px;">
+                <h4 style="color:white; margin-bottom:1rem;">Suivez-nous</h4>
+                <div class="socials" style="display: flex; gap: 1rem; font-size: 1.5rem;">
                     <a href="https://www.linkedin.com/in/tedsai-complex-a26b95397" target="_blank"
                         rel="noopener noreferrer" aria-label="LinkedIn" style="color: white; transition: color 0.3s;"><i
                             class="fa-brands fa-linkedin"></i></a>
@@ -218,51 +225,24 @@
                             class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
-            <div class="footer-col">
-                <h4>Liens</h4>
+
+            <div class="footer-col" style="flex: 1; min-width: 200px;">
+                <h4 style="color:white; margin-bottom:1rem;">Contact</h4>
                 <ul>
-                    <li><a href="contact.html?reason=hiring">Recrutement</a></li>
-                    <li><a href="contact.html?reason=press">Presse</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Contact</h4>
-                <ul>
-                    <li><a href="mailto:partenariat@garden.cm">partenariat@garden.cm</a></li>
-                    <li><a href="https://maps.app.goo.gl/PAqnePyormGahFcW9" target="_blank"><i class="fa-solid fa-location-dot"></i> Localiser sur Maps</a></li>
+                    <li><a href="mailto:garden@tedsai.cm" style="color:white; opacity:0.8;">garden@tedsai.cm</a>
+                    </li>
+                    <li><a href="https://maps.app.goo.gl/PAqnePyormGahFcW9" target="_blank"
+                            style="color:white; opacity:0.8;"><i class="fa-solid fa-location-dot"></i> Localiser sur
+                            Maps</a></li>
                 </ul>
             </div>
         </div>
+        <div class="container copyright"
+            style="text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; margin-top: 2rem;">
+            <p style="opacity: 0.6;">&copy; 2024 SelecTED Gardens. Une entité du TEDSAI Complex.</p>
+        </div>
     </footer>
 
-    <!-- Scripts -->
-    <!-- Firebase SDKs (Compat for file:// support) -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-
-    <!-- Firebase Config -->
-    <script src="../assets/js/core/firebase-config.js"></script>
-
-    <script src="../assets/js/core/db.js"></script>
-    <script src="../assets/js/core/auth.js"></script>
-    <script src="../assets/js/core/api.js"></script>
-    <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/cms-loader.js"></script>
-    <script src="../assets/js/ted-assistant.js"></script>
-    <script>
-        // Specific override for Garden page specific "Tracer" button in section
-        const gardenBtn = document.querySelector('#btn-trace-submit'); // corrected selector
-        if (gardenBtn) {
-            gardenBtn.addEventListener('click', () => {
-                document.getElementById('trace-result-view').style.display = 'block';
-                window.scrollTo({
-                    top: document.getElementById('trace-result-view').offsetTop - 100,
-                    behavior: 'smooth'
-                });
-            });
-        }
-    </script>
     <!-- Mobile Bottom Navigation -->
     <nav class="mobile-bottom-nav" aria-label="Navigation mobile principale">
         <div class="mobile-nav-items">
@@ -292,6 +272,25 @@
             </a>
         </div>
     </nav>
+
+    <!-- Scripts -->
+    <script src="../assets/js/core/api.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/cms-loader.js"></script>
+    <script src="../assets/js/ted-assistant.js"></script>
+    <script>
+        // Specific override for Garden page specific "Tracer" button in section
+        const gardenBtn = document.querySelector('#btn-trace-submit');
+        if (gardenBtn) {
+            gardenBtn.addEventListener('click', () => {
+                document.getElementById('trace-result-view').style.display = 'block';
+                window.scrollTo({
+                    top: document.getElementById('trace-result-view').offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            });
+        }
+    </script>
 </body>
 
 </html>

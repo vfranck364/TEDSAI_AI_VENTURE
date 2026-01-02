@@ -193,52 +193,89 @@
     </section>
 
     <!-- Footer -->
-    <footer style="background: var(--color-vitedia-primary);">
-        <div class="container footer-content">
-            <div class="footer-col">
-                <h4>viTEDia</h4>
-                <p>Gastronomie Durable à Yaoundé.</p>
-                <div class="socials" style="margin-top: 1rem; display: flex; gap: 1rem; font-size: 1.5rem;">
+    <footer style="background: var(--color-vitedia-primary); padding: 4rem 0; color: white;">
+        <div class="container footer-content"
+            style="display: flex; justify-content: space-between; flex-wrap: wrap; text-align: left; gap: 3rem;">
+            <div class="footer-col" style="flex: 2; min-width: 300px;">
+                <h3 style="color: white; margin-bottom: 1.5rem; font-family: var(--font-accent);">viTEDia</h3>
+                <p style="opacity: 0.8; line-height: 1.6;">Gastronomie Durable à Yaoundé. Une expérience culinaire
+                    unique alliant tradition et innovation.</p>
+            </div>
+
+            <div class="footer-col" style="flex: 1; min-width: 200px;">
+                <h4 style="color:white; margin-bottom:1rem;">Suivez-nous</h4>
+                <div class="socials" style="display: flex; gap: 1rem; font-size: 1.5rem;">
                     <a href="https://www.linkedin.com/in/tedsai-complex-a26b95397" target="_blank"
-                        rel="noopener noreferrer" aria-label="Notre page LinkedIn"
-                        style="color: white; transition: color 0.3s;"><i class="fa-brands fa-linkedin"></i></a>
+                        rel="noopener noreferrer" aria-label="LinkedIn" style="color: white; transition: color 0.3s;"><i
+                            class="fa-brands fa-linkedin"></i></a>
                     <a href="https://www.instagram.com/tedsai1385/" target="_blank" rel="noopener noreferrer"
-                        aria-label="Notre profil Instagram" style="color: white; transition: color 0.3s;"><i
+                        aria-label="Instagram" style="color: white; transition: color 0.3s;"><i
                             class="fa-brands fa-instagram"></i></a>
                     <a href="https://www.facebook.com/profile.php?id=61584073655708" target="_blank"
-                        rel="noopener noreferrer" aria-label="Notre page Facebook"
-                        style="color: white; transition: color 0.3s;"><i class="fa-brands fa-facebook"></i></a>
+                        rel="noopener noreferrer" aria-label="Facebook" style="color: white; transition: color 0.3s;"><i
+                            class="fa-brands fa-facebook"></i></a>
                     <a href="https://x.com/Tedsai1385" target="_blank" rel="noopener noreferrer"
-                        aria-label="Notre compte X (Twitter)"
+                        aria-label="X (Twitter)"
                         style="color: white; transition: color 0.3s; font-weight: bold; font-family: Arial, sans-serif;">𝕏</a>
                     <a href="https://www.youtube.com/@TEDSAIComplex" target="_blank" rel="noopener noreferrer"
-                        aria-label="Notre chaîne YouTube" style="color: white; transition: color 0.3s;"><i
+                        aria-label="YouTube" style="color: white; transition: color 0.3s;"><i
                             class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
 
-            <div class="footer-col">
-                <h4>Contact</h4>
+            <div class="footer-col" style="flex: 1; min-width: 200px;">
+                <h4 style="color:white; margin-bottom:1rem;">Contact</h4>
                 <ul>
-                    <li><a href="tel:+237683121654">+237 683 121 654</a></li>
-                    <li><a href="mailto:vitediabytedsai@gmail.com">vitediabytedsai@gmail.com</a></li>
-                    <li><a href="https://maps.app.goo.gl/PAqnePyormGahFcW9" target="_blank"><i
-                                class="fa-solid fa-location-dot"></i> Localiser sur Maps</a></li>
+                    <li><a href="tel:+237683121654" style="color:white; opacity:0.8;">+237 683 121 654</a></li>
+                    <li><a href="mailto:vitediabytedsai@gmail.com"
+                            style="color:white; opacity:0.8;">vitediabytedsai@gmail.com</a></li>
+                    <li><a href="https://maps.app.goo.gl/PAqnePyormGahFcW9" target="_blank"
+                            style="color:white; opacity:0.8;"><i class="fa-solid fa-location-dot"></i> Localiser sur
+                            Maps</a></li>
                 </ul>
             </div>
         </div>
-
         <div class="container copyright"
-            style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 2rem; color: rgba(255,255,255,0.8);">
+            style="text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; margin-top: 2rem;">
             <div style="margin-bottom: 1rem;">
                 <span
                     style="font-size: 0.8rem; background: rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 20px;">
                     <i class="fa-solid fa-robot"></i> <span>Logistique propulsée par</span> <strong>TEDSAI IA</strong>
                 </span>
             </div>
-            <p>&copy; 2024 viTEDia Restaurant. Une entité du TEDSAI Complex.</p>
+            <p style="opacity: 0.6;">&copy; 2024 viTEDia Restaurant. Une entité du TEDSAI Complex.</p>
         </div>
     </footer>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" aria-label="Navigation mobile principale">
+        <div class="mobile-nav-items">
+            <a href="../index.html" class="mobile-nav-item" aria-label="Accueil">
+                <i class="fa-solid fa-home"></i>
+                <span>Accueil</span>
+            </a>
+            <a href="solutions-ia.html" class="mobile-nav-item" aria-label="Solutions IA">
+                <i class="fa-solid fa-brain"></i>
+                <span>IA</span>
+            </a>
+            <a href="vitedia.html" class="mobile-nav-item active" aria-label="Restaurant viTEDia">
+                <i class="fa-solid fa-utensils"></i>
+                <span>viTEDia</span>
+            </a>
+            <a href="garden.html" class="mobile-nav-item" aria-label="SelecTED Gardens">
+                <i class="fa-solid fa-leaf"></i>
+                <span>Jardin</span>
+            </a>
+            <a href="observatoire.html" class="mobile-nav-item" aria-label="Observatoire">
+                <i class="fa-solid fa-satellite-dish"></i>
+                <span>Obs</span>
+            </a>
+            <a href="contact.html" class="mobile-nav-item" aria-label="Contact">
+                <i class="fa-solid fa-envelope"></i>
+                <span>Contact</span>
+            </a>
+        </div>
+    </nav>
 
     <!-- Scripts -->
     <!-- Firebase SDKs (Compat for file:// support) -->
