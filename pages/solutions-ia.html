@@ -520,39 +520,112 @@
     </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container footer-content">
-            <div class="footer-col">
-                <h4 style="color: white; border-bottom: 2px solid var(--color-secondary); padding-bottom: 8px;">TEDSAI
-                    Solutions</h4>
-                <p>L'intelligence artificielle au service du réel.</p>
-                <div class="socials" style="margin-top: 1rem; display: flex; gap: 1rem; font-size: 1.5rem;">
-                    <a href="https://www.linkedin.com/in/tedsai-complex-a26b95397" target="_blank"
-                        rel="noopener noreferrer" aria-label="LinkedIn" style="color: white; transition: color 0.3s;"><i
-                            class="fa-brands fa-linkedin"></i></a>
-                    <a href="https://www.instagram.com/tedsai1385/" target="_blank" rel="noopener noreferrer"
-                        aria-label="Instagram" style="color: white; transition: color 0.3s;"><i
-                            class="fa-brands fa-instagram"></i></a>
-                    <a href="https://www.facebook.com/profile.php?id=61584073655708" target="_blank"
-                        rel="noopener noreferrer" aria-label="Facebook" style="color: white; transition: color 0.3s;"><i
-                            class="fa-brands fa-facebook"></i></a>
-                    <a href="https://x.com/Tedsai1385" target="_blank" rel="noopener noreferrer"
-                        aria-label="X (Twitter)"
-                        style="color: white; transition: color 0.3s; font-weight: bold; font-family: Arial, sans-serif;">𝕏</a>
-                    <a href="https://www.youtube.com/@TEDSAIComplex" target="_blank" rel="noopener noreferrer"
-                        aria-label="YouTube" style="color: white; transition: color 0.3s;"><i
-                            class="fa-brands fa-youtube"></i></a>
+    <!-- ==========================================================================
+         NEW PRO FOOTER (Global Template)
+         ========================================================================== -->
+    <footer class="pro-footer">
+        <div class="container">
+            <!-- 5️⃣ Bloc Call To Action (Banner) -->
+            <div class="footer-cta-banner fade-in-up">
+                <h3>Prêt à automatiser votre avenir ?</h3>
+                <p>Discutez avec notre agent IA ou demandez un devis personnalisé pour vos projets.</p>
+                <div class="footer-cta-buttons">
+                    <a href="contact.html" class="btn btn-primary">Demander un devis</a>
+                    <button onclick="window.tedAssistant.toggleChat()" class="btn btn-secondary"
+                        style="color: white; border-color: white;">Discuter avec l'IA</button>
                 </div>
             </div>
-            <div class="footer-col">
-                <h4>Liens Rapides</h4>
-                <ul>
-                    <li><a href="../index.html">Accueil</a></li>
-                    <li><a href="contact.html">Demander un Audit</a></li>
-                    <li><a href="contact.html?reason=hiring">Recrutement</a></li>
-                    <li><a href="contact.html?reason=press">Presse</a></li>
-                </ul>
+
+            <div class="footer-main">
+                <!-- 1️⃣ Bloc Identité & Branding -->
+                <div class="footer-col footer-identity">
+                    <div class="footer-logo">
+                        <img src="../assets/images/logos/tedsai_logo.jpg" alt="TEDSAI Logo">
+                    </div>
+                    <div class="footer-slogan">
+                        <strong>TEDSAI Complex</strong><br>
+                        <em>Automatisation intelligente & solutions IA sur mesure.</em>
+                        <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                            Un écosystème unifié pour propulser l'Afrique vers l'industrie 4.0.
+                        </p>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/tedsai-complex-a26b95397" target="_blank"
+                            class="social-icon" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/tedsai1385/" target="_blank" class="social-icon"
+                            title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://x.com/Tedsai1385" target="_blank" class="social-icon" title="X (Twitter)"><i
+                                class="fa-brands fa-twitter"></i></a>
+                        <a href="https://www.facebook.com/profile.php?id=61584073655708" target="_blank"
+                            class="social-icon" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://www.youtube.com/@TEDSAIComplex" target="_blank" class="social-icon"
+                            title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- 2️⃣ Bloc Navigation rapide -->
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul class="footer-links-list">
+                        <li><a href="../index.html">Accueil</a></li>
+                        <li><a href="a-propos.html">À Propos</a></li>
+                        <li><a href="solutions-ia.html">Solutions IA</a></li>
+                        <li><a href="vitedia.html">Restaurant viTEDia</a></li>
+                        <li><a href="garden.html">SelecTED Gardens</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- 3️⃣ Bloc Services / Solutions -->
+                <div class="footer-col">
+                    <h4>Nos Services</h4>
+                    <ul class="footer-links-list">
+                        <li><a href="solutions-ia.html#automation">Automatisation IA</a></li>
+                        <li><a href="solutions-ia.html#agents">Agents Intelligents</a></li>
+                        <li><a href="vitedia.html#traceability">Traçabilité Alimentaire</a></li>
+                        <li><a href="garden.html#urban">Agriculture Urbaine</a></li>
+                        <li><a href="observatoire.html">Études & Consulting</a></li>
+                    </ul>
+                </div>
+
+                <!-- 4️⃣ Bloc Contact & Infos légales -->
+                <div class="footer-col">
+                    <h4>Contact & Info</h4>
+                    <ul class="footer-contact-info">
+                        <li class="contact-item">
+                            <i class="fa-solid fa-envelope"></i>
+                            <span>contact@tedsai.cm</span>
+                        </li>
+                        <li class="contact-item">
+                            <i class="fa-solid fa-phone"></i>
+                            <span>+237 6XX XXX XXX</span>
+                        </li>
+                        <li class="contact-item">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span>Yaoundé, Cameroun</span>
+                        </li>
+                        <li class="contact-item" style="margin-top: 1rem;">
+                            <a href="https://maps.app.goo.gl/YourLink" target="_blank"
+                                style="color: var(--color-secondary); font-weight: 600;">
+                                <i class="fa-solid fa-map-location-dot"></i> Localiser sur Maps
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 6️⃣ Barre finale (Bottom bar) -->
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2026 <strong>TEDSAI Complex</strong>. Tous droits réservés.
+                </div>
+                <div class="footer-bottom-links">
+                    <a href="#">Mentions Légales</a>
+                    <a href="#">Confidentialité</a>
+                </div>
+                <div class="powered-by">
+                    Built with <i class="fa-solid fa-heart"></i> & Intelligence Artificielle
+                </div>
             </div>
         </div>
     </footer>

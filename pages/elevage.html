@@ -70,21 +70,85 @@
         <a href="contact.html" class="btn btn-primary" style="background: #8B4513;">Demander un Devis</a>
     </section>
 
-    <footer>
-        <div class="container footer-content">
-            <div class="footer-col">
-                <h4>TEDSAI Élevage</h4>
-                <p>Expertise • Formation • Qualité</p>
+    <!-- ==========================================================================
+         NEW PRO FOOTER (Global Template)
+         ========================================================================== -->
+    <footer class="pro-footer">
+        <div class="container">
+            <div class="footer-main">
+                <!-- 1️⃣ Bloc Identité & Branding -->
+                <div class="footer-col footer-identity">
+                    <div class="footer-logo">
+                        <img src="../assets/images/logos/tedsai_logo.jpg" alt="TEDSAI Logo">
+                    </div>
+                    <div class="footer-slogan">
+                        <strong>TEDSAI Complex</strong><br>
+                        <em>L'IA au service de l'excellence.</em>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/tedsai-complex-a26b95397" target="_blank"
+                            class="social-icon" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/tedsai1385/" target="_blank" class="social-icon"
+                            title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://x.com/Tedsai1385" target="_blank" class="social-icon" title="X (Twitter)"><i
+                                class="fa-brands fa-twitter"></i></a>
+                        <a href="https://www.facebook.com/profile.php?id=61584073655708" target="_blank"
+                            class="social-icon" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://www.youtube.com/@TEDSAIComplex" target="_blank" class="social-icon"
+                            title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- 2️⃣ Bloc Navigation rapide -->
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul class="footer-links-list">
+                        <li><a href="../index.html">Accueil</a></li>
+                        <li><a href="a-propos.html">À Propos</a></li>
+                        <li><a href="solutions-ia.html">Solutions IA</a></li>
+                        <li><a href="vitedia.html">Restaurant viTEDia</a></li>
+                        <li><a href="garden.html">SelecTED Gardens</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- 3️⃣ Bloc Services / Solutions -->
+                <div class="footer-col">
+                    <h4>Nos Services</h4>
+                    <ul class="footer-links-list">
+                        <li><a href="solutions-ia.html">Audit & Conseil IA</a></li>
+                        <li><a href="solutions-ia.html">Développement Logiciel</a></li>
+                        <li><a href="garden.html">Solutions Agro-Tech</a></li>
+                        <li><a href="observatoire.html">Intelligence Économique</a></li>
+                        <li><a href="formations.html">Formations Certifiantes</a></li>
+                    </ul>
+                </div>
+
+                <!-- 4️⃣ Bloc Contact & Infos légales -->
+                <div class="footer-col">
+                    <h4>Contact & Info</h4>
+                    <ul class="footer-contact-info">
+                        <li class="contact-item">
+                            <i class="fa-solid fa-envelope"></i>
+                            <span>contact@tedsai.cm</span>
+                        </li>
+                        <li class="contact-item">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span>Yaoundé, Cameroun</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="footer-col">
-                <h4>Contact</h4>
-                <p>Tél: +237 XXX XXX XXX</p>
-                <p>Email: elevage@tedsai.cm</p>
+
+            <!-- 6️⃣ Barre finale (Bottom bar) -->
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2026 <strong>TEDSAI Complex</strong>. Tous droits réservés.
+                </div>
+                <div class="powered-by">
+                    Built with <i class="fa-solid fa-heart"></i> & Intelligence Artificielle
+                </div>
             </div>
-        </div>
-        <div class="container"
-            style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 2rem;">
-            <p>&copy; 2025 TEDSAI Complex.</p>
         </div>
     </footer>
 
@@ -118,10 +182,45 @@
         </div>
     </nav>
 
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="../assets/js/core/firebase-config.js"></script>
+    <script src="../assets/js/core/db.js"></script>
+    <script src="../assets/js/core/auth.js"></script>
+    <script src="../assets/js/core/api.js"></script>
+    <script src="../assets/js/mobile-nav.js"></script>
     <script src="../assets/js/data-loader.js"></script>
+    <!-- Ted Assistant (Chat) -->
+    <script src="../assets/js/ted-assistant.js"></script>
+
     <script>
         async function loadElevage() {
-            const data = await tedApi.fetchData('elevage');
+            // Mock data or fetch from API
+            const data = {
+                volaille: {
+                    capacity: "5000 têtes",
+                    cycle_duration: "45 jours",
+                    production_annuelle: "40,000 poulets",
+                    stats: { taux_survie: "96%", poids_moyen: "2.2kg", rentabilite: "+25%" }
+                },
+                aquaculture: {
+                    especes: ["Tilapia", "Silure"],
+                    bassins: "12",
+                    production_annuelle: "5 tonnes",
+                    stats: { taux_survie: "92%", poids_moyen_tilapia: "500g", rentabilite: "+30%" }
+                },
+                services: [
+                    { name: "Consultation Démarrage", description: "Étude de faisabilité et dimensionnement de votre projet.", price: "50,000 FCFA" },
+                    { name: "Suivi Vétérinaire", description: "Audit sanitaire et plan de prophylaxie personnalisé.", price: "Sur devis" },
+                    { name: "Formation Avicole", description: "3 jours de formation pratique sur site.", price: "75,000 FCFA" },
+                    { name: "Vente Poussins 1J", description: "Souche Cobb 500, vaccinés Marek/Newcastle.", price: "Variable" }
+                ]
+            };
+
+            // Note: In a real scenario we would fetch this: const data = await tedApi.fetchData('elevage'); 
+            // For now, using static data to ensure it works immediately
+
             if (!data) return;
 
             // Render Volaille Stats
@@ -171,8 +270,15 @@
         }
 
         document.addEventListener('DOMContentLoaded', loadElevage);
+        document.addEventListener('DOMContentLoaded', function () {
+            const currentPage = window.location.pathname;
+            const navItems = document.querySelectorAll('.mobile-nav-item');
+            navItems.forEach(item => {
+                const href = item.getAttribute('href').replace('../', '');
+                if (currentPage.includes(href)) item.classList.add('active');
+            });
+        });
     </script>
-    <script src="/Users/dev-ai/Documents/TEDSAI-website/relative/path/fixer.js"></script>
 </body>
 
 </html>

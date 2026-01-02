@@ -901,3 +901,223 @@ footer {
     background: var(--color-vitedia-accent);
     border-radius: 2px;
 }
+
+/* ==========================================================================
+   PRO FOOTER DESIGN SYSTEM
+   ========================================================================== */
+
+.pro-footer {
+    background: #050b1a;
+    /* Dark Elegant Blue */
+    color: #e2e8f0;
+    /* Light Gray Text */
+    padding: 0;
+    font-family: var(--font-body);
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* 5️⃣ Bloc Call To Action (Banner) */
+.footer-cta-banner {
+    background: linear-gradient(135deg, #0a2463 0%, #1e3a8a 100%);
+    padding: 3rem 2rem;
+    text-align: center;
+    border-radius: 20px;
+    margin-top: -3rem;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer-cta-banner h3 {
+    color: white;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.footer-cta-banner p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1.5rem;
+}
+
+.footer-cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+/* Footer Main Grid */
+.footer-main {
+    padding: 6rem 0 3rem;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1.2fr 1.3fr;
+    gap: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-col h4 {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* 1️⃣ Bloc Identité */
+.footer-logo img {
+    height: 60px;
+    margin-bottom: 1rem;
+    /* filter: brightness(0) invert(1); */
+    object-fit: contain;
+}
+
+.footer-slogan {
+    font-size: 0.95rem;
+    color: #94a3b8;
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icon {
+    width: 42px;
+    height: 42px;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    color: white;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 1.2rem;
+}
+
+.social-icon:hover {
+    background: var(--color-secondary);
+    color: white;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(90, 169, 230, 0.3);
+}
+
+/* 2️⃣ & 3️⃣ Navigation & Services */
+.footer-links-list li {
+    margin-bottom: 12px;
+}
+
+.footer-links-list a {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.footer-links-list a:hover {
+    color: white;
+    transform: translateX(8px);
+}
+
+/* 4️⃣ Bloc Contact */
+.footer-contact-info {
+    list-style: none;
+    padding: 0;
+}
+
+.contact-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    color: #94a3b8;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.contact-item i {
+    color: var(--color-secondary);
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+}
+
+/* 6️⃣ Barre Finale */
+.footer-bottom {
+    padding: 2rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #64748b;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-bottom-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-bottom-links a:hover {
+    color: white;
+}
+
+.powered-by {
+    font-weight: 500;
+}
+
+.powered-by i {
+    color: #ef4444;
+    margin: 0 4px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .footer-main {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-main {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 5rem;
+        gap: 3rem;
+    }
+
+    .footer-cta-banner {
+        margin: -3rem 1.5rem 0;
+        padding: 2.5rem 1.5rem;
+    }
+
+    .footer-cta-banner h3 {
+        font-size: 1.5rem;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    .contact-item {
+        justify-content: center;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+        padding-bottom: 120px;
+        /* Space for mobile nav */
+    }
+
+    .footer-bottom-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

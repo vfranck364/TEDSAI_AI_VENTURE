@@ -195,52 +195,116 @@
     </div>
 
     <!-- Footer -->
-    <footer style="background: var(--color-garden-primary); padding: 4rem 0; color: white;">
-        <div class="container footer-content"
-            style="display: flex; justify-content: space-between; flex-wrap: wrap; text-align: left; gap: 3rem;">
-            <div class="footer-col" style="flex: 2; min-width: 300px;">
-                <h3 style="color: white; margin-bottom: 1.5rem; font-family: var(--font-accent);">SelecTED Gardens
-                </h3>
-                <p style="opacity: 0.8; line-height: 1.6;">Agriculture Urbaine & Production Locale. Des produits
-                    frais, directement de nos jardins à votre assiette.</p>
-            </div>
-
-            <div class="footer-col" style="flex: 1; min-width: 200px;">
-                <h4 style="color:white; margin-bottom:1rem;">Suivez-nous</h4>
-                <div class="socials" style="display: flex; gap: 1rem; font-size: 1.5rem;">
-                    <a href="https://www.linkedin.com/in/tedsai-complex-a26b95397" target="_blank"
-                        rel="noopener noreferrer" aria-label="LinkedIn" style="color: white; transition: color 0.3s;"><i
-                            class="fa-brands fa-linkedin"></i></a>
-                    <a href="https://www.instagram.com/tedsai1385/" target="_blank" rel="noopener noreferrer"
-                        aria-label="Instagram" style="color: white; transition: color 0.3s;"><i
-                            class="fa-brands fa-instagram"></i></a>
-                    <a href="https://www.facebook.com/profile.php?id=61584073655708" target="_blank"
-                        rel="noopener noreferrer" aria-label="Facebook" style="color: white; transition: color 0.3s;"><i
-                            class="fa-brands fa-facebook"></i></a>
-                    <a href="https://x.com/Tedsai1385" target="_blank" rel="noopener noreferrer"
-                        aria-label="X (Twitter)"
-                        style="color: white; transition: color 0.3s; font-weight: bold; font-family: Arial, sans-serif;">𝕏</a>
-                    <a href="https://www.youtube.com/@TEDSAIComplex" target="_blank" rel="noopener noreferrer"
-                        aria-label="YouTube" style="color: white; transition: color 0.3s;"><i
-                            class="fa-brands fa-youtube"></i></a>
+    <!-- ==========================================================================
+         NEW PRO FOOTER (Global Template)
+         ========================================================================== -->
+    <footer class="pro-footer">
+        <div class="container">
+            <!-- 5️⃣ Bloc Call To Action (Banner) -->
+            <div class="footer-cta-banner fade-in-up">
+                <h3>Cultivons ensemble l'avenir.</h3>
+                <p>Besoin de conseils pour votre potager urbain ou d'une production sur mesure ? Contactez nos experts.
+                </p>
+                <div class="footer-cta-buttons">
+                    <a href="contact.html?reason=garden" class="btn btn-primary">Nous contacter</a>
+                    <button onclick="window.tedAssistant.toggleChat()" class="btn btn-secondary"
+                        style="color: white; border-color: white;">Discuter avec l'IA</button>
                 </div>
             </div>
 
-            <div class="footer-col" style="flex: 1; min-width: 200px;">
-                <h4 style="color:white; margin-bottom:1rem;">Contact</h4>
-                <ul>
-                    <li><a href="mailto:garden@tedsai.cm" style="color:white; opacity:0.8;">garden@tedsai.cm</a>
-                    </li>
-                    <li><a href="https://maps.app.goo.gl/PAqnePyormGahFcW9" target="_blank"
-                            style="color:white; opacity:0.8;"><i class="fa-solid fa-location-dot"></i> Localiser sur
-                            Maps</a></li>
-                </ul>
+            <div class="footer-main">
+                <!-- 1️⃣ Bloc Identité & Branding -->
+                <div class="footer-col footer-identity">
+                    <div class="footer-logo">
+                        <img src="../assets/images/logos/tedsai_logo.jpg" alt="TEDSAI Logo">
+                    </div>
+                    <div class="footer-slogan">
+                        <strong>SelecTED Gardens</strong><br>
+                        <em>Agriculture urbaine & production durable.</em>
+                        <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                            Des produits frais, locaux et 100% traçables pour une alimentation saine.
+                        </p>
+                    </div>
+                    <div class="social-links">
+                        <div class="social-links">
+                            <a href="https://www.linkedin.com/in/tedsai-complex-a26b95397" target="_blank"
+                                class="social-icon" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/tedsai1385/" target="_blank" class="social-icon"
+                                title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="https://x.com/Tedsai1385" target="_blank" class="social-icon"
+                                title="X (Twitter)"><i class="fa-brands fa-twitter"></i></a>
+                            <a href="https://www.facebook.com/profile.php?id=61584073655708" target="_blank"
+                                class="social-icon" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                            <a href="https://www.youtube.com/@TEDSAIComplex" target="_blank" class="social-icon"
+                                title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- 2️⃣ Bloc Navigation rapide -->
+                    <div class="footer-col">
+                        <h4>Navigation</h4>
+                        <ul class="footer-links-list">
+                            <li><a href="../index.html">Accueil</a></li>
+                            <li><a href="a-propos.html">À Propos</a></li>
+                            <li><a href="solutions-ia.html">Solutions IA</a></li>
+                            <li><a href="vitedia.html">Restaurant viTEDia</a></li>
+                            <li><a href="garden.html">SelecTED Gardens</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- 3️⃣ Bloc Services / Solutions -->
+                    <div class="footer-col">
+                        <h4>Solutions Vertes</h4>
+                        <ul class="footer-links-list">
+                            <li><a href="garden.html#trace">Traçabilité Récolte</a></li>
+                            <li><a href="garden.html#urban">Potagers Urbains</a></li>
+                            <li><a href="contact.html?reason=supply">Approvisionnement B2B</a></li>
+                            <li><a href="vitedia.html">Produits frais viTEDia</a></li>
+                            <li><a href="../index.html#ecosystem">Écosystème TEDSAI</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- 4️⃣ Bloc Contact & Infos légales -->
+                    <div class="footer-col">
+                        <h4>Contact & Info</h4>
+                        <ul class="footer-contact-info">
+                            <li class="contact-item">
+                                <i class="fa-solid fa-envelope"></i>
+                                <span>garden@tedsai.cm</span>
+                            </li>
+                            <li class="contact-item">
+                                <i class="fa-solid fa-phone"></i>
+                                <span>+237 6XX XXX XXX</span>
+                            </li>
+                            <li class="contact-item">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span>Yaoundé, Cameroun</span>
+                            </li>
+                            <li class="contact-item" style="margin-top: 1rem;">
+                                <a href="https://maps.app.goo.gl/PAqnePyormGahFcW9" target="_blank"
+                                    style="color: var(--color-secondary); font-weight: 600;">
+                                    <i class="fa-solid fa-map-location-dot"></i> Localiser sur Maps
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 6️⃣ Barre finale (Bottom bar) -->
+                <div class="footer-bottom">
+                    <div class="copyright">
+                        &copy; 2026 <strong>SelecTED Gardens</strong>. Une entité du TEDSAI Complex.
+                    </div>
+                    <div class="footer-bottom-links">
+                        <a href="#">Mentions Légales</a>
+                        <a href="#">Confidentialité</a>
+                    </div>
+                    <div class="powered-by">
+                        Built with <i class="fa-solid fa-heart"></i> & Intelligence Artificielle
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="container copyright"
-            style="text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; margin-top: 2rem;">
-            <p style="opacity: 0.6;">&copy; 2024 SelecTED Gardens. Une entité du TEDSAI Complex.</p>
-        </div>
     </footer>
 
     <!-- Mobile Bottom Navigation -->
