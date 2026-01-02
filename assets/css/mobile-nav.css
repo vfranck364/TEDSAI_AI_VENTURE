@@ -6,24 +6,48 @@
 
 /* Barre de navigation inférieure (Mobile Bottom Nav) */
 .mobile-bottom-nav {
-    display: none; /* Cachée par défaut sur desktop */
+    display: none;
+    /* Cachée par défaut sur desktop */
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    background: white;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.95);
+    /* Légère transparence pour effet glass */
+    backdrop-filter: blur(10px);
+    /* Effet Glassmorphism */
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.05);
+    /* Ombre plus douce */
     z-index: 1000;
-    padding: 0.5rem 0;
-    border-top: 1px solid #e0e0e0;
+    padding: 0.5rem 0 0.25rem 0;
+    /* Padding ajusté */
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    animation: slideUpNav 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Animation d'entrée fluide */
+}
+
+@keyframes slideUpNav {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .mobile-nav-items {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    /* Espacement équilibré */
     align-items: center;
-    max-width: 500px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
+    padding: 0 0.5rem;
 }
 
 .mobile-nav-item {
@@ -32,122 +56,150 @@
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    color: #666;
-    transition: all 0.3s ease;
-    padding: 0.5rem;
-    min-width: 60px;
-    min-height: 60px; /* Zone du pouce optimisée */
-    border-radius: 8px;
+    color: #94a3b8;
+    /* Gris plus doux par défaut */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0.35rem;
+    flex: 1;
+    text-align: center;
+    border-radius: 12px;
+    /* Pour l'effet de fond */
+    position: relative;
+    overflow: hidden;
 }
 
 .mobile-nav-item i {
-    font-size: 1.5rem;
-    margin-bottom: 0.25rem;
-    transition: transform 0.3s ease;
+    font-size: 1.35rem;
+    margin-bottom: 0.2rem;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    /* Effet rebond */
+    position: relative;
+    z-index: 1;
 }
 
 .mobile-nav-item span {
-    font-size: 0.7rem;
-    font-weight: 600;
+    font-size: 0.65rem;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0.8;
+    transition: all 0.3s ease;
 }
 
+/* EFFETS AU CLIC (ACTIVE TOUCH) */
 .mobile-nav-item:active {
-    background: rgba(90, 169, 230, 0.1);
-    transform: scale(0.95);
+    transform: scale(0.92);
 }
 
+/* ÉTAT ACTIF (Page Courante) */
 .mobile-nav-item.active {
     color: var(--color-primary);
 }
 
 .mobile-nav-item.active i {
-    color: var(--color-secondary);
-    transform: scale(1.1);
+    transform: translateY(-2px) scale(1.1);
+    /* L'icône monte et grossit un peu */
+    color: var(--color-primary);
+    filter: drop-shadow(0 4px 6px rgba(59, 130, 246, 0.3));
+    /* Glow subtil */
 }
 
-/* Afficher la navigation mobile uniquement sur petits écrans */
-@media (max-width: 768px) {
-    .mobile-bottom-nav {
-        display: block;
+.mobile-nav-item.active span {
+    font-weight: 700;
+    opacity: 1;
+    color: var(--color-primary);
+}
+
+/* Petit indicateur sous l'icône active (facultatif mais stylé) */
+.mobile-nav-item.active::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    bottom: 2px;
+    opacity: 0;
+    animation: fadeInDot 0.4s 0.2s forwards;
+}
+
+@keyframes fadeInDot {
+    from {
+        opacity: 0;
+        transform: scale(0);
     }
 
-    /* Ajouter du padding au body pour éviter que le contenu soit caché par la nav */
-    body {
-        padding-bottom: 70px;
-    }
-
-    /* Cacher la navigation desktop sur mobile */
-    header .nav-links {
-        display: none;
-    }
-
-    /* Simplifier le header mobile */
-    header .navbar {
-        height: 60px;
-        padding: 0.5rem 1rem;
-    }
-
-    header .logo img {
-        height: 40px;
+    to {
+        opacity: 1;
+        transform: scale(1);
     }
 }
 
 /* Support pour prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
+
+    .mobile-bottom-nav,
     .mobile-nav-item,
     .mobile-nav-item i {
+        animation: none;
         transition: none;
     }
-
-    .mobile-nav-item:active {
-        transform: none;
-    }
-
-    .mobile-nav-item.active i {
-        transform: none;
-    }
 }
 
-/* Zones cliquables optimisées pour le pouce */
+/* CENTRAGE ET REAJUSTEMENT GLOBAL MOBILE */
 @media (max-width: 768px) {
-    /* Augmenter la taille des boutons et liens sur mobile */
-    .btn {
-        min-height: 48px;
-        padding: 14px 28px;
-        font-size: 1rem;
+
+    /* Centrage des titres et textes principaux */
+    h1,
+    h2,
+    h3,
+    p {
+        text-align: center;
     }
 
-    /* Zones cliquables pour les cartes */
-    .pillar-card,
-    .choice-card {
-        min-height: 48px;
+    /* Réduction des tailles de titres pour éviter les débordements */
+    h1 {
+        font-size: 2rem !important;
     }
 
-    /* Inputs de formulaire */
-    input,
-    textarea,
-    select,
-    button {
-        min-height: 48px;
-        font-size: 16px; /* Évite le zoom automatique sur iOS */
+    h2 {
+        font-size: 1.5rem !important;
     }
-}
 
-/* Menu hamburger simplifié (si nécessaire pour pages secondaires) */
-.mobile-menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: var(--color-primary);
-    cursor: pointer;
-    padding: 0.5rem;
-    min-width: 48px;
-    min-height: 48px;
-}
+    h3 {
+        font-size: 1.25rem !important;
+    }
 
-@media (max-width: 768px) {
-    .mobile-menu-toggle {
+    /* Centrage des conteneurs flex */
+    .hero-content,
+    .container,
+    .footer-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    /* Ajustement Navbar Mobile */
+    .navbar {
+        justify-content: center;
+    }
+
+    .logo {
+        margin: 0 auto;
+    }
+
+    /* Mobile Nav specific display */
+    .mobile-bottom-nav {
         display: block;
+    }
+
+    body {
+        padding-bottom: 60px;
+        /* Reduced padding matching nav height */
+    }
+
+    /* Hide Desktop Nav */
+    header .nav-links {
+        display: none;
     }
 }

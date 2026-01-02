@@ -1,155 +1,127 @@
 /**
- * MODULE PAGES CMS
- * Gestion des pages et du contenu textuel
+ * MODULE: GESTION DES PAGES DU SITE
  */
 
 const PagesAdmin = {
+    // Configuration: Liste des pages connues du site
+    pagesList: [
+        { id: 'home', path: 'index.html', title: 'Accueil', desc: 'Page principale' },
+        { id: 'ia', path: 'pages/solutions-ia.html', title: 'Solutions IA', desc: 'Offres B2B' },
+        { id: 'resto', path: 'pages/vitedia.html', title: 'Restaurant viTEDia', desc: 'Réservations et Menu' },
+        { id: 'garden', path: 'pages/garden.html', title: 'SelecTED Gardens', desc: 'Produits et Jardin' },
+        { id: 'obs', path: 'pages/observatoire.html', title: 'Observatoire', desc: 'Blog et Analyses' },
+        { id: 'ecosystem', path: 'pages/ecosystem.html', title: 'Écosystème', desc: 'Vue d\'ensemble' },
+        { id: 'contact', path: 'pages/contact.html', title: 'Contact', desc: 'Formulaire' },
+        { id: 'about', path: 'pages/a-propos.html', title: 'À Propos', desc: 'Histoire et Mission' }
+    ],
+
+    // Initialisation
     init() {
-        console.log("Pages Admin Init");
-        this.renderList();
+        console.log("📄 PagesAdmin: Init");
+        this.render();
     },
 
-    renderList() {
+    // Rendu de la liste
+    render() {
         const container = document.getElementById('pages-content');
         if (!container) return;
 
-        const pages = TedDB.findAll('content_pages');
-
-        // Define map function manually for cleaner HTML generation
-        const rows = pages.map(page => {
-            const statusBadge = page.status === 'published'
-                ? '<span class="badge badge-success">Publié</span>'
-                : '<span class="badge badge-warning">Brouillon</span>';
-
-            const date = new Date(page.lastModified).toLocaleDateString();
-
-            return `
-            <tr>
-                <td style="font-weight: 600;">${page.title} <br> <span style="font-size:0.75rem; color:#94a3b8; font-weight:400;">/${page.slug}</span></td>
-                <td>${statusBadge}</td>
-                <td>${date}</td>
-                <td>
-                    <button class="btn-action btn-edit" onclick="PagesAdmin.editPage('${page.id}')"><i class="fa-solid fa-pen"></i> Éditer</button>
-                    <!-- <button class="btn-action" style="background:none; color:#3b82f6;" onclick="window.open('../${page.slug}', '_blank')"><i class="fa-solid fa-eye"></i></button> -->
-                </td>
-            </tr>
-            `;
-        }).join('');
-
-        container.innerHTML = `
+        let html = `
             <div class="card-table">
+                <div class="card-header">
+                    <h3>Liste des Pages (${this.pagesList.length})</h3>
+                </div>
                 <table>
                     <thead>
                         <tr>
-                            <th>Titre Page</th>
+                            <th>Page</th>
+                            <th>Chemin</th>
                             <th>Statut</th>
-                            <th>Dernière Modif</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        ${rows}
-                    </tbody>
+        `;
+
+        this.pagesList.forEach(page => {
+            html += `
+                <tr>
+                    <td>
+                        <div style="font-weight:600; color:#0f172a;">${page.title}</div>
+                        <div style="font-size:0.8rem; color:#64748b;">${page.desc}</div>
+                    </td>
+                    <td style="font-family:monospace; color:#3b82f6;">${page.path}</td>
+                    <td><span class="badge badge-success">Publié</span></td>
+                    <td>
+                        <button class="btn-action btn-edit" onclick="PagesAdmin.editPage('${page.id}')">
+                            <i class="fa-solid fa-pen"></i> Éditer Métas
+                        </button>
+                        <a href="../${page.path}" target="_blank" class="btn-action">
+                            <i class="fa-solid fa-external-link-alt"></i> Voir
+                        </a>
+                    </td>
+                </tr>
+            `;
+        });
+
+        html += `   </tbody>
                 </table>
             </div>
-        `;
-    },
-
-    editPage(id) {
-        const page = TedDB.findById('content_pages', id);
-        if (!page) return;
-
-        // Render Blocks Form
-        let blocksHtml = '';
-        if (page.blocks && page.blocks.length > 0) {
-            blocksHtml = page.blocks.map((block, index) => {
-                let input = '';
-                if (block.type === 'text') {
-                    input = `<input type="text" name="block_${index}" value="${block.value}" style="width:100%; padding:0.75rem; border:1px solid #e2e8f0; border-radius:6px;">`;
-                } else if (block.type === 'textarea') {
-                    input = `<textarea name="block_${index}" rows="4" style="width:100%; padding:0.75rem; border:1px solid #e2e8f0; border-radius:6px;">${block.value}</textarea>`;
-                } else if (block.type === 'image') {
-                    input = `
-                        <div style="display:flex; gap:10px;">
-                            <input type="text" id="img_input_${index}" name="block_${index}" value="${block.value}" style="flex:1; padding:0.75rem; border:1px solid #e2e8f0; border-radius:6px;">
-                            <button type="button" class="btn-action" style="background:#3b82f6; color:white;" onclick="MediaAdmin.openPicker((url) => document.getElementById('img_input_${index}').value = url)">
-                                <i class="fa-solid fa-image"></i> Choisir
-                            </button>
-                        </div>
-                    `;
-                }
-
-                return `
-                    <div class="form-group" style="margin-bottom:1.5rem; background:#f8fafc; padding:1rem; border-radius:8px; border:1px solid #e2e8f0;">
-                        <label style="display:block; font-weight:600; margin-bottom:0.5rem; color:#475569;">${block.label} <span style="font-weight:400; font-size:0.7rem; color:#94a3b8;">(${block.id})</span></label>
-                        ${input}
-                        <input type="hidden" name="block_id_${index}" value="${block.id}">
+            
+            <!-- Modal Édition Simple -->
+            <div id="page-edit-modal" class="modal-overlay" style="display:none;">
+                <div class="modal-card">
+                    <h3 style="margin-bottom:1rem;">Éditer Page</h3>
+                    <p style="margin-bottom:1rem; color:#666;" id="edit-page-name">...</p>
+                    
+                    <div class="form-group" style="margin-bottom:1rem;">
+                        <label style="display:block; margin-bottom:5px; font-weight:600;">Titre (SEO)</label>
+                        <input type="text" id="edit-seo-title" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
                     </div>
-                `;
-            }).join('');
-        } else {
-            blocksHtml = `<p style="color:#64748b; font-style:italic;">Aucun bloc de contenu configurable pour cette page.</p>`;
-        }
 
-        const modalHtml = `
-            <div class="modal-overlay">
-                <div class="modal-card fade-in-up" style="max-width: 700px; width: 100%; max-height: 90vh; overflow-y: auto;">
-                    <div class="modal-header" style="position:sticky; top:0; background:white; z-index:10; padding-bottom:1rem; border-bottom:1px solid #e2e8f0; margin-bottom:1rem;">
-                        <h3>Éditer Page : ${page.title}</h3>
-                        <button onclick="this.closest('.modal-overlay').remove()" style="background:none; border:none; color:#64748b; font-size:1.5rem; cursor:pointer;">&times;</button>
+                    <div class="form-group" style="margin-bottom:1rem;">
+                        <label style="display:block; margin-bottom:5px; font-weight:600;">Description (Meta)</label>
+                        <textarea id="edit-seo-desc" rows="3" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;"></textarea>
                     </div>
-                    <form id="pages-form">
-                        <div class="form-group" style="margin-bottom:1.5rem;">
-                            <label style="display:block; font-weight:500; margin-bottom:0.5rem;">Titre de la page (SEO)</label>
-                            <input type="text" name="title" value="${page.title}" required style="width:100%; padding:0.75rem; border:1px solid #e2e8f0; border-radius:6px;">
-                        </div>
 
-                        <div class="form-group" style="margin-bottom:1.5rem;">
-                             <label style="display:flex; align-items:center; gap:0.5rem; cursor:pointer;">
-                                <input type="checkbox" name="published" ${page.status === 'published' ? 'checked' : ''}>
-                                <span style="font-weight:500;">Page Publiée</span>
-                            </label>
-                        </div>
-
-                        <h4 style="margin-bottom:1rem; color:#1e293b; border-bottom:1px solid #e2e8f0; padding-bottom:0.5rem;">Blocs de Contenu</h4>
-                        ${blocksHtml}
-
-                        <div style="margin-top:2rem; display:flex; justify-content:flex-end; gap:1rem;">
-                            <button type="button" onclick="this.closest('.modal-overlay').remove()" style="padding:0.75rem 1.5rem; background:#f1f5f9; color:#475569; border:none; border-radius:6px; cursor:pointer; font-weight:600;">Annuler</button>
-                            <button type="submit" style="padding:0.75rem 1.5rem; background:#3b82f6; color:white; border:none; border-radius:6px; cursor:pointer; font-weight:600;">Enregistrer</button>
-                        </div>
-                    </form>
+                    <div style="text-align:right; margin-top:2rem;">
+                         <button onclick="document.getElementById('page-edit-modal').style.display='none'" 
+                            style="background:none; border:none; color:#666; margin-right:1rem; cursor:pointer;">Annuler</button>
+                        <button onclick="PagesAdmin.savePage()" 
+                            style="background:#3b82f6; color:white; padding:8px 20px; border:none; border-radius:4px; cursor:pointer;">Enregistrer</button>
+                    </div>
                 </div>
             </div>
         `;
 
-        document.body.insertAdjacentHTML('beforeend', modalHtml);
+        container.innerHTML = html;
+    },
 
-        document.getElementById('pages-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const formData = new FormData(e.target);
+    currentEditId: null,
 
-            // Update Base Info
-            const updates = {
-                title: formData.get('title'),
-                status: formData.get('published') === 'on' ? 'published' : 'draft',
-                lastModified: new Date().toISOString(),
-                blocks: page.blocks // Start with existing blocks structure
-            };
+    // Ouvrir Modal
+    editPage(id) {
+        const page = this.pagesList.find(p => p.id === id);
+        if (!page) return;
 
-            // Update Blocks Values
-            if (updates.blocks) {
-                updates.blocks.forEach((block, index) => {
-                    const newVal = formData.get(`block_${index}`);
-                    if (newVal !== null) block.value = newVal;
-                });
-            }
+        this.currentEditId = id;
+        document.getElementById('edit-page-name').innerText = `Modification de : ${page.title}`;
+        document.getElementById('edit-seo-title').value = page.title; // Simulé (viendrait de la DB en vrai)
+        document.getElementById('edit-seo-desc').value = `Description optimisée pour ${page.title}...`; // Simulé
 
-            TedDB.update('content_pages', id, updates);
-            document.querySelector('.modal-overlay').remove();
-            this.renderList();
-        });
+        document.getElementById('page-edit-modal').style.display = "flex";
+    },
+
+    // Sauvegarder (Simulation)
+    savePage() {
+        const newTitle = document.getElementById('edit-seo-title').value;
+        const newDesc = document.getElementById('edit-seo-desc').value;
+
+        // Ici, on enregistrerait dans Firebase Firestore collection 'pages_meta'
+        alert(`✅ Méta-données simulées sauvegardées pour ${this.currentEditId}:\nTitre: ${newTitle}\nDesc: ${newDesc}`);
+        document.getElementById('page-edit-modal').style.display = "none";
     }
 };
 
+// Expose Globalement
 window.PagesAdmin = PagesAdmin;

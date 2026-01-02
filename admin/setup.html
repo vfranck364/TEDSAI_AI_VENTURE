@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>TEDSAI Admin Setup</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            background: #f0f2f5;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #2563eb;
+        }
+
+        .log {
+            background: #1e293b;
+            color: #4ade80;
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: monospace;
+            min-height: 100px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>🛠 Initialisation Admin</h1>
+        <p>Cet outil va créer les comptes administrateurs nécessaires dans Firebase.</p>
+
+        <button onclick="createAllAccounts()">Créer les comptes (Superadmin, Resto, Garden, IA)</button>
+
+        <div id="logs" class="log">Prêt...</div>
+    </div>
+
+    <!-- SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="../assets/js/core/firebase-config.js"></script>
+
+    <script>
+        const logDiv = document.getElementById('logs');
+        function log(msg) {
+            logDiv.innerText += '\n' + msg;
+            console.log(msg);
+        }
+
+        async function createAllAccounts() {
+            log("🚀 Démarrage de la création...");
+
+            const accounts = [
+                { email: 'superadmin@tedsai.cm', pass: 'admin123', role: 'super_admin', name: 'Super Admin' },
+                { email: 'resto@tedsai.cm', pass: 'resto123', role: 'admin_resto', name: 'Chef Cuisine' },
+                { email: 'garden@tedsai.cm', pass: 'garden123', role: 'admin_garden', name: 'Chef Jardinier' },
+                { email: 'ia@tedsai.cm', pass: 'ia123', role: 'admin_ia', name: 'Responsable IA' }
+            ];
+
+            const auth = firebase.auth();
+            const db = firebase.firestore();
+
+            for (const acc of accounts) {
+                try {
+                    log(`Creating ${acc.email}...`);
+                    // 1. Check if exists via login attempt (hacky but works without admin sdk)
+                    try {
+                        await auth.signInWithEmailAndPassword(acc.email, acc.pass);
+                        log(`⚠️ Compte ${acc.email} existe déjà.`);
+                    } catch (e) {
+                        // 2. Create if not exists
+                        const cred = await auth.createUserWithEmailAndPassword(acc.email, acc.pass);
+                        const user = cred.user;
+
+                        // 3. Set Role
+                        await db.collection('users').doc(user.uid).set({
+                            email: acc.email,
+                            role: acc.role,
+                            name: acc.name,
+                            createdAt: new Date()
+                        });
+                        log(`✅ Compte créé : ${acc.email} (${acc.role})`);
+                        await auth.signOut(); // Logout to prepare next
+                    }
+                } catch (err) {
+                    log(`❌ Erreur pour ${acc.email}: ${err.message}`);
+                }
+            }
+            log("✨ Opération terminée ! Retournez sur le login.");
+        }
+    </script>
+</body>
+
+</html>

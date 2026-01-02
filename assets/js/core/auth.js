@@ -14,8 +14,15 @@ const TedAuth = {
         const { auth, db } = window.tedFirebase; // Instances from compat SDK
 
         try {
-            // 1. Firebase Auth Login (Compat Syntax)
-            const userCredential = await auth.signInWithEmailAndPassword(email, password);
+            // 1. Auto-Format Short Usernames (Compatfix)
+            let emailToUse = email;
+            if (!email.includes('@')) {
+                emailToUse = email + '@tedsai.cm';
+                console.log(`🔧 Auto-formatting username: ${email} -> ${emailToUse}`);
+            }
+
+            // 2. Firebase Auth Login (Compat Syntax)
+            const userCredential = await auth.signInWithEmailAndPassword(emailToUse, password);
             const user = userCredential.user;
 
             // 2. Fetch User Role from Firestore

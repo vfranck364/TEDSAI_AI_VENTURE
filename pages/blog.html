@@ -5,13 +5,15 @@
     <meta charset="UTF-8">
     <title>Le Lab - TEDSAI Complex</title>
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/mobile-nav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
     <header>
         <div class="container navbar">
             <a href="../index.html" class="logo">
-                <img src="../assets/images/logos/Logo TEDSAI.jpeg" alt="TEDSAI Logo">
+                <img src="../assets/images/logos/tedsai_logo.jpg" alt="TEDSAI Logo">
             </a>
             <nav class="nav-links">
                 <a href="../index.html">Accueil</a>
@@ -24,7 +26,45 @@
         <p>Cette page est en cours de construction.</p>
         <a href="../index.html" class="btn btn-primary" style="margin-top: 1rem;">Retour à l'accueil</a>
     </section>
-<script src="/Users/dev-ai/Documents/TEDSAI-website/relative/path/fixer.js"></script> 
+    <nav class="mobile-bottom-nav" aria-label="Navigation mobile principale">
+        <div class="mobile-nav-items">
+            <a href="../index.html" class="mobile-nav-item" aria-label="Accueil">
+                <i class="fa-solid fa-home"></i>
+                <span>Accueil</span>
+            </a>
+            <a href="solutions-ia.html" class="mobile-nav-item" aria-label="Solutions IA">
+                <i class="fa-solid fa-brain"></i>
+                <span>IA</span>
+            </a>
+            <a href="vitedia.html" class="mobile-nav-item" aria-label="Restaurant viTEDia">
+                <i class="fa-solid fa-utensils"></i>
+                <span>viTEDia</span>
+            </a>
+            <a href="garden.html" class="mobile-nav-item" aria-label="SelecTED Gardens">
+                <i class="fa-solid fa-leaf"></i>
+                <span>Jardin</span>
+            </a>
+            <a href="observatoire.html" class="mobile-nav-item" aria-label="Observatoire">
+                <i class="fa-solid fa-satellite-dish"></i>
+                <span>Obs</span>
+            </a>
+            <a href="contact.html" class="mobile-nav-item" aria-label="Contact">
+                <i class="fa-solid fa-envelope"></i>
+                <span>Contact</span>
+            </a>
+        </div>
+    </nav>
+    <script src="../assets/js/ted-assistant.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const currentPage = window.location.pathname;
+            const navItems = document.querySelectorAll('.mobile-nav-item');
+            navItems.forEach(item => {
+                const href = item.getAttribute('href').replace('../', '');
+                if (currentPage.includes(href)) item.classList.add('active');
+            });
+        });
+    </script>
 </body>
 
 </html>

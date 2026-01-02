@@ -27,7 +27,7 @@
             overflow: hidden;
         }
 
-        /* SIDEBAR */
+        /* SIDEBAR DESKTOP */
         .sidebar {
             width: var(--sidebar-width);
             background: var(--color-sidebar);
@@ -36,12 +36,86 @@
             flex-direction: column;
             flex-shrink: 0;
             overflow-y: auto;
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        /* OVERLAY MOBILE */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        /* MOBILE RESPONSIVE SIDEBAR */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                height: 100%;
+                transform: translateX(-100%);
+                box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .sidebar.show {
+                transform: translateX(0);
+            }
+
+            .sidebar-overlay.show {
+                display: block;
+            }
+
+            .wrapper {
+                width: 100%;
+            }
+
+            /* Header adjustments for mobile */
+            .top-header {
+                padding: 0 1rem;
+            }
+
+            #sidebar-toggle {
+                display: block !important;
+                margin-right: 1rem;
+                font-size: 1.5rem;
+                cursor: pointer;
+                background: none;
+                border: none;
+                color: #1e293b;
+            }
+
+            .header-right span {
+                display: none;
+                /* Hide labels on mobile */
+            }
+
+            /* Responsive Grid */
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid>div {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+
+        /* ... Desktop styles remain ... */
+        /* Hiding Toggle on Desktop */
+        #sidebar-toggle {
+            display: none;
         }
 
         .sidebar-brand {
             height: var(--header-height);
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            /* Adjusted for mobile close btn */
             padding: 0 1.5rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             font-weight: 700;
@@ -52,6 +126,18 @@
         .sidebar-brand span {
             color: var(--color-primary-admin);
             margin-left: 8px;
+        }
+
+        .mobile-close-btn {
+            display: none;
+            cursor: pointer;
+            color: #94a3b8;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-close-btn {
+                display: block;
+            }
         }
 
         .menu-category {
@@ -96,6 +182,7 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            width: 100%;
         }
 
         /* HEADER */
@@ -339,10 +426,14 @@
 
 <body>
 
+    <!-- OVERLAY (for mobile) -->
+    <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
     <!-- 2️⃣ BARRE LATÉRALE GAUCHE -->
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
         <div class="sidebar-brand">
-            <i class="fa-solid fa-cube"></i> <span>TED ADMIN</span>
+            <div><i class="fa-solid fa-cube"></i> <span>TED ADMIN</span></div>
+            <i class="fa-solid fa-xmark mobile-close-btn" onclick="toggleSidebar()"></i>
         </div>
 
         <div id="sidebar-content">
@@ -354,7 +445,10 @@
     <div class="wrapper">
         <!-- 1️⃣ EN-TÊTE -->
         <header class="top-header">
-            <div class="header-left">
+            <div class="header-left" style="display: flex; align-items: center;">
+                <button id="sidebar-toggle" onclick="toggleSidebar()">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
                 <h2 id="page-title">Tableau de bord</h2>
             </div>
             <div class="header-right">
@@ -598,6 +692,7 @@
     <script src="../assets/js/modules/media.js"></script>
     <script src="../assets/js/modules/pages.js"></script>
     <script src="../assets/js/modules/blog.js"></script>
+    <script src="settings.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -636,12 +731,21 @@
                     if (viewId === 'media') MediaAdmin.init();
                     if (viewId === 'pages') PagesAdmin.init();
                     if (viewId === 'blog') BlogAdmin.init();
+                    if (viewId === 'settings') SettingsAdmin.init(); // AJOUTÉ
                 }
             };
 
             // Init Default View
             DashboardHome.init();
         });
+
+        // MOBILE SIDEBAR TOGGLE
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            sidebar.classList.toggle('show');
+            overlay.classList.toggle('show');
+        }
 
         function formatRole(role) {
             const map = {

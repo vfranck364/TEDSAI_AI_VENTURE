@@ -66,6 +66,49 @@ const TedDB = {
             this.saveToLocal('blog_posts');
         }
 
+        if (this.collections.garden_products.length === 0) {
+            console.log("🌱 Seeding Garden Products...");
+            this.collections.garden_products = [
+                {
+                    id: 'prod-1',
+                    name: "Tomates Cœur de Bœuf",
+                    variety: "Bio - Ancienne",
+                    category: "Légume",
+                    season: "Été",
+                    inStock: true,
+                    image: "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?q=80&w=800"
+                },
+                {
+                    id: 'prod-2',
+                    name: "Basilic Grand Vert",
+                    variety: "Genovese",
+                    category: "Aromate",
+                    season: "Toute l'année",
+                    inStock: true,
+                    image: "https://images.unsplash.com/photo-1618375569909-3c8616cf7733?q=80&w=800"
+                },
+                {
+                    id: 'prod-3',
+                    name: "Piments Habanero",
+                    variety: "Red Savina",
+                    category: "Épice",
+                    season: "Automne",
+                    inStock: true,
+                    image: "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?q=80&w=800"
+                },
+                {
+                    id: 'prod-4',
+                    name: "Aubergines Violettes",
+                    variety: "Barbentane",
+                    category: "Légume",
+                    season: "Été",
+                    inStock: false,
+                    image: "https://images.unsplash.com/photo-1621459569680-2646274e64f0?q=80&w=800"
+                }
+            ];
+            this.saveToLocal('garden_products');
+        }
+
         window.dispatchEvent(new Event('ted-db-ready'));
 
         if (window.tedFirebase && window.tedFirebase.loaded) {

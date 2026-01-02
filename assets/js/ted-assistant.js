@@ -22,13 +22,13 @@ class TEDAssistant {
         widget.className = 'ted-widget';
         widget.innerHTML = `
             <button class="ted-button" id="ted-toggle" aria-label="Ouvrir l'assistant TED">
-                <img src="assets/images/logos/Logo TEDSAI.jpeg" alt="TED">
+                <img src="assets/images/logos/tedsai_logo.jpg" alt="TED">
             </button>
 
             <div class="ted-chat-window" id="ted-chat">
                 <div class="ted-chat-header">
                     <div class="ted-chat-header-info">
-                        <img src="assets/images/logos/Logo TEDSAI.jpeg" alt="TED">
+                        <img src="assets/images/logos/tedsai_logo.jpg" alt="TED">
                         <div>
                             <h3>TED Assistant</h3>
                             <p class="ted-status">En ligne</p>
@@ -116,7 +116,7 @@ class TEDAssistant {
 
         if (sender === 'ted') {
             messageDiv.innerHTML = `
-                <img src="assets/images/logos/Logo TEDSAI.jpeg" alt="TED" class="ted-message-avatar">
+                <img src="assets/images/logos/tedsai_logo.jpg" alt="TED" class="ted-message-avatar">
                 <div class="ted-message-content">${isHTML ? content : this.escapeHtml(content)}</div>
             `;
         } else {
