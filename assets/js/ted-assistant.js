@@ -8,7 +8,17 @@ class TEDAssistant {
         this.isOpen = false;
         this.currentScenario = null;
         this.conversationHistory = [];
+        this.sessionId = this.getOrCreateSessionId();
         this.init();
+    }
+
+    getOrCreateSessionId() {
+        let sid = localStorage.getItem('ted_session_id');
+        if (!sid) {
+            sid = 'vanilla_' + Math.random().toString(36).substr(2, 9);
+            localStorage.setItem('ted_session_id', sid);
+        }
+        return sid;
     }
 
     init() {
@@ -127,7 +137,19 @@ class TEDAssistant {
 
         messagesContainer.appendChild(messageDiv);
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        this.conversationHistory.push({ sender, content, timestamp: new Date() });
+
+        const messageData = { sender, content, timestamp: new Date().toISOString() };
+        this.conversationHistory.push(messageData);
+
+        // PERSISTENCE TO FIRESTORE via TedDB
+        if (window.TedDB) {
+            window.TedDB.add('chatSessions', {
+                sessionId: this.sessionId,
+                userId: localStorage.getItem('ted_user_id') || 'anonymous',
+                message: messageData,
+                updatedAt: new Date().toISOString()
+            });
+        }
     }
 
     showScenarios(scenarios) {

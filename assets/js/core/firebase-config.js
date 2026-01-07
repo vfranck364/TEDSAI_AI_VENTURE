@@ -3,12 +3,13 @@
 
 // 1. Keys (Preserved from User)
 const firebaseConfig = {
-    apiKey: "AIzaSyB005ML4Ir-E8WWstZQ4L9efycg7zsB8Nw",
-    authDomain: "tedsai-complex.firebaseapp.com",
-    projectId: "tedsai-complex",
-    storageBucket: "tedsai-complex.firebasestorage.app",
-    messagingSenderId: "481412810894",
-    appId: "1:481412810894:web:1132aa94212d1c579e61df"
+    apiKey: "AIzaSyDFtVRpZiELmWbxLcwaUX53vEXh3x4wPyw",
+    authDomain: "tedsai-prod-dd55f.firebaseapp.com",
+    projectId: "tedsai-prod-dd55f",
+    storageBucket: "tedsai-prod-dd55f.firebasestorage.app",
+    messagingSenderId: "889607754188",
+    appId: "1:889607754188:web:b06be52e987883a06c4d69",
+    measurementId: "G-0WM9ETBKV5"
 };
 // Expose for secondary app usage (User Management)
 window.tedFirebaseConfig = firebaseConfig;

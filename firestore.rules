@@ -1,0 +1,185 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ========================================
+    // HELPER FUNCTIONS
+    // ========================================
+    
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && 
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'super_admin';
+    }
+    
+    function isAdminOrOwner(userId) {
+      return isAdmin() || isOwner(userId);
+    }
+    
+    // ========================================
+    // USERS COLLECTION
+    // ========================================
+    
+    match /users/{userId} {
+      allow read: if isAdminOrOwner(userId);
+      allow create: if isOwner(userId) && 
+                       request.resource.data.keys().hasAll(['name', 'email', 'role', 'createdAt']);
+      allow update: if isOwner(userId) && 
+                       !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role']) ||
+                       isAdmin();
+      allow delete: if isAdmin();
+    }
+    
+    // ========================================
+    // MENU COLLECTION (Restaurant)
+    // ========================================
+    
+    match /menu/{menuId} {
+      allow read: if true;
+      allow write: if isAdmin() || 
+                      (isAuthenticated() && 
+                       get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin_resto');
+    }
+    
+    // ========================================
+    // GARDEN PRODUCTS COLLECTION
+    // ========================================
+    
+    match /garden_products/{productId} {
+      allow read: if true;
+      allow write: if isAdmin() || 
+                      (isAuthenticated() && 
+                       get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin_garden');
+    }
+    
+    // ========================================
+    // IA SERVICES COLLECTION
+    // ========================================
+    
+    match /ia_services/{serviceId} {
+      allow read: if true;
+      allow write: if isAdmin() || 
+                      (isAuthenticated() && 
+                       get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin_ia');
+    }
+    
+    // ========================================
+    // RESERVATIONS COLLECTION
+    // ========================================
+    
+    match /reservations/{reservationId} {
+      allow read: if isAuthenticated() && 
+                     (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isAuthenticated() && 
+                       request.resource.data.userId == request.auth.uid &&
+                       request.resource.data.keys().hasAll(['name', 'date', 'time', 'phone']);
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+    
+    // ========================================
+    // ORDERS COLLECTION (E-Commerce)
+    // ========================================
+    
+    match /orders/{orderId} {
+      allow read: if isAuthenticated() && 
+                     (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isAuthenticated() && 
+                       request.resource.data.userId == request.auth.uid;
+      allow update: if isAdmin();
+      allow delete: if false;
+    }
+    
+    // ========================================
+    // INVENTORY COLLECTION
+    // ========================================
+    
+    match /inventory/{productId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    // ========================================
+    // BLOG COLLECTIONS
+    // ========================================
+    
+    match /blog_posts/{postId} {
+      allow read: if resource.data.status == 'publié' || isAdmin();
+      allow create: if isAuthenticated() && 
+                       request.resource.data.status == 'en_attente';
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+    
+    match /blog_categories/{categoryId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    match /blog_comments/{commentId} {
+      allow read: if true;
+      allow create: if isAuthenticated();
+      allow update, delete: if isAdmin();
+    }
+    
+    // ========================================
+    // CHAT SESSIONS (pour Chatbot IA)
+    // ========================================
+    
+    match /chatSessions/{sessionId} {
+      allow read: if isAdmin() || (isAuthenticated() && resource.data.userId == request.auth.uid);
+      allow create: if true;
+      allow update: if isAdmin() || 
+                       (resource.data.userId == 'anonymous') || 
+                       (isAuthenticated() && resource.data.userId == request.auth.uid);
+      allow delete: if isAdmin();
+    }
+    
+    // ========================================
+    // MESSAGES COLLECTION (Contact)
+    // ========================================
+    
+    match /messages/{messageId} {
+      allow read: if isAdmin();
+      allow create: if true;
+      allow update, delete: if isAdmin();
+    }
+    
+    // ========================================
+    // MEDIA COLLECTION
+    // ========================================
+    
+    match /media/{mediaId} {
+      allow read: if true;
+      allow write: if isAdmin() || 
+                      (isAuthenticated() && 
+                       get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin_resto', 'admin_garden']);
+    }
+    
+    // ========================================
+    // LOGS COLLECTION
+    // ========================================
+    
+    match /logs/{logId} {
+      allow read: if isAdmin();
+      allow create: if false;
+      allow update, delete: if false;
+    }
+    
+    // ========================================
+    // CONTENT PAGES (CMS)
+    // ========================================
+    
+    match /content_pages/{pageId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+  }
+}

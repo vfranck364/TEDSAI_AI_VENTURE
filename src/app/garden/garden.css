@@ -1,0 +1,113 @@
+:root {
+    --color-garden-primary: #2D5A27;
+    --color-garden-accent: #B68D40;
+}
+
+.hero-garden {
+    background-color: var(--color-garden-primary);
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-garden::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+    opacity: 0.4;
+    z-index: 1;
+}
+
+.hero-content {
+    z-index: 2;
+    position: relative;
+}
+
+.prod-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 4rem 0;
+}
+
+.prod-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    text-align: center;
+    padding: 2rem;
+}
+
+.prod-card:hover {
+    transform: translateY(-5px);
+}
+
+.prod-icon {
+    font-size: 3rem;
+    color: var(--color-garden-primary);
+    margin-bottom: 1rem;
+}
+
+.traceability-section {
+    background: #E8F5E9;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.trace-input {
+    padding: 15px;
+    width: 300px;
+    border: 2px solid var(--color-garden-primary);
+    border-radius: 4px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.btn-garden {
+    background-color: var(--color-garden-primary);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: opacity 0.3s;
+}
+
+.btn-garden:hover {
+    opacity: 0.9;
+}
+
+.trace-result-container {
+    max-width: 600px;
+    margin: 2rem auto 0;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

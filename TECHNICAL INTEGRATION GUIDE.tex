@@ -1,0 +1,515 @@
+TECHNICAL INTEGRATION GUIDE
+Vercel + Google Cloud Platform
+E-Commerce & Web Application Platform for TEDSAI.COM
+DOCUMENT OVERVIEW
+This technical guide provides comprehensive implementation instructions for integrating Vercel (frontend) with Google Cloud Platform (backend) to create a high-performance e-commerce and web application platform. The guide includes detailed configuration steps, code examples, security best practices, and optimization strategies specific to the TEDSAI.com project.
+Target Audience: Full-stack developers, DevOps engineers, and technical architects
+Prerequisites: Knowledge of Next.js, Node.js, Docker, and cloud infrastructure concepts
+Estimated Implementation Time: 8-10 weeks for complete deployment
+ 
+ARCHITECTURE OVERVIEW
+System Components
+Layer	Technology	Purpose
+Frontend	Vercel + Next.js 14	Static/dynamic pages, Edge rendering
+API Gateway	Next.js API Routes	Request routing, authentication middleware
+Backend Services	Cloud Run (Docker)	AI chatbots, business logic, processing
+Database	Firestore / Cloud SQL	User data, products, orders, real-time chat
+File Storage	Cloud Storage	Product images, videos, user uploads
+Authentication	Firebase Auth	User registration, login, OAuth
+AI Services	Vertex AI	Machine learning models, NLP, recommendations
+CDN	Vercel Edge Network	Global content delivery, edge caching
+
+Data Flow Architecture
+Request Flow:
+1.	User accesses tedsai.com → Vercel Edge Network (closest geographic location)
+2.	Static content served directly from Edge (HTML, CSS, images cached)
+3.	Dynamic requests → Next.js API Routes on Vercel
+4.	API Routes authenticate & route to Cloud Run services in GCP
+5.	Cloud Run processes business logic, queries Firestore/Cloud SQL
+6.	Response cached where appropriate, returned to user
+7.	Media assets loaded from Cloud Storage via public CDN URLs
+ 
+GOOGLE CLOUD PLATFORM SETUP
+Project Initialization
+1. Create GCP Project
+# Install Google Cloud SDK
+curl https://sdk.cloud.google.com | bash
+exec -l $SHELL
+gcloud init
+
+# Create new project
+gcloud projects create tedsai-prod --name="TEDSAI Production"
+gcloud config set project tedsai-prod
+
+# Enable billing
+gcloud beta billing projects link tedsai-prod --billing-account=YOUR_BILLING_ID
+2. Enable Required APIs
+# Enable all necessary GCP services
+gcloud services enable run.googleapis.com
+gcloud services enable firestore.googleapis.com
+gcloud services enable storage.googleapis.com
+gcloud services enable aiplatform.googleapis.com
+gcloud services enable cloudbuild.googleapis.com
+gcloud services enable secretmanager.googleapis.com
+gcloud services enable sqladmin.googleapis.com
+3. Configure Budget Alerts
+Navigate to GCP Console → Billing → Budgets & alerts
+•	Create budget: $150/month (GCP portion of total $300 budget)
+•	Set alerts at: 50% ($75), 75% ($112.50), 90% ($135)
+•	Configure email notifications to technical team
+Firestore Database Setup
+1. Initialize Firestore
+# Create Firestore database in Native mode
+gcloud firestore databases create --region=europe-west1
+
+Region Selection Rationale:
+•	europe-west1 (Belgium): Lowest latency to Cameroon from Europe
+•	Alternative: europe-west3 (Frankfurt) or europe-west2 (London)
+2. Database Schema Design
+Collections Structure:
+Collection	Document ID	Key Fields	Purpose
+users	userId	email, name, created	User profiles
+products	productId	name, price, stock	Product catalog
+orders	orderId	userId, items, total	Order history
+chatSessions	sessionId	userId, messages[]	AI chat history
+inventory	productId	quantity, location	Stock tracking
+
+ 
+3. Security Rules Configuration
+Create file: firestore.rules
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users can only read/write their own data
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    // Products are public for reading
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.token.admin == true;
+    }
+    // Orders belong to users
+    match /orders/{orderId} {
+      allow read: if request.auth != null && resource.data.userId == request.auth.uid;
+      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+    }
+  }
+}
+# Deploy security rules
+firebase deploy --only firestore:rules
+Cloud Storage Configuration
+1. Create Storage Bucket
+# Create bucket for product images
+gsutil mb -c STANDARD -l europe-west1 gs://tedsai-media
+
+# Make bucket publicly readable
+gsutil iam ch allUsers:objectViewer gs://tedsai-media
+
+# Set CORS for frontend access
+echo '[{"origin":["https://tedsai.com","https://*.vercel.app"],"method":["GET"],"maxAgeSeconds":3600}]' > cors.json
+gsutil cors set cors.json gs://tedsai-media
+2. Folder Structure
+•	products/ - Product images and videos
+•	users/ - User profile pictures and uploads
+•	blog/ - Blog post images
+•	temp/ - Temporary files (7-day lifecycle)
+3. Lifecycle Management
+# Configure automatic deletion of temp files
+echo '{"lifecycle":{"rule":[{"action":{"type":"Delete"},"condition":{"age":7,"matchesPrefix":["temp/"]}}]}}' > lifecycle.json
+gsutil lifecycle set lifecycle.json gs://tedsai-media
+ 
+CLOUD RUN SERVICES DEPLOYMENT
+AI Chatbot Service
+1. Create Dockerfile
+Create: services/chatbot/Dockerfile
+FROM node:18-slim
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . .
+ENV PORT=8080
+EXPOSE 8080
+CMD ["node", "index.js"]
+2. Service Code Structure
+Create: services/chatbot/index.js
+const express = require('express');
+const { Firestore } = require('@google-cloud/firestore');
+const { VertexAI } = require('@google-cloud/aiplatform');
+
+const app = express();
+const firestore = new Firestore();
+const vertexAI = new VertexAI({ project: 'tedsai-prod', location: 'europe-west1' });
+
+app.use(express.json());
+
+// Health check endpoint
+app.get('/health', (req, res) => res.json({ status: 'healthy' }));
+
+// Chat endpoint
+app.post('/chat', async (req, res) => {
+  try {
+    const { userId, message, sessionId } = req.body;
+    
+    // Get chat history
+    const sessionDoc = await firestore.doc(`chatSessions/${sessionId}`).get();
+    const history = sessionDoc.exists ? sessionDoc.data().messages : [];
+    
+    // Call Vertex AI
+    const response = await vertexAI.predict({
+      instances: [{ content: message, context: history }]
+    });
+    
+    // Save to Firestore
+    await firestore.doc(`chatSessions/${sessionId}`).set({
+      userId,
+      messages: [...history, { user: message, ai: response, timestamp: new Date() }]
+    }, { merge: true });
+    
+    res.json({ response });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+const port = process.env.PORT || 8080;
+app.listen(port, () => console.log(`Chatbot running on port ${port}`));
+3. Deploy to Cloud Run
+# Build and push container image
+gcloud builds submit --tag gcr.io/tedsai-prod/chatbot ./services/chatbot
+
+# Deploy with scale-to-zero configuration
+gcloud run deploy chatbot \
+  --image gcr.io/tedsai-prod/chatbot \
+  --platform managed \
+  --region europe-west1 \
+  --allow-unauthenticated \
+  --min-instances 0 \
+  --max-instances 10 \
+  --memory 512Mi \
+  --cpu 1
+CRITICAL: --min-instances 0 ensures scale-to-zero. Never set this > 0 in production unless absolutely necessary for cold-start performance.
+
+ 
+VERCEL FRONTEND SETUP
+Project Initialization
+1. Create Next.js Project
+# Create Next.js 14 app
+npx create-next-app@latest tedsai-frontend --typescript --app --tailwind
+cd tedsai-frontend
+
+2. Project Structure
+tedsai-frontend/
+├── app/
+│   ├── (pages)/
+│   │   ├── page.tsx          # Homepage (SSG)
+│   │   ├── products/
+│   │   │   └── page.tsx      # Product catalog (ISR)
+│   │   ├── cart/
+│   │   │   └── page.tsx      # Shopping cart (SSR)
+│   │   └── account/
+│   │       └── page.tsx      # User account (SSR)
+│   ├── api/
+│   │   ├── chat/route.ts     # Chatbot proxy
+│   │   ├── products/route.ts # Product API
+│   │   └── orders/route.ts   # Order processing
+├── components/
+│   ├── ChatWidget.tsx
+│   ├── ProductCard.tsx
+│   └── Navigation.tsx
+├── lib/
+│   ├── firebase.ts          # Firebase client config
+│   └── api-client.ts        # GCP API client
+└── next.config.js           # Next.js configuration
+
+3. Configure Next.js
+Edit: next.config.js
+module.exports = {
+  images: {
+    domains: ['storage.googleapis.com'],
+    formats: ['image/webp'],
+  },
+  // Enable ISR
+  experimental: {
+    isrMemoryCacheSize: 0,  // Disable in-memory cache for ISR
+  },
+  // Environment variables
+  env: {
+    NEXT_PUBLIC_GCP_PROJECT_ID: process.env.NEXT_PUBLIC_GCP_PROJECT_ID,
+    NEXT_PUBLIC_FIREBASE_API_KEY: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+    CLOUD_RUN_CHATBOT_URL: process.env.CLOUD_RUN_CHATBOT_URL,
+  },
+};
+Firebase Client Integration
+Create: lib/firebase.ts
+import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+
+const firebaseConfig = {
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: 'tedsai-prod.firebaseapp.com',
+  projectId: 'tedsai-prod',
+  storageBucket: 'tedsai-prod.appspot.com',
+};
+
+const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
+export const db = getFirestore(app);
+ 
+API Routes Configuration
+Chatbot API Route
+Create: app/api/chat/route.ts
+import { NextResponse } from 'next/server';
+
+export async function POST(request: Request) {
+  try {
+    const { message, userId, sessionId } = await request.json();
+    
+    // Forward to Cloud Run chatbot service
+    const response = await fetch(`${process.env.CLOUD_RUN_CHATBOT_URL}/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message, userId, sessionId }),
+    });
+    
+    const data = await response.json();
+    return NextResponse.json(data);
+  } catch (error) {
+    return NextResponse.json({ error: 'Chat service unavailable' }, { status: 500 });
+  }
+}
+Deploy to Vercel
+1. Initialize Git Repository
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin https://github.com/yourusername/tedsai-frontend.git
+2. Connect to Vercel
+1.	Visit vercel.com and sign in with GitHub
+2.	Click "Add New Project" and import your repository
+3.	Configure environment variables (see next section)
+4.	Deploy automatically on push to main branch
+3. Configure Environment Variables
+In Vercel Dashboard → Settings → Environment Variables:
+Variable Name	Value / Source
+NEXT_PUBLIC_GCP_PROJECT_ID	tedsai-prod
+NEXT_PUBLIC_FIREBASE_API_KEY	From Firebase Console → Project Settings
+CLOUD_RUN_CHATBOT_URL	From Cloud Run service URL (e.g., https://chatbot-xxx.run.app)
+STORAGE_BUCKET_URL	https://storage.googleapis.com/tedsai-media
+
+ 
+SECURITY & AUTHENTICATION
+Firebase Authentication Setup
+1. Enable Authentication Methods
+In Firebase Console → Authentication → Sign-in method:
+•	Enable Email/Password authentication
+•	Enable Google OAuth (for social login)
+•	Configure authorized domains: tedsai.com, *.vercel.app
+2. Authentication Component
+Create: components/AuthProvider.tsx
+import { createContext, useContext, useEffect, useState } from 'react';
+import { onAuthStateChanged, User } from 'firebase/auth';
+import { auth } from '@/lib/firebase';
+
+const AuthContext = createContext<{ user: User | null }>({ user: null });
+
+export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => setUser(user));
+    return unsubscribe;
+  }, []);
+
+  return <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>;
+}
+
+export const useAuth = () => useContext(AuthContext);
+Cloud Run Access Control
+1. Service Account Configuration
+# Create service account for Vercel access
+gcloud iam service-accounts create vercel-frontend \
+  --display-name="Vercel Frontend Service Account"
+
+# Grant invoker role to service account
+gcloud run services add-iam-policy-binding chatbot \
+  --region=europe-west1 \
+  --member="serviceAccount:vercel-frontend@tedsai-prod.iam.gserviceaccount.com" \
+  --role="roles/run.invoker"
+2. API Key Authentication
+Add authentication header to all Cloud Run requests:
+// In API routes
+const response = await fetch(cloudRunUrl, {
+  headers: {
+    'Content-Type': 'application/json',
+    'X-API-Key': process.env.GCP_API_KEY,
+  },
+});
+ 
+PERFORMANCE OPTIMIZATION
+Image Optimization Strategy
+1. Convert Images to WebP
+# Batch convert images to WebP
+for img in products/*.{jpg,png}; do
+  cwebp -q 80 "$img" -o "${img%.*}.webp"
+done
+2. Upload to Cloud Storage
+# Upload with caching headers
+gsutil -m -h "Cache-Control:public, max-age=31536000" cp products/*.webp gs://tedsai-media/products/
+
+3. Next.js Image Component
+import Image from 'next/image';
+
+<Image
+  src="https://storage.googleapis.com/tedsai-media/products/item1.webp"
+  alt="Product"
+  width={800}
+  height={600}
+  loading="lazy"
+  quality={80}
+/>
+Caching Configuration
+Static Site Generation (SSG)
+For: Homepage, About page, Blog posts
+// app/page.tsx
+export default async function Home() {
+  // This page is statically generated at build time
+  return <div>Welcome to TEDSAI</div>;
+}
+Incremental Static Regeneration (ISR)
+For: Product catalog, frequently updated content
+// app/products/page.tsx
+export const revalidate = 3600; // Revalidate every hour
+
+export default async function Products() {
+  const products = await fetchProducts();
+  return <ProductGrid products={products} />;
+}
+ 
+MONITORING & MAINTENANCE
+Cost Monitoring Dashboard
+GCP Budget Alerts
+1.	Navigate to GCP Console → Billing → Budgets & alerts
+2.	Create monthly budget: $150
+3.	Configure threshold alerts:
+◦	50% ($75) - Warning email to dev team
+◦	75% ($112.50) - Critical email + Slack notification
+◦	90% ($135) - Emergency alert + review Cloud Run configs
+Vercel Usage Monitoring
+•	Dashboard → Usage → Set bandwidth alert at 80GB (before overage)
+•	Monitor function invocations weekly
+•	Review build minutes (Pro plan: 6,000/month included)
+Performance Monitoring
+Enable Cloud Monitoring
+# Enable Cloud Monitoring API
+gcloud services enable monitoring.googleapis.com
+
+Key Metrics to Monitor:
+•	Cloud Run: Request count, latency, error rate, instance count
+•	Firestore: Read/write operations, document count
+•	Cloud Storage: Bandwidth usage, request count
+•	Vercel: Page load times, Core Web Vitals (LCP, FID, CLS)
+Maintenance Schedule
+Frequency	Task	Purpose
+Daily	Review error logs	Identify and fix issues quickly
+Weekly	Cost review (first 3 months)	Ensure budget compliance
+Monthly	Cloud Run config audit	Verify scale-to-zero settings
+Monthly	Security updates	Update dependencies, patch vulnerabilities
+Quarterly	Performance optimization	Analyze and improve Core Web Vitals
+Quarterly	Database optimization	Review indexes, clean old data
+
+ 
+E-COMMERCE SPECIFIC IMPLEMENTATION
+Payment Integration
+Recommended Payment Gateway: Stripe
+Why Stripe:
+•	Supports Cameroon with international card processing
+•	PCI compliance handled by Stripe (reduces security burden)
+•	Excellent Next.js integration libraries
+Setup Payment Flow
+# Install Stripe SDK
+npm install @stripe/stripe-js stripe
+
+Create: app/api/checkout/route.ts
+import Stripe from 'stripe';
+import { NextResponse } from 'next/server';
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+
+export async function POST(request: Request) {
+  const { items, userId } = await request.json();
+  
+  // Create Stripe checkout session
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ['card'],
+    line_items: items.map(item => ({
+      price_data: {
+        currency: 'xaf', // Central African Franc
+        product_data: { name: item.name },
+        unit_amount: item.price,
+      },
+      quantity: item.quantity,
+    })),
+    success_url: `${process.env.NEXT_PUBLIC_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${process.env.NEXT_PUBLIC_URL}/cart`,
+    metadata: { userId },
+  });
+  
+  return NextResponse.json({ sessionId: session.id });
+}
+Inventory Management
+Real-time Stock Updates with Firestore
+Create: lib/inventory.ts
+import { db } from './firebase';
+import { doc, runTransaction } from 'firebase/firestore';
+
+export async function reserveStock(productId: string, quantity: number) {
+  const inventoryRef = doc(db, 'inventory', productId);
+  
+  return runTransaction(db, async (transaction) => {
+    const inventoryDoc = await transaction.get(inventoryRef);
+    
+    if (!inventoryDoc.exists()) throw new Error('Product not found');
+    
+    const currentStock = inventoryDoc.data().quantity;
+    if (currentStock < quantity) throw new Error('Insufficient stock');
+    
+    transaction.update(inventoryRef, { quantity: currentStock - quantity });
+    return true;
+  });
+}
+ 
+TESTING & QUALITY ASSURANCE
+Load Testing
+1. Install Testing Tools
+npm install -g artillery
+
+2. Create Load Test Script
+Create: tests/load-test.yml
+config:
+  target: 'https://tedsai.com'
+  phases:
+    - duration: 60
+      arrivalRate: 10
+    - duration: 120
+      arrivalRate: 50
+scenarios:
+  - flow:
+      - get:
+          url: '/'
+      - get:
+          url: '/products'
+
+# Run load test
+artillery run tests/load-test.yml
+Security Testing
+Security Checklist
+•	Enable HTTPS only (Vercel automatic, GCP Cloud Run configured)
+•	Configure CORS properly on Cloud Storage and Cloud Run
+•	Implement rate limiting on API endpoints
+•	Validate all user inputs (frontend and backend)
+•	Use environment variables for all secrets (never hardcode)
+•	Enable Firestore security rules (production-ready rules)
+•	Regular dependency updates (npm audit, dependabot)
+ 

@@ -16,7 +16,8 @@ const TedDB = {
         blog_posts: [],
         blog_categories: [],
         blog_comments: [],
-        logs: []
+        logs: [],
+        chatSessions: []
     },
 
     // Initialize DB

@@ -1,0 +1,276 @@
+/* Carrefour Landing Page Styles extracted from index.html */
+.carrefour-hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #0A2463 0%, #1e3a8a 50%, #0A2463 100%);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.carrefour-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/assets/images/hero_bg.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.15;
+    z-index: 0;
+}
+
+.carrefour-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.carrefour-logo {
+    margin-bottom: 2rem;
+}
+
+.carrefour-logo img {
+    height: 80px;
+    filter: brightness(0) invert(1);
+}
+
+.carrefour-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.carrefour-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.carrefour-tagline {
+    font-size: 1.1rem;
+    margin-bottom: 4rem;
+    opacity: 0.8;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.carrefour-choices {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.choice-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.choice-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--accent-color), var(--accent-color-light));
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.choice-card:hover::before {
+    transform: scaleX(1);
+}
+
+.choice-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.choice-card.ia {
+    --accent-color: #5AA9E6;
+    --accent-color-light: #7ec8ff;
+}
+
+.choice-card.restaurant {
+    --accent-color: #8B1E3F;
+    --accent-color-light: #b8274f;
+}
+
+.choice-card.garden {
+    --accent-color: #2D5A27;
+    --accent-color-light: #4a8f42;
+}
+
+.choice-card.ecosystem {
+    --accent-color: #D4AF37;
+    --accent-color-light: #f1c40f;
+    background: white;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.choice-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    color: var(--accent-color);
+    transition: transform 0.3s ease;
+}
+
+.choice-card:hover .choice-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.choice-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    /* color: var(--color-primary); */
+}
+
+.choice-description {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.choice-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    font-size: 1.1rem;
+    transition: gap 0.3s ease;
+}
+
+.choice-card:hover .choice-cta {
+    gap: 1rem;
+}
+
+.ecosystem-extra-choice {
+    margin: 0 auto 4rem;
+    max-width: 500px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .carrefour-title {
+        font-size: 2.5rem;
+    }
+
+    .carrefour-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .carrefour-tagline {
+        font-size: 1rem;
+    }
+
+    .carrefour-choices {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .choice-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .choice-icon {
+        font-size: 3rem;
+    }
+
+    .choice-title {
+        font-size: 1.5rem;
+    }
+
+    .carrefour-logo img {
+        height: 60px;
+    }
+}
+
+/* Observatory Section Home */
+.home-obs-section {
+    padding: 5rem 2rem;
+    background: #050b1a;
+    position: relative;
+    z-index: 1;
+    margin-top: 2rem;
+    border-radius: 30px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.home-obs-container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.home-obs-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.home-obs-text {
+    font-size: 1.2rem;
+    color: #94a3b8;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+}
+
+.btn-obs-pulse {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: #2196F3;
+    color: white;
+    padding: 1.25rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+    box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.7);
+    animation: pulse-obs 2s infinite;
+}
+
+@keyframes pulse-obs {
+    0% {
+        box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 20px rgba(33, 150, 243, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(33, 150, 243, 0);
+    }
+}
